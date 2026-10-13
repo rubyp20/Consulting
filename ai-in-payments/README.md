@@ -1,6 +1,9 @@
 # Agentic and generative AI across the payments value chain
 
-**[Open the PDF (48 pages)](Agentic-GenAI-Payments-Value-Chain-Bank-X.pdf)**
+Two documents:
+
+- **[Assessment and prioritisation framework (30 pages)](AI-Payments-Assessment-and-Prioritisation-Framework.pdf)**: the method only. It covers the five assessment lenses and the six-step prioritisation, each explained step by step with Bank X as the worked example. It shows the scoring arithmetic, sequencing rules, a dependency map and a stress test of the weights. **Start here.**
+- **[Full RFP response (48 pages)](Agentic-GenAI-Payments-Value-Chain-Bank-X.pdf)**: the same framework inside a complete proposal, adding deep dives, business case, architecture, operating model and the engagement plan with fees.
 
 This is an illustrative response to an RFP. In it, a payments consulting practice lead answers an Indian bank's question: where should generative and agentic AI be used across the payments value chain, and in what order? The worked example uses **Bank X**, a fictional large Indian private-sector bank.
 
