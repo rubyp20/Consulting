@@ -1,0 +1,265 @@
+<!doctype html><html><head><meta charset="utf-8"><title>2.4 Routing Design and Rules Tables</title><link rel="stylesheet" href="../phase-1/build/style.css"><style>
+.rs { border: 1px solid #b8c4d0; margin: 0 0 10pt 0; }
+.rs .hd { background: #0b3d6b; color: #fff; padding: 5pt 8pt; font-weight: bold; font-size: 10.5pt; }
+.rs .hd span { font-weight: normal; opacity: .85; font-size: 8.5pt; margin-left: 8pt; }
+.rs > table { margin: 0; }
+.rs .meta2 td:first-child { width: 16%; color: #555; background: #f7f9fb; }
+.dt th { background: #1f4f82; color: #fff; }
+.prop { color: #7a2e00; }
+</style></head><body>
+
+<div class="cover"><p class="small" style="letter-spacing:1px;text-transform:uppercase">Business Bank · Business Banking Transformation Office · BB-BLP-BPR</p>
+<h1>2.4 Risk-Based Routing Design and Rules Tables<br/><span style="font-size:15pt;color:#1f4f82">The fourteen rule sets that replace deal-type workflows, for agreement with Credit Risk Policy</span></h1>
+<table class="meta" style="width:65%;margin-top:20pt"><tr><td>Deliverable</td><td>2.4 Routing design (eligibility, triage, material-change triggers) and rules tables RS-01 to RS-14</td></tr><tr><td>Version</td><td>0.5 – proposed content for co-design with Credit Risk Policy in Weeks 8–10; thresholds marked <span class="prop">proposed</span> are the project’s starting positions, not Bank policy; v1.0 on Head of Credit Risk Policy acceptance (Week 10)</td></tr>
+<tr><td>Derived from</td><td>2.2 §5 rule-set index; 1.6 control inventory; 1.3 matrix variants; 1.4 fast-track cohort analysis (A2); RFP deal-type definitions; SR / SD existing fast-track practice</td></tr><tr><td>Owner</td><td>WS2 Credit Policy, DA &amp; Controls (Credit Risk and Controls Specialist)</td></tr><tr><td>Accepted by</td><td>Head of Credit Risk Policy (rule content); second-line Risk (evidence and sampling, via 2.5); Lending Operations (RS-06, 07, 08, 13, 14)</td></tr>
+<tr><td>Depends on</td><td>PQ-001 renewal authority; PQ-002 CAP parallel authority; DR-07 DA matrix; A2 cohort results; WS-05 reason taxonomy; WS-10 material-change triggers</td></tr></table>
+<div class="ph-box" style="margin-top:24pt"><b>How to read the thresholds.</b> Every numeric threshold below is a <span class="prop">proposal</span> chosen to be defensible and to be tested against the Phase 1 cohort data. Credit Risk Policy sets the actual values. The project’s contribution is the structure of each rule, the data it runs on, the evidence it records, and the sizing of each threshold’s effect (section 7), so that the trade-off between eligibility and risk is explicit when the values are set.</div></div>
+
+<div class="pb"><h1>1. Approach</h1>
+<h2>1.1 Rules as data, not workflow</h2>
+<p>Each rule set is specified as a decision table: a list of conditions on named data elements, and the outcome when the conditions hold. The platform evaluates the table at the step named in 2.3; the outcome and the rule version are written to the deal as evidence (DP-02). Rules are owned by the function named on each table and changed through that function’s governance, not by a system change. This is the mechanism by which deal type stops defining a workflow: the type is simply a condition column.</p>
+<table><tr><th>Element</th><th>Meaning</th></tr>
+<tr><td>Rule set (RS-nn)</td><td>A decision table with a single purpose, an owner, a version and an effective date</td></tr>
+<tr><td>Condition</td><td>A test on a data element the platform holds at the evaluation point (1.8 field groups); every condition names its source</td></tr>
+<tr><td>Outcome</td><td>Route, required item, template, gate, limit or approver</td></tr>
+<tr><td>Hit policy</td><td>How multiple matching rows resolve: <b>First</b> (ordered; first match wins), <b>Any</b> (all matching rows must agree), <b>Collect</b> (union of outcomes, e.g. required items)</td></tr>
+<tr><td>Evidence</td><td>What is written to the deal: rule set, version, row(s) matched, input values at evaluation</td></tr>
+<tr><td>Override</td><td>Whether a human may override the outcome, by whom, and with what recorded reason</td></tr></table>
+<h2>1.2 The three routing decisions</h2>
+<table><tr><th>Decision</th><th>Where</th><th>Rule sets</th><th>Outcome</th><th>Equivalence / policy</th></tr>
+<tr><td>Is this renewal eligible for the fast-track?</td><td>SC-2 D1 for P2</td><td>RS-01 with RS-11 exclusion, RS-10</td><td>R-FAST or R-FULL</td><td>CE-001; PQ-001</td></tr>
+<tr><td>Is this servicing change administrative or credit-relevant?</td><td>SC-2 D1 for P3</td><td>RS-03 with RS-11 exclusion</td><td>R-FAST or R-FULL; gates in SC-3 via RS-07</td><td>CE-003</td></tr>
+<tr><td>Does this drawdown need Credit?</td><td>SC-2 D1 for P4</td><td>RS-02 with RS-11 exclusion</td><td>R-EXC or R-FULL</td><td>Existing practice formalised</td></tr></table>
+<h2>1.3 Design constraints applied</h2>
+<ul><li>An early-warning flag (RS-11) always forces R-FULL or P5; no fast route is available to a flagged connection (DP-08).</li><li>A fast route never removes the authority control (C5); it changes who holds the authority and what evidence is recorded (DP-03).</li><li>Every fast route is sampled by Credit after approval at a rate set in CE-001 / CE-003, with a feedback loop to the thresholds.</li><li>Rules run on data captured at source; where a condition needs data the platform does not hold, the rule is marked <i>Gap</i> for 2.7 and the condition is conservative until the data exists.</li></ul></div>
+
+<div class="pb"><h1>2. Route eligibility and triggers</h1>
+
+<div class="rs"><div class="hd">RS-01 · Renewal fast-track eligibility<span>P2 · SC-2 D1 · hit policy: Any (all conditions must hold) · owner: Head of Credit Risk Policy</span></div>
+<table class="meta2"><tr><td>Purpose</td><td>Identify renewals with no structural change and no risk deterioration that may be approved within line authority with a reduced submission.</td></tr>
+<tr><td>Evaluated on</td><td>Data at SC-1a completion; re-evaluated at submission if any input changed.</td></tr>
+<tr><td>Outcome</td><td>All conditions true → R-FAST; any false → R-FULL with the failing condition(s) recorded (so Credit sees why).</td></tr>
+<tr><td>Override</td><td>RM may force R-FULL (always permitted). RM may not force R-FAST.</td></tr></table>
+<table class="dt"><tr><th style="width:5%">#</th><th style="width:30%">Condition</th><th style="width:20%">Data element (1.8)</th><th style="width:20%">Proposed threshold</th><th>Rationale / to test</th></tr>
+<tr><td>1</td><td>No change to any facility limit</td><td>F04 limits vs. prior</td><td>Δ = 0 for every facility</td><td>Definitional for Renewal (RFP); structural validation in P2</td></tr>
+<tr><td>2</td><td>No change to pricing, tenor, repayment, security, covenants, parties</td><td>F04, F08, F09, F02</td><td>Δ = 0</td><td>As above; any change diverts to P3 before SC-2</td></tr>
+<tr><td>3</td><td>Risk grade within the eligible band</td><td>F06 grade</td><td class="prop">Grades 1–[n] on the Bank’s scale (proposed: top two-thirds of performing grades)</td><td>A2 cohort: compare 12-month outcomes by grade band; set the band where eligible-cohort downgrade rate ≤ full-review cohort</td></tr>
+<tr><td>4</td><td>Risk grade not stale</td><td>F06 grade date</td><td class="prop">Reviewed within 15 months</td><td>Ensures a grade refresh at least every other renewal cycle; F06 protection (1.8)</td></tr>
+<tr><td>5</td><td>No grade migration downward in the period</td><td>F06 history</td><td class="prop">No downgrade in prior 12 months</td><td>Early deterioration signal</td></tr>
+<tr><td>6</td><td>Covenants compliant; no open breach or waiver</td><td>F09</td><td>All tests passed; no active waiver</td><td>RS-11 input</td></tr>
+<tr><td>7</td><td>No early-warning flag</td><td>RS-11 output</td><td>Flag = false</td><td>DP-08 exclusion</td></tr>
+<tr><td>8</td><td>No arrears or excess in the period</td><td>Account conduct (integration)</td><td class="prop">No arrears &gt; [n] days; no unauthorised excess in 12 months</td><td>Gap if conduct data not integrated → conservative: condition fails</td></tr>
+<tr><td>9</td><td>No EPR in the prior 12 months</td><td>F03 history</td><td>EPR count = 0</td><td>RFP: EPR indicates review could not complete</td></tr>
+<tr><td>10</td><td>Not in a sector or product excluded by policy</td><td>F01 sector; F04 product</td><td class="prop">Exclusion list per policy</td><td>Credit Risk to specify</td></tr>
+<tr><td>11</td><td>Total connection exposure within fast-track ceiling</td><td>F05 exposure</td><td class="prop">≤ £[x] (proposed: aligned to line-authority ceiling in DA matrix)</td><td>Ties to RS-05; DR-07</td></tr>
+<tr><td>12</td><td>Prior renewal was not itself fast-tracked, or sampling permits consecutive</td><td>F03 route history</td><td class="prop">At most [2] consecutive fast-tracks before a full review</td><td>Guarantees periodic full review; CE-001</td></tr></table>
+<table class="meta2"><tr><td>Evidence written</td><td>Rule version; each condition’s input value and result; route selected; approver authority level (RS-05).</td></tr>
+<tr><td>Expected effect</td><td class="prop">Illustrative 48% of renewals eligible (1.10 input); measured share from A2 at G1. Section 7 shows sensitivity to conditions 3, 4, 11, 12.</td></tr>
+<tr><td>Review</td><td>Quarterly: eligible-cohort outcomes vs. full-review cohort; thresholds adjusted by Credit Risk Policy; sampling findings (CE-001) feed in.</td></tr></table></div>
+
+<div class="rs"><div class="hd">RS-02 · Material-change triggers for pre-approved drawdowns<span>P4 · SC-2 D1 · hit policy: Any trigger → R-FULL · owner: Head of Credit Risk Policy</span></div>
+<table class="meta2"><tr><td>Purpose</td><td>Formalise the undocumented “need credit approval?” decision on SR-1 / SD-1: Credit is involved only when something material differs from the approval.</td></tr>
+<tr><td>Outcome</td><td>No trigger → R-EXC; any trigger → R-FULL with trigger recorded.</td></tr></table>
+<table class="dt"><tr><th style="width:5%">#</th><th style="width:40%">Trigger</th><th style="width:20%">Data element</th><th>Proposed threshold</th></tr>
+<tr><td>1</td><td>Allocation would exceed pre-approved limit</td><td>F04; C19 arithmetic</td><td>Hard stop; cannot proceed (not a trigger, a block)</td></tr>
+<tr><td>2</td><td>Product outside the approved product set</td><td>F04 product vs. approval</td><td>Any</td></tr>
+<tr><td>3</td><td>Pricing outside the approved range</td><td>F04 rate / margin</td><td class="prop">Margin below approved floor</td></tr>
+<tr><td>4</td><td>Tenor beyond approved maturity</td><td>F04 maturity</td><td>Any</td></tr>
+<tr><td>5</td><td>Approval age</td><td>F07 decision date</td><td class="prop">&gt; 12 months since approval or last full review</td></tr>
+<tr><td>6</td><td>Early-warning flag</td><td>RS-11</td><td>Flag = true</td></tr>
+<tr><td>7</td><td>Tranche drawn out of sequence or amount differs from schedule</td><td>P1 tranche schedule</td><td class="prop">Amount Δ &gt; 10% or sequence change</td></tr>
+<tr><td>8</td><td>Security condition attached to the tranche not yet satisfied</td><td>F08; G-SEC</td><td>Any unsatisfied</td></tr></table></div>
+
+<div class="rs"><div class="hd">RS-03 · Variation reason taxonomy and materiality<span>P3 · SC-1a R1 and SC-2 D1 · hit policy: First (most material reason wins) · owner: Head of Credit Risk Policy; taxonomy maintained by Lending Operations</span></div>
+<table class="meta2"><tr><td>Purpose</td><td>Capture why a facility is being changed, and route administrative changes to R-FAST and credit-relevant changes to R-FULL. Replaces the single Variation path.</td></tr>
+<tr><td>Outcome</td><td>Route; letter template (RS-06); security gate (RS-07); fulfilment gate.</td></tr>
+<tr><td>Combination rule</td><td>Where several reasons apply, the most material governs. Any reason marked R-FULL forces R-FULL.</td></tr></table>
+<table class="dt"><tr><th style="width:8%">Code</th><th style="width:30%">Reason</th><th style="width:12%">Route (proposed)</th><th style="width:10%">Letter</th><th style="width:10%">Security gate</th><th style="width:10%">Fulfil gate</th><th>Notes</th></tr>
+<tr><td>V-01</td><td>Review or maturity date change within policy window</td><td class="prop">R-FAST</td><td>Notice</td><td>No</td><td>Yes</td><td>Overlaps EPR; counter applies</td></tr>
+<tr><td>V-02</td><td>Tracking item / covenant due-date amendment (no covenant level change)</td><td class="prop">R-FAST</td><td>None</td><td>No</td><td>No</td><td>Most frequent administrative change (to confirm from DR-04)</td></tr>
+<tr><td>V-03</td><td>Covenant level or test change</td><td>R-FULL</td><td>Letter</td><td>No</td><td>Yes</td><td>Credit-relevant</td></tr>
+<tr><td>V-04</td><td>Pricing change (reference rate or margin)</td><td>R-FULL</td><td>Letter</td><td>No</td><td>Yes</td><td>RFP: EPR cannot be used for rate change; same logic</td></tr>
+<tr><td>V-05</td><td>Limit decrease (not full repayment)</td><td class="prop">R-FAST if no security release; else R-FULL</td><td>Letter</td><td>If release</td><td>Yes</td><td>Policy question: is a decrease credit-neutral?</td></tr>
+<tr><td>V-06</td><td>Limit increase</td><td>→ P1 (Increase)</td><td>—</td><td>—</td><td>—</td><td>Not a variation</td></tr>
+<tr><td>V-07</td><td>Party added or removed (guarantor, partner, director)</td><td>R-FULL</td><td>Letter</td><td>Yes if guarantee</td><td>Yes</td><td>Party completeness (C1)</td></tr>
+<tr><td>V-08</td><td>Security added, substituted or released</td><td>R-FULL</td><td>Letter</td><td>Yes</td><td>Yes</td><td>Shared-security check</td></tr>
+<tr><td>V-09</td><td>Product change or restructure (same aggregate exposure)</td><td>R-FULL</td><td>Letter</td><td>Per product</td><td>Yes</td><td>Restructure flag</td></tr>
+<tr><td>V-10</td><td>Correction of a recording error (no change to agreed terms)</td><td class="prop">R-FAST</td><td>None</td><td>No</td><td>Per field</td><td>Audit trail; four-eyes by line</td></tr>
+<tr><td>V-11</td><td>Removal of all facilities</td><td>Removal path (TB-P3R)</td><td>Confirmation</td><td>Release</td><td>Yes</td><td>C12</td></tr>
+<tr><td>V-12</td><td>Other (free text; routes R-FULL until classified)</td><td>R-FULL</td><td>Letter</td><td>Per Credit</td><td>Yes</td><td>Taxonomy maintenance input</td></tr></table>
+<table class="meta2"><tr><td>Expected effect</td><td class="prop">Illustrative 60% of variations administrative (V-01, V-02, V-05 part, V-10); measured mix from DR-04 and the 50-deal sample.</td></tr><tr><td>Equivalence</td><td>CE-003: administrative route approved by line with recorded reason; Credit sampling; any R-FULL reason forces full route.</td></tr></table></div></div>
+
+<div class="pb"><h1>3. Submission, authority and analytics rules</h1>
+
+<div class="rs"><div class="hd">RS-04 · Required analytics and submission items<span>SC-2 R1 / R2 / S2 · hit policy: Collect · owner: Head of Credit Risk Policy</span></div>
+<table class="meta2"><tr><td>Purpose</td><td>Replace “if required” and tacit Credit expectations with an explicit list of items the submission must contain, by route, pattern and risk band. The platform enforces presence before submission (C3 as rules) and presents the list to the RM as a checklist.</td></tr><tr><td>Outcome</td><td>Union of required items from all matching rows; each item has a field or document type the platform can check for presence.</td></tr></table>
+<table class="dt"><tr><th style="width:20%">Item (C2 components and more)</th><th>P1 R-FULL</th><th>P2 R-FULL</th><th>P2 R-FAST</th><th>P3 R-FULL</th><th>P3 R-FAST</th><th>P4 R-EXC</th><th>P5 referral</th><th>Platform check</th></tr>
+<tr><td>Customer analysis narrative</td><td>●</td><td>●</td><td class="prop">Short form</td><td>●</td><td>—</td><td>—</td><td>●</td><td>Field present; min length</td></tr>
+<tr><td>Financial statements (current)</td><td>●</td><td>●</td><td class="prop">Not required if grade &lt; 15 months</td><td>●</td><td>—</td><td>—</td><td>●</td><td>Document type + date</td></tr>
+<tr><td>Debt-servicing calculation</td><td>●</td><td>●</td><td class="prop">Prior carried forward</td><td>● if V-03/04/05/09</td><td>—</td><td>—</td><td>●</td><td>Calc present; inputs dated</td></tr>
+<tr><td>ECRS / lending category classification</td><td>●</td><td>●</td><td>● (refresh if stale)</td><td>●</td><td>—</td><td>—</td><td>●</td><td>Field present; date</td></tr>
+<tr><td>Risk grade (current)</td><td>●</td><td>●</td><td>● (RS-01 c.4)</td><td>●</td><td>Current</td><td>Current</td><td>●</td><td>Field + date</td></tr>
+<tr><td>External credit checks</td><td>●</td><td class="prop">● if &gt; 12 months old</td><td class="prop">Not required</td><td>● if V-07</td><td>—</td><td>—</td><td>●</td><td>Integration result + date</td></tr>
+<tr><td>Credit memo</td><td>●</td><td>●</td><td class="prop">Auto-generated summary + RM confirmation</td><td>●</td><td>Reason + confirmation</td><td>Allocation summary</td><td>Referral summary</td><td>Document generated / field</td></tr>
+<tr><td>Security valuation (current)</td><td>● if secured</td><td class="prop">● if &gt; [36] months</td><td>—</td><td>● if V-08</td><td>—</td><td>● if tranche-conditioned</td><td>●</td><td>F08 date</td></tr>
+<tr><td>Covenant compliance certificate</td><td>—</td><td>●</td><td>● (system status)</td><td>● if V-03</td><td>—</td><td>—</td><td>●</td><td>F09 status</td></tr>
+<tr><td>Early-warning check</td><td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td>n/a</td><td>RS-11 result</td></tr>
+<tr><td>Variation reason and materiality</td><td>—</td><td>—</td><td>—</td><td>●</td><td>●</td><td>—</td><td>—</td><td>RS-03 code</td></tr>
+<tr><td>Tranche / allocation detail vs. schedule</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>●</td><td>—</td><td>P1 schedule; C19</td></tr></table>
+<p class="small">● required · — not required · <span class="prop">proposed</span> where the as-is has no stated rule. Risk-band variants (e.g. additional items for grades near the band edge) added by Credit Risk Policy in co-design.</p></div>
+
+<div class="rs"><div class="hd">RS-05 · Delegated-authority determination inputs<span>SC-2 S3 · hit policy: First (lowest sufficient authority) · owner: Head of Credit Risk Policy · content from DA matrix (DR-07)</span></div>
+<table class="meta2"><tr><td>Purpose</td><td>Automate C5: determine the authority level required for a decision from data, record it, and route accordingly. The matrix content is Bank policy and is loaded as data; this table defines the inputs and the determination logic.</td></tr>
+<tr><td>Inputs</td><td>Total connection exposure after the proposal (F05); largest single facility limit (F04); risk grade (F06); product class (F04); customer type / segment (F01); route (RS-01/02/03 outcome); pattern; any policy exception flag.</td></tr>
+<tr><td>Logic</td><td>Look up the DA matrix on the input combination; return the lowest authority level whose ceilings all exceed the proposal; compare with the approver’s held authority (user profile); if approver ≥ required → within authority; else → Credit queue at the required level.</td></tr>
+<tr><td>R-FAST authority</td><td class="prop">Subject to PQ-001: eligible renewals determined at “line” level regardless of exposure up to the RS-01 c.11 ceiling, with Credit sampling (CE-001). If PQ-001 is refused, R-FAST still runs the standard matrix and removes only the manual step.</td></tr>
+<tr><td>Evidence</td><td>Matrix version; inputs; required level; approver level; outcome; override reason if any.</td></tr>
+<tr><td>Override</td><td>Approver may escalate to a higher level (always). May not approve below required level. Policy-exception approvals recorded as such with the exception reference.</td></tr>
+<tr><td>Reporting</td><td>Authority breaches become impossible by construction; attempted approvals below level are logged (control MI for O3).</td></tr></table></div>
+
+<div class="rs"><div class="hd">RS-09 · Loop limits and escalation<span>EX-B · owner: Head of Credit</span></div>
+<table class="dt"><tr><th>Parameter</th><th>Proposed value</th><th>Rationale</th></tr>
+<tr><td>Maximum deferral loops before escalation</td><td class="prop">2</td><td>Illustrative baseline: 18% of deferred deals loop ≥ 2; escalation catches the tail</td></tr>
+<tr><td>Assessor continuity</td><td>Same assessor on resubmission unless unavailable &gt; 3 working days</td><td>Removes re-reading; accountability</td></tr>
+<tr><td>Request structure</td><td>Items from RS-04 list or free text with category; each with owner (RM / customer) and due date</td><td>Feeds RS-04 maintenance</td></tr>
+<tr><td>Response SLA</td><td class="prop">RM items 3 working days; customer items 10 working days then chase</td><td>DP-04</td></tr>
+<tr><td>Escalation outcome options</td><td>Approve with conditions; decline; one further loop with Credit-manager reason</td><td>Bounded</td></tr></table></div>
+
+<div class="rs"><div class="hd">RS-10 · Extension Pending Review limits<span>P2 · owner: Head of Credit Risk Policy · from RFP</span></div>
+<table class="dt"><tr><th>Parameter</th><th>Value</th><th>Enforcement</th></tr>
+<tr><td>Maximum extension per EPR</td><td>3 months</td><td>Maturity and review date Δ ≤ 3 months; system-enforced</td></tr>
+<tr><td>Maximum consecutive EPRs</td><td>3</td><td>Counter on facility; third extension forces R-FULL on the next renewal; fourth blocked</td></tr>
+<tr><td>Items required</td><td>RS-04 P2 R-FAST column, plus reason for extension</td><td>Checklist</td></tr>
+<tr><td>Rate or structure change</td><td>Not permitted on EPR</td><td>Divert to P3 or P1</td></tr>
+<tr><td>Eligibility interaction</td><td>EPR in prior 12 months fails RS-01 c.9</td><td>Automatic</td></tr></table></div>
+
+<div class="rs"><div class="hd">RS-12 · Post-approval change materiality<span>EX-C · owner: Head of Credit Risk Policy</span></div>
+<table class="dt"><tr><th style="width:40%">Field changed after approval</th><th style="width:20%">Proposed class</th><th>Effect</th></tr>
+<tr><td>Drawdown date within approved window; account details; correspondence address</td><td class="prop">Non-material</td><td>Documents regenerated; approval stands; change logged</td></tr>
+<tr><td>Amount decrease ≤ [20]% with no security change</td><td class="prop">Non-material</td><td>As above; DA re-check (lower)</td></tr>
+<tr><td>Any limit increase; pricing; tenor; repayment profile; security; parties; product</td><td>Material</td><td>Return to SC-2 S2; re-assessment of the change; same assessor</td></tr>
+<tr><td>Purpose of borrowing</td><td>Material</td><td>As above</td></tr>
+<tr><td>Early-warning flag raised since approval</td><td>Material</td><td>As above; P5 prompt</td></tr></table></div></div>
+
+<div class="pb"><h1>4. Documentation, security and staleness rules</h1>
+
+<div class="rs"><div class="hd">RS-06 · Letter template and letter-required rule<span>SC-3 S1 · hit policy: First · owner: Lending Operations</span></div>
+<table class="dt"><tr><th>Pattern / reason</th><th>Letter required?</th><th>Template</th><th>Signature</th><th>Notes</th></tr>
+<tr><td>P1 any</td><td>Yes</td><td>Facility agreement per product set</td><td>Customer (and guarantors)</td><td>Tranche schedule embedded where applicable</td></tr>
+<tr><td>P2 R-FAST, no term restated</td><td class="prop">Notice of renewal</td><td>Renewal confirmation</td><td class="prop">None (acknowledgement optional)</td><td>Resolves RN-3 D1 for the majority of renewals; to confirm with Legal</td></tr>
+<tr><td>P2 R-FULL or terms restated</td><td>Yes</td><td>Renewal letter</td><td>Customer</td><td></td></tr>
+<tr><td>P2 EPR</td><td class="prop">Notice of extension</td><td>Extension confirmation</td><td>None</td><td></td></tr>
+<tr><td>P3 V-01, V-02, V-10</td><td>Notice or none (RS-03)</td><td>Variation notice</td><td>None</td><td></td></tr>
+<tr><td>P3 V-03 to V-09</td><td>Yes</td><td>Variation letter / supplemental agreement</td><td>Customer; guarantors if affected</td><td></td></tr>
+<tr><td>P3 V-11 removal</td><td>Confirmation</td><td>Release confirmation</td><td>None</td><td></td></tr>
+<tr><td>P4 reduced shadow limit</td><td>Notice</td><td>Limit notice</td><td>None</td><td>Replaces full FAL (PP-31)</td></tr>
+<tr><td>P4 new facility from shadow limit</td><td>Yes</td><td>Facility agreement</td><td>Customer</td><td></td></tr>
+<tr><td>P4 tranche drawdown</td><td>Confirmation</td><td>Tranche confirmation</td><td>None</td><td>Ends off-platform letter (W-07)</td></tr></table></div>
+
+<div class="rs"><div class="hd">RS-07 · Security gate and re-instruction<span>SC-3 S4 · owner: Head of Lending Services</span></div>
+<table class="dt"><tr><th>Condition</th><th>G-SEC applies?</th><th>Instruction content</th></tr>
+<tr><td>P1 with security in approval conditions</td><td>Yes</td><td>Generated from conditions: type, parties, property / asset, priority</td></tr>
+<tr><td>P2 any</td><td>No</td><td>Existing security confirmed in place (status check only)</td></tr>
+<tr><td>P3 with V-07 (guarantee) or V-08</td><td>Yes</td><td>Add / substitute / release per reason</td></tr>
+<tr><td>P3 other reasons</td><td>No</td><td>None (ends default re-instruction, PP-28)</td></tr>
+<tr><td>P4 tranche with security condition</td><td>Yes, for that condition</td><td>Per tranche</td></tr>
+<tr><td>Removal (V-11)</td><td>Release sequence (TB-P3R)</td><td>Release after shared-security check</td></tr></table></div>
+
+<div class="rs"><div class="hd">RS-08 · Staleness and chase schedule<span>EX-E · owner: Lending Operations; second line (CE-002)</span></div>
+<table class="dt"><tr><th>Elapsed since issue</th><th>Action</th><th>Actor</th><th>Evidence</th></tr>
+<tr><td class="prop">2 weeks</td><td>Automated reminder to customer</td><td>Platform</td><td>Sent timestamp</td></tr>
+<tr><td class="prop">4 weeks</td><td>Second reminder; RM task to contact</td><td>Platform; RM</td><td>Contact note</td></tr>
+<tr><td class="prop">8 weeks</td><td>Third reminder; RM task; line manager visibility</td><td>Platform; RM</td><td>Contact note</td></tr>
+<tr><td class="prop">10 weeks</td><td>RM extension with reason, or withdraw</td><td>RM</td><td>Reason code</td></tr>
+<tr><td>3 months</td><td>Re-validation of key facts (below); approval stands if unchanged</td><td>Platform check + RM confirmation</td><td>Re-validation record</td></tr>
+<tr><td class="prop">6 months, or material change at any time</td><td>Reset to SC-2 (full re-approval)</td><td>Platform</td><td>Reset reason</td></tr></table>
+<table class="meta2"><tr><td>Re-validation items at 3 months</td><td class="prop">Risk grade unchanged or improved; no early-warning flag; no arrears; limit and terms unchanged; security position unchanged; no change in parties. Any failure → reset.</td></tr></table></div></div>
+
+<div class="pb"><h1>5. Flag, approver and pre-screen rules</h1>
+
+<div class="rs"><div class="hd">RS-11 · Early-warning flag composition<span>SC-1a S3; RS-01/02/03 exclusion; P5 trigger · hit policy: Any → flag · owner: Credit Risk; SBS</span></div>
+<table class="dt"><tr><th style="width:5%">#</th><th style="width:35%">Indicator</th><th style="width:20%">Data element</th><th style="width:20%">Proposed threshold</th><th>Availability (2.7)</th></tr>
+<tr><td>1</td><td>Arrears or unauthorised excess</td><td>Account conduct</td><td class="prop">&gt; [n] days in last 6 months</td><td>Integration (Gap until built)</td></tr>
+<tr><td>2</td><td>Risk-grade downgrade</td><td>F06 history</td><td class="prop">≥ 1 notch in 12 months, or any move into watch grades</td><td>Platform</td></tr>
+<tr><td>3</td><td>Covenant breach or active waiver</td><td>F09</td><td>Any</td><td>Platform (OP-24)</td></tr>
+<tr><td>4</td><td>Forbearance status</td><td>F10</td><td>Any active</td><td>Platform</td></tr>
+<tr><td>5</td><td>Watch-list membership</td><td>F06 / risk flag</td><td>Any</td><td>Platform</td></tr>
+<tr><td>6</td><td>Prior CAP referral (open or closed within 24 months)</td><td>P5 history</td><td>Any</td><td>Platform</td></tr>
+<tr><td>7</td><td>Connected party flagged</td><td>F02 → indicators 1–6 on connected customers</td><td>Any</td><td>Platform (connection model)</td></tr>
+<tr><td>8</td><td>External adverse data (where integrated)</td><td>Bureau</td><td class="prop">Per bureau score band</td><td>Integration</td></tr></table>
+<table class="meta2"><tr><td>Effect</td><td>Flag = true → no fast route (RS-01, 02, 03 fail); P5 referral prompt at SC-1a; SBS queue visibility; Credit sees indicators on assessment.</td></tr><tr><td>Review</td><td>Indicator thresholds reviewed quarterly against referral outcomes (T8; categorisation rate of flagged connections).</td></tr></table></div>
+
+<div class="rs"><div class="hd">RS-13 · Approver by segment and route<span>SC-2 R3; SC-3 S3 (wet-ink) · owner: Lending Operations · from RN-3 segment variation and DA matrix</span></div>
+<table class="dt"><tr><th>Segment</th><th>P2 R-FAST approver (proposed)</th><th>P3 R-FAST approver</th><th>Returned-letter checker (wet-ink)</th><th>Notes</th></tr>
+<tr><td>Business Direct</td><td class="prop">Team leader (line)</td><td class="prop">Team leader</td><td>RM</td><td>Volume segment; four-eyes by line</td></tr>
+<tr><td>Strategic Finance</td><td class="prop">RM within held authority; else line</td><td class="prop">RM</td><td>Business Ops</td><td>As-is checker retained</td></tr>
+<tr><td>Corporate</td><td class="prop">Line (insider-information restrictions)</td><td class="prop">Line</td><td>Corporate Associate</td><td>C27 access model</td></tr></table></div>
+
+<div class="rs"><div class="hd">RS-14 · Pre-screen criteria and reason codes<span>SC-1b S2 · owner: Lending Operations; Conduct</span></div>
+<table class="dt"><tr><th style="width:8%">Code</th><th style="width:40%">Criterion (proposed)</th><th>Outcome</th><th>Notes</th></tr>
+<tr><td>PS-01</td><td>Request outside product set or below minimum / above maximum for channel</td><td>Decline with reason; refer to alternative</td><td>Referral destinations defined (EX-A)</td></tr>
+<tr><td>PS-02</td><td>Customer type not served by Business Banking</td><td>Refer</td><td></td></tr>
+<tr><td>PS-03</td><td>Known adverse: existing early-warning flag or prior decline within [6] months without change</td><td>Decline with reason</td><td>RS-11</td></tr>
+<tr><td>PS-04</td><td>Sector or purpose excluded by policy</td><td>Decline with reason</td><td>Policy list</td></tr>
+<tr><td>PS-05</td><td>Insufficient information to assess (after one request)</td><td>Hold; close after [30] days</td><td>Measured</td></tr>
+<tr><td>PS-06</td><td>Passes</td><td>Proceed to SC-1b S3</td><td></td></tr></table>
+<p class="small">Every outcome is recorded with the code; the free-text “initial overview” ends. Decline MI feeds RR-07 and the appeal path EX-A.</p></div></div>
+
+<div class="pb"><h1>6. Policy questions, equivalence entries and sampling design</h1>
+<h2>6.1 Policy questions routed to Credit Risk Policy</h2>
+<table><tr><th>Ref</th><th>Question</th><th>Rule sets affected</th><th>Needed by</th><th>Design if answered no</th></tr>
+<tr><td>PQ-001</td><td>May renewals meeting RS-01 be approved within RM / line authority up to the RS-01 c.11 ceiling, with Credit sampling in place of pre-approval assessment?</td><td>RS-01, RS-05</td><td>W10</td><td>R-FAST retains Credit assessment; benefit is reduced submission and automated DA only</td></tr>
+<tr><td>PQ-002</td><td>May SBS categorisation proceed in parallel with the Credit authority decision for referrals triggered by RS-11 indicators 3, 4 or 5?</td><td>RS-11; P5</td><td>W10</td><td>Sequential; referral record still shared</td></tr>
+<tr><td>PQ-003</td><td>Is a limit decrease without security release (V-05) credit-neutral for routing purposes?</td><td>RS-03</td><td>W9</td><td>V-05 → R-FULL</td></tr>
+<tr><td>PQ-004</td><td>What grade band, grade age and exposure ceiling apply to RS-01 conditions 3, 4 and 11?</td><td>RS-01</td><td>W10</td><td>Conservative defaults until set</td></tr>
+<tr><td>PQ-005</td><td>May a renewal notice without customer signature document an unchanged renewal (RS-06 P2 R-FAST)?</td><td>RS-06</td><td>W10 (with Legal)</td><td>Letter with signature on all renewals</td></tr></table>
+<h2>6.2 Equivalence entries opened in 2.5 by this design</h2>
+<table><tr><th>Ref</th><th>As-is control changed</th><th>Replacement</th><th>Evidence produced</th><th>Residual risk and mitigation</th></tr>
+<tr><td>CE-001</td><td>C6 independent Credit assessment bypassed for RS-01-eligible renewals</td><td>RS-01 eligibility evaluated by platform; RS-05 automated authority with recorded level; RS-04 reduced items enforced; RS-01 c.12 periodic full review; Credit post-approval sampling</td><td>Rule evidence per deal; sampling results; cohort outcome MI quarterly</td><td>Deterioration missed between grade reviews → RS-11 flag exclusion; c.4 grade age; sampling rate <span class="prop">10% initially, risk-weighted</span></td></tr>
+<tr><td>CE-002</td><td>3-month unreturned-letter reset (C8 timing)</td><td>RS-08 chase evidence; RM extension with reason; 3-month re-validation of listed facts; 6-month reset</td><td>Chase timestamps; reason codes; re-validation record</td><td>Stale approval acted upon → re-validation items include grade, flag, arrears, terms</td></tr>
+<tr><td>CE-003</td><td>C6 bypassed for administrative variations (RS-03 R-FAST reasons)</td><td>Reason code enforced; most-material-wins; line approval with evidence; Credit sampling</td><td>Reason, route, approver; sampling</td><td>Mis-coding → sampling targets V-02 and V-10; V-12 always R-FULL</td></tr>
+<tr><td>CE-004</td><td>C4 manual document check</td><td>Letter generated from terms; reconciliation on return (automated for e-signed)</td><td>Generation log; reconciliation result</td><td>Template error → template change control; wet-ink retains manual check</td></tr>
+<tr><td>CE-005</td><td>C7 distress screen relocated from end of assessment to deal start</td><td>RS-11 flag at SC-1a; assessor judgement retained at K1</td><td>Flag result and indicators</td><td>Indicator data gaps → conservative thresholds; Gap items in 2.7</td></tr></table>
+<h2>6.3 Sampling design (CE-001, CE-003)</h2>
+<table><tr><th>Element</th><th>Proposed</th></tr>
+<tr><td>Population</td><td>All R-FAST approvals (P2 and P3) in the month</td></tr>
+<tr><td>Rate</td><td class="prop">10% in the first two quarters, risk-weighted (higher for grades at the band edge, exposures near the ceiling, V-05 and V-10); reviewed quarterly against findings; floor 5%</td></tr>
+<tr><td>Reviewer</td><td>Credit assessor not involved in the segment’s line approvals</td></tr>
+<tr><td>Test</td><td>Would a full assessment have reached the same decision? Were RS-01 / RS-03 inputs correct?</td></tr>
+<tr><td>Outcome</td><td>Pass / finding; findings categorised (rule error, data error, judgement); feedback to thresholds and to RS-04 items</td></tr>
+<tr><td>Escalation</td><td>Finding rate above <span class="prop">[5]%</span> in a segment suspends R-FAST for that segment pending Credit Risk review</td></tr>
+<tr><td>MI</td><td>Monthly to Head of Credit; quarterly to Design Authority / Risk Committee; cohort outcomes (downgrade, arrears, referral) for fast-track vs. full-review populations</td></tr></table></div>
+
+<div class="pb"><h1>7. Threshold sensitivity and expected effect <span class="ph">(illustrative; measured at v1.0)</span></h1>
+<p>The value of RS-01 depends on where Credit Risk sets conditions 3, 4, 11 and 12. The table shows how the eligible share and the capacity effect move with each, using the illustrative inputs from 1.10. It is the basis for the co-design conversation: each row is a choice with a stated cost.</p>
+<table><tr><th>Scenario</th><th>Conditions</th><th>Illustrative eligible share</th><th>Credit FTE-eq</th><th>RM FTE-eq</th><th>Renewal P50 (eligible)</th><th>Risk posture</th></tr>
+<tr class="ill"><td>A · Conservative</td><td>Grade band top half; grade ≤ 12 months; ceiling at RM authority; no consecutive fast-tracks</td><td class="num">≈ 30%</td><td class="num">1.3</td><td class="num">2.1</td><td class="num">35 → 27</td><td>Full review at least every other cycle; lowest residual</td></tr>
+<tr class="ill"><td>B · Proposed</td><td>Top two-thirds; ≤ 15 months; line ceiling; max 2 consecutive</td><td class="num">≈ 48%</td><td class="num">2.0</td><td class="num">3.3</td><td class="num">35 → 27</td><td>Periodic full review every third cycle; sampling 10%</td></tr>
+<tr class="ill"><td>C · Extended</td><td>All performing grades; ≤ 24 months; line ceiling; unlimited consecutive with sampling</td><td class="num">≈ 65%</td><td class="num">2.7</td><td class="num">4.5</td><td class="num">35 → 27</td><td>Relies on RS-11 and sampling; highest residual</td></tr></table>
+<p class="small">Capacity figures use the 1.10 OP-01 formula on illustrative inputs; cycle-time effect is the same per eligible deal in each scenario. The A2 cohort analysis at G1 replaces the eligible share with a measured value per scenario and adds the outcome comparison (downgrade / arrears rate of the would-have-been-eligible cohort), which is the evidence Credit Risk needs to choose.</p>
+<h2>7.1 Validation plan to v1.0</h2>
+<table><tr><th>Week</th><th>Session</th><th>Rule sets</th><th>Participants</th><th>Output</th></tr>
+<tr><td>8</td><td>Co-design 1: routing structure and RS-01 conditions; PQ-001 framing</td><td>RS-01, RS-05, RS-11</td><td>Head of Credit Risk Policy; Credit Managers; Controls Specialist</td><td>Condition list agreed; thresholds as scenarios</td></tr>
+<tr><td>9</td><td>Co-design 2: variation taxonomy and materiality; EPR; post-approval</td><td>RS-03, RS-10, RS-12</td><td>Credit Risk Policy; Lending Ops; WG Servicing</td><td>Taxonomy v1; PQ-003</td></tr>
+<tr><td>9</td><td>Co-design 3: submission items and loop limits</td><td>RS-04, RS-09</td><td>Credit Managers; Senior RMs</td><td>Items matrix agreed</td></tr>
+<tr><td>10</td><td>Co-design 4: documents, security, staleness, approvers, pre-screen</td><td>RS-06, 07, 08, 13, 14</td><td>Lending Ops; Lending Services; Legal; Conduct</td><td>Tables agreed; PQ-005</td></tr>
+<tr><td>10</td><td>Threshold decision with A2 cohort evidence</td><td>RS-01</td><td>Head of Credit Risk Policy</td><td>PQ-001, PQ-004 answered; scenario chosen</td></tr>
+<tr><td>11</td><td>Equivalence review</td><td>CE-001 to CE-005</td><td>Second-line Risk</td><td>Register entries signed or conditions set</td></tr>
+<tr><td>11</td><td>Rule test cases (section 8) executed on paper against 30 historic deals</td><td>All</td><td>Controls Specialist; Bank BA</td><td>Rules behave as intended; edge cases logged</td></tr></table></div>
+
+<div class="pb"><h1>8. Rule test cases (extract)</h1>
+<p>Each rule set carries test cases in the requirements pack (2.8). The extract below shows the form; the full set is thirty historic deals re-routed on paper in Week 11.</p>
+<table><tr><th>ID</th><th>Scenario</th><th>Inputs</th><th>Expected outcome</th><th>Rule rows</th></tr>
+<tr><td>TC-01</td><td>Unchanged renewal, grade 3, reviewed 10 months ago, covenants compliant, no flags, exposure below ceiling, prior renewal full</td><td>Per RS-01 c.1–12 all true</td><td>R-FAST; line approver per RS-13; notice per RS-06</td><td>RS-01 all; RS-05; RS-06 row 2</td></tr>
+<tr><td>TC-02</td><td>As TC-01 but one covenant waiver active</td><td>c.6 false</td><td>R-FULL; failing condition recorded; full items</td><td>RS-01 c.6; RS-04 P2 R-FULL</td></tr>
+<tr><td>TC-03</td><td>As TC-01 but grade reviewed 16 months ago</td><td>c.4 false</td><td>R-FULL; grade refresh required</td><td>RS-01 c.4; RS-04</td></tr>
+<tr><td>TC-04</td><td>Renewal with guarantor change requested</td><td>Party Δ</td><td>Divert to P3 before SC-2; V-07 → R-FULL</td><td>P2 structural validation; RS-03 V-07</td></tr>
+<tr><td>TC-05</td><td>Variation: covenant due-date moved 30 days</td><td>V-02 only</td><td>R-FAST; no letter; no security; no fulfilment</td><td>RS-03 V-02; RS-06; RS-07</td></tr>
+<tr><td>TC-06</td><td>Variation: due-date move plus margin change</td><td>V-02 + V-04</td><td>R-FULL (most material wins); letter</td><td>RS-03 combination rule</td></tr>
+<tr><td>TC-07</td><td>Shadow-limit reallocation within limit, approved 8 months ago, product in set</td><td>No RS-02 trigger</td><td>R-EXC; notice + agreement</td><td>RS-02; RS-06 P4 rows</td></tr>
+<tr><td>TC-08</td><td>Tranche drawdown 15% above schedule</td><td>RS-02 t.7</td><td>R-FULL; trigger recorded</td><td>RS-02 t.7</td></tr>
+<tr><td>TC-09</td><td>Eligible renewal but connected party has arrears</td><td>RS-11 i.7</td><td>Flag; R-FULL; P5 prompt</td><td>RS-11; RS-01 c.7</td></tr>
+<tr><td>TC-10</td><td>Deferred twice, still insufficient</td><td>Counter = 2</td><td>Escalation to Credit manager</td><td>RS-09</td></tr>
+<tr><td>TC-11</td><td>Letter unreturned at 11 weeks; RM extends; at 3 months grade unchanged, no flag</td><td>RS-08</td><td>Re-validation passes; approval stands; no reset</td><td>RS-08; CE-002</td></tr>
+<tr><td>TC-12</td><td>Approved deal; customer asks to reduce amount 10%, no security change</td><td>RS-12 row 2</td><td>Non-material; documents regenerated; DA re-check</td><td>RS-12</td></tr></table></div>
+</body></html>
