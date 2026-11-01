@@ -1,0 +1,201 @@
+<!doctype html><html><head><meta charset="utf-8"><title>2.7 Fit-Gap Assessment</title><link rel="stylesheet" href="../phase-1/build/style.css"><style>
+.fg th, .fg td { font-size: 7.6pt; padding: 1.8pt 3.5pt; }
+.F { background: #e6f4ea; } .C { background: #e6edf5; } .X { background: #fff8e6; } .G { background: #fbe9e7; } .U { background: #f7f9fb; }
+.cap { border: 1px solid #b8c4d0; margin: 0 0 10pt 0; page-break-inside: avoid; }
+.cap .hd { background: #0b3d6b; color: #fff; padding: 5pt 8pt; font-weight: bold; font-size: 10.5pt; }
+.cap .hd span { font-weight: normal; opacity: .85; font-size: 8.5pt; margin-left: 8pt; }
+.cap > table { margin: 0; }
+.cap td:first-child { width: 18%; color: #555; background: #f7f9fb; }
+</style></head><body>
+
+<div class="cover"><p class="small" style="letter-spacing:1px;text-transform:uppercase">Business Bank · Business Banking Transformation Office · BB-BLP-BPR</p>
+<h1>2.7 Fit-Gap Assessment<br/><span style="font-size:15pt;color:#1f4f82">The target design against the replacement platform’s standard capability: what is Fit, Configure, Custom or Gap, and the rules for deciding</span></h1>
+<table class="meta" style="width:65%;margin-top:20pt"><tr><td>Deliverable</td><td>2.7 Fit-gap of every requirement in 2.8 against the replacement platform; custom list; degradation plan</td></tr><tr><td>Version</td><td>0.5 – method, capability questions, expected classification per story with confirming evidence, custom-list governance and degradation plan (Week 9). Classification column is <span class="ph">expected</span> until the fit-gap workshops with the Solution Architect (Weeks 9–11) using the platform documentation (DR-18); v1.0 at Week 11 feeds 2.8 v1.0 and 2.12</td></tr>
+<tr><td>Derived from</td><td>2.8 stories, rules catalogue, interfaces, data and non-functionals; 2.6 technology gaps GT-01 to GT-12; 1.7 workaround dispositions; 2.1 DP-10; RFP §7 fit-to-standard</td></tr><tr><td>Owner</td><td>WS4 Technology &amp; Replacement Interface (Platform / Integration Analyst) with the Replacement Solution Architect</td></tr><tr><td>Accepted by</td><td>Replacement Solution Architect (classifications); Design Authority (custom list as a whole, per DP-10)</td></tr>
+<tr><td>Depends on</td><td>DR-18 platform standard-process and configuration documentation (P-03); platform selection status (A-05 / R-09); vendor participation in workshops</td></tr></table>
+<div class="ph-box" style="margin-top:24pt"><b>Status of the classifications.</b> The platform has not yet been examined by this project. Every classification in sections 3–5 is the design’s <u>expectation</u>, stated with the evidence that would confirm or overturn it, so that the workshops are a verification exercise rather than a discovery exercise. Where the RFP has not confirmed platform selection, the expectations reflect common capability across current commercial lending platforms and will be re-run for the selected product (R-09 contingency).</div></div>
+
+<div class="pb"><h1>1. Purpose and the principle it serves</h1>
+<p>DP-10 says: standard before custom; configure before build. This assessment is how that principle is applied. Each requirement in the pack is tested against what the platform does as standard, and the result decides one of four things: adopt the standard (Fit), set it up (Configure), build or integrate (Custom), or accept that the capability does not exist (Gap) and apply the fallback. The output is a short, justified custom list that the Design Authority approves as a whole, and a view of build effort for 2.12 and the business case.</p>
+<p>Two failure modes are guarded against. The first is customising the platform to reproduce the as-is; the assessment requires every Custom item to cite the design principle that needs it and the opportunity in 1.10 whose value depends on it. The second is designing against a platform that is weaker than assumed; the assessment states, for each capability, what the design does if the platform cannot provide it, so that no Release 1 outcome rests on an unconfirmed capability.</p>
+<h2>1.1 Classification</h2>
+<table><tr><th style="width:6%">Code</th><th style="width:14%">Class</th><th>Definition</th><th style="width:22%">Effort implication (2.12)</th></tr>
+<tr class="F"><td>Fit</td><td>Standard</td><td>The platform does this out of the box; the design adopts the standard behaviour, possibly adjusting the to-be map to the platform’s sequence where the outcome is the same</td><td>Set-up only</td></tr>
+<tr class="C"><td>Configure</td><td>Standard, parameterised</td><td>The capability exists and is set up through configuration (workflow, rules tables, templates, queues, SLAs, fields) under Bank change control without vendor code</td><td>Configuration effort; no custom code</td></tr>
+<tr class="X"><td>Custom</td><td>Build or integrate</td><td>The capability is needed (a principle requires it; an L / XL opportunity depends on it) and the platform does not provide it as standard; built by the Programme or supplied by a partner integration</td><td>Build and test effort; run cost; on the custom list</td></tr>
+<tr class="G"><td>Gap</td><td>Not provided, not built</td><td>The platform does not provide it and the Design Authority decides not to build it for Release 1; the fallback in 2.8 applies and the item is a Release 2 candidate</td><td>Fallback operating cost; deferred</td></tr>
+<tr class="U"><td>—</td><td>Unassessed</td><td>Awaiting workshop</td><td></td></tr></table>
+<h2>1.2 Decision rules</h2>
+<ol><li><b>Fit over Configure:</b> if the platform’s standard sequence achieves the same outcome, controls and evidence as the to-be map, the map is adjusted to the platform, not the reverse. The DDR records the adjustment.</li><li><b>Configure over Custom:</b> a capability achievable through configuration is never built, even if configuration is less elegant.</li><li><b>Custom only with a principle and a value:</b> a Custom item must cite the DP-nn that requires it and the OP-nn (size L or XL) that depends on it, or a regulatory / control requirement (2.5). Otherwise it is a Gap with fallback.</li><li><b>Gap means fallback is live at go-live:</b> no Gap is accepted without its 2.8 fallback being operable (NFR-07).</li><li><b>Custom list approved as a whole:</b> the Design Authority sees the full list with total effort, not item by item, so the cumulative cost of deviation is visible (DP-10).</li><li><b>Protected fields are not negotiable:</b> any Gap touching a P1 field (1.8 §6) is escalated; the design does not accept it.</li></ol></div>
+
+<div class="pb"><h1>2. Capability questions for the workshops</h1>
+<p>Twelve capability areas, ordered by how much of the design depends on them. For each: the question put to the Solution Architect, the evidence that confirms the expected class, what the design assumes, and what the design does if the answer is weaker than expected. These are the agendas for the three fit-gap workshops.</p>
+
+<div class="cap"><div class="hd">CAP-01 · Rules engine and decision tables<span>GT-04 · RS-01 to RS-14 · stories RUL-01..05, SC2-01..03 · expected: Configure</span></div><table>
+<tr><td>Question</td><td>Can business rules be held as versioned decision tables, maintained by business owners, evaluated at defined workflow points with hit policies First / Any / Collect, and with every evaluation writing inputs, matched rows, version and outcome to the deal?</td></tr>
+<tr><td>Confirming evidence</td><td>Rule editor or import; version history with effective dates; evaluation log accessible to reporting; at least one of the Bank’s reference rules (RS-05 authority lookup) demonstrated on the product</td></tr>
+<tr><td>Design assumes</td><td>Configure. RS-01 to RS-14 loaded as data; RUL-01 to RUL-05 met natively</td></tr>
+<tr><td>If weaker</td><td>Rules exist but shallow (no hit policies, no evidence log): evidence captured by workflow fields instead (Configure + small Custom for evidence write-back). Rules absent: external rules component (Custom; justified by DP-02 and OP-01 / OP-06, both L–XL). Design unchanged; effort rises</td></tr>
+<tr><td>Dependent value</td><td>OP-01, OP-02, OP-06, OP-07, OP-17: most of the quantified capacity</td></tr></table></div>
+
+<div class="cap"><div class="hd">CAP-02 · Document generation, delivery, e-signature and status<span>GT-03 · SC3-01..04 · INT-06 · expected: Configure (templates) + partner integration (e-signature)</span></div><table>
+<tr><td>Question</td><td>Can facility letters, notices and confirmations be generated from deal data using Bank-maintained templates with conditional sections (tranches, shadow limits, guarantors), delivered to the customer electronically, signed electronically with identity evidence, returned, and their status (issued / viewed / signed / returned) held on the deal with timers?</td></tr>
+<tr><td>Confirming evidence</td><td>Template designer with merge fields and conditionals; a tranche-schedule letter demonstrated; native or certified e-signature integration; document status fields; timer hooks on status</td></tr>
+<tr><td>Design assumes</td><td>Templates Configure; e-signature via partner integration (Custom-light, common in lending platforms); status Configure</td></tr>
+<tr><td>If weaker</td><td>No e-signature: SC3-02 fallback (generate and track; send manually; manual C8) with OP-30 interim; OP-15 cycle-time value partly deferred to Release 2. No conditional templates: separate templates per product variant (more templates, still Configure). No generation at all: Custom, justified by DP-06 and OP-15 (XL); or Gap with the largest value loss in the design, escalated to Design Authority and G1 decision 3</td></tr>
+<tr><td>Dependent value</td><td>OP-15 (XL), OP-16, OP-05, OP-13; ends W-06 to W-09</td></tr></table></div>
+
+<div class="cap"><div class="hd">CAP-03 · Workflow: patterns, routes, timers, SLAs, escalation<span>GT-01, GT-05 · PAT-01, P2-01, P3-01, SC3-04, SC2-05 · expected: Configure</span></div><table>
+<tr><td>Question</td><td>Can five journey patterns be configured as compositions of shared segments with rule-selected routes, parameters per deal type, date-driven tasks (review dates, tranche dates), stage timers with SLAs and escalation, and counters (EPR, deferral loops)?</td></tr>
+<tr><td>Confirming evidence</td><td>Workflow designer supports sub-process reuse and conditional routing from rule outcomes; timer and escalation primitives; counters or equivalent; a renewal-task-from-date example</td></tr>
+<tr><td>Design assumes</td><td>Configure throughout; patterns built once from shared segments</td></tr>
+<tr><td>If weaker</td><td>No sub-process reuse: patterns configured separately (more configuration, same design). No timers: Custom scheduler component (justified by DP-04; OP-10, OP-11, OP-12, OP-16) or interim central task list (OP-31). No counters: workflow fields with rule checks (Configure)</td></tr>
+<tr><td>Dependent value</td><td>Build count 13 vs 33 (OP-03); OP-10, OP-11, OP-12; all SLA ownership in 2.9</td></tr></table></div>
+
+<div class="cap"><div class="hd">CAP-04 · Work management: queues, tasks, cross-team hand-off<span>GT-02 · SC2-05, SC3-05, SC3-07, P5-05, SC1-10 · expected: Fit / Configure</span></div><table>
+<tr><td>Question</td><td>Are role- and team-based work queues standard, with tasks created from workflow state, visible to the originating role, with ageing, SLA status and filters, and a landing page that is the queue?</td></tr>
+<tr><td>Confirming evidence</td><td>Queue configuration per team; task visibility across roles; SLA colouring; landing page configuration</td></tr>
+<tr><td>Design assumes</td><td>Fit for queues and tasks; Configure for SLA display and landing page</td></tr>
+<tr><td>If weaker</td><td>Queues only by user, not team: configure team users as a pool (Configure). No cross-role visibility: RM sees status only (acceptable; OP-11 value reduced)</td></tr>
+<tr><td>Dependent value</td><td>OP-11, OP-13, OP-14; retires W-12, W-13, W-15</td></tr></table></div>
+
+<div class="cap"><div class="hd">CAP-05 · Evidence, audit trail and access control<span>NFR-01, NFR-02 · 2.5 all entries · C27 · expected: Fit</span></div><table>
+<tr><td>Question</td><td>Is every decision, rule evaluation, approval, override, status change and ownership transfer recorded immutably with actor, timestamp and before / after, reportable to second line; and can access be restricted by connection attribute (Corporate) and segregated by role (line approval vs sampling review)?</td></tr>
+<tr><td>Confirming evidence</td><td>Audit log schema; report access; attribute-based access control; role segregation configuration</td></tr>
+<tr><td>Design assumes</td><td>Fit; this is baseline for a regulated lending platform</td></tr>
+<tr><td>If weaker</td><td>Any shortfall on audit is Custom and non-negotiable (DP-03, 2.5 evidence). Attribute-based access absent: separate Corporate instance or partition (Custom; C27 regulatory)</td></tr>
+<tr><td>Dependent value</td><td>All equivalence entries; C27; NFR-01, NFR-02</td></tr></table></div>
+
+<div class="cap"><div class="hd">CAP-06 · Data model: connection, parties, facilities, tranches, security, covenants, protected fields<span>DAT-01, DAT-02, DAT-06, DAT-08 · SC1-09, SC3-06, P5-03 · expected: Configure</span></div><table>
+<tr><td>Question</td><td>Does the data model hold connection → customer → parties → deal → facility → tranche schedule → security → covenant → conditions precedent, with configurable fields for the new structured elements (reason codes, route evidence, authority level, loop counter, document status, referral record, ownership history), and all protected fields (1.8 §6) with validation?</td></tr>
+<tr><td>Confirming evidence</td><td>Entity model documentation; custom field configuration; validation rules; tranche and CP entities present or configurable</td></tr>
+<tr><td>Design assumes</td><td>Configure; new fields added by configuration; tranches and CPs as standard entities</td></tr>
+<tr><td>If weaker</td><td>Tranche schedule not modelled: configure as repeating child records (Configure) or Custom entity (justified by P4 and P1-01). Any protected field not representable: escalate; not accepted (rule 6)</td></tr>
+<tr><td>Dependent value</td><td>Every rule set (inputs); 1.8 preservation; OP-27 measurement</td></tr></table></div>
+
+<div class="cap"><div class="hd">CAP-07 · Integration: CIF, balances, fees, product systems, bureau, identity, reporting<span>INT-01..09 · expected: mixed; see §4</span></div><table>
+<tr><td>Question</td><td>Which of the nine interfaces does the platform support through standard connectors or published APIs, and which require Programme build?</td></tr>
+<tr><td>Confirming evidence</td><td>Connector catalogue; API documentation; prior integrations with the Bank’s systems (MEO, IMPACS, TELLER, CIF)</td></tr>
+<tr><td>Design assumes</td><td>INT-02 (CIF) and INT-08 (reporting extract) Must and Custom-by-Programme if no connector; INT-06 (e-signature) partner connector; INT-07 (SSO) Fit; INT-01, 03, 04, 05, 09 Custom in Release 2 with fallbacks live</td></tr>
+<tr><td>If weaker</td><td>Fallbacks in 2.8 §5 are the design for Release 1 in every case except INT-02 and INT-08, which have none</td></tr>
+<tr><td>Dependent value</td><td>OP-19, OP-32, OP-33 (W2); INT-02 and INT-08 are preconditions, not value items</td></tr></table></div>
+
+<div class="cap"><div class="hd">CAP-08 · Early-warning indicators and flag composition<span>RS-11 · SC1-03 · DAT-07 · expected: Configure (R1 indicators) + Gap (conduct feed, R2)</span></div><table>
+<tr><td>Question</td><td>Can a composite flag be evaluated from grade history, covenant status, forbearance, watch-list, prior referral and connected-party indicators held on the platform, and later from an account-conduct feed?</td></tr>
+<tr><td>Confirming evidence</td><td>Rule access to history fields and connection traversal; flag field; integration path for conduct data</td></tr>
+<tr><td>Design assumes</td><td>Configure for platform-held indicators; conduct feed Gap in R1 with RUL-05 conservative handling (condition fails for eligibility; i.e., no exclusion is lost, some eligibility is)</td></tr>
+<tr><td>If weaker</td><td>No connection traversal: indicator 7 evaluated at customer level only (documented in CE-005). No history: downgrade check unavailable; grade-age condition carries the load</td></tr>
+<tr><td>Dependent value</td><td>OP-22 (risk); fast-route safety (CE-001, CE-003, CE-005)</td></tr></table></div>
+
+<div class="cap"><div class="hd">CAP-09 · Sampling, cohort and control MI; pattern dashboards<span>SC2-08 · NFR-04 · 1.4 §6 · expected: Configure</span></div><table>
+<tr><td>Question</td><td>Can the platform select a risk-weighted sample of approvals into a review queue, capture findings, and report sampling, cohort outcome, control (attempted breaches, exceptions) and stage-time MI through its reporting layer or an extract?</td></tr>
+<tr><td>Confirming evidence</td><td>Sampling or random-selection rule; reporting designer or warehouse extract; stage timestamp availability</td></tr>
+<tr><td>Design assumes</td><td>Sample selection Configure (rule); findings capture Configure (fields); MI via INT-08 extract to Bank reporting (Configure)</td></tr>
+<tr><td>If weaker</td><td>No sampling rule: monthly extract and manual selection by Credit manager (operable fallback; CE-001 condition). Dashboards built in Bank MI from extract regardless</td></tr>
+<tr><td>Dependent value</td><td>CE-001, CE-003 detective layer; OP-27; benefits tracking (Phase 4)</td></tr></table></div>
+
+<div class="cap"><div class="hd">CAP-10 · Customer-facing capture and response<span>SC1-06, EXB-03 · expected: Gap in R1 (RM-mediated fallback)</span></div><table>
+<tr><td>Question</td><td>Does the platform provide a customer portal or secure channel for lead capture, information requests and responses?</td></tr>
+<tr><td>Design assumes</td><td>Gap in Release 1; RM logs leads and uploads customer responses; Business Lending Form continues as intake with RM entry (W-14 retained interim)</td></tr>
+<tr><td>If stronger</td><td>Configure; SC1-06 and EXB-03 move to Should delivered</td></tr>
+<tr><td>Dependent value</td><td>OP-14 (lead element), OP-18 (customer element): small</td></tr></table></div>
+
+<div class="cap"><div class="hd">CAP-11 · Migration and cut-over support<span>NFR-06 · DAT-03..05 · expected: Programme scope</span></div><table>
+<tr><td>Question</td><td>Can open deals be migrated with stage mapping; deal-type history re-coded by mapping table; forbearance and waiver status reconciled after a parallel cycle; exposure updates applied by rule?</td></tr>
+<tr><td>Design assumes</td><td>Programme migration tooling; this project supplies DAT-03 to DAT-05 specifications and reconciliation criteria</td></tr>
+<tr><td>Dependent value</td><td>Regulatory continuity (2.5 §4.1); baseline comparability (GD-08)</td></tr></table></div>
+
+<div class="cap"><div class="hd">CAP-12 · Configuration governance<span>NFR-03 · RUL-01, RUL-04 · 2.9 §5 · expected: Configure</span></div><table>
+<tr><td>Question</td><td>Can patterns, rules, templates, SLAs, queues and suspension switches be changed by Bank administrators under change control, in a non-production environment with promotion, without a vendor release?</td></tr>
+<tr><td>Design assumes</td><td>Configure; run-mode governance in 2.9 §5 relies on it</td></tr>
+<tr><td>If weaker</td><td>Vendor-dependent changes: rule maintenance cadence slows; quarterly threshold review becomes a vendor change request; cost in 2.12</td></tr></table></div></div>
+
+<div class="pb wide"><h1>3. Story-level assessment <span class="ph">(expected classification; confirmed in workshops)</span></h1>
+<table class="fg"><tr><th style="width:5%">Story</th><th style="width:22%">Capability required</th><th style="width:5%">Cap.</th><th style="width:6%">Expected</th><th style="width:24%">Confirming evidence</th><th style="width:16%">If weaker</th><th style="width:7%">Principle / value</th><th>Workshop</th></tr>
+<tr class="C"><td>SC1-01</td><td>Date-driven and event-driven task creation</td><td>03</td><td>Configure</td><td>Timer on date field creates task; event hooks</td><td>Interim OP-31; Custom scheduler</td><td>DP-05; OP-10</td><td>FG-1</td></tr>
+<tr class="F"><td>SC1-02</td><td>Open deal in connection context</td><td>04, 06</td><td>Fit</td><td>Connection view standard</td><td>—</td><td>DP-05; OP-14</td><td>FG-1</td></tr>
+<tr class="C"><td>SC1-03</td><td>Composite flag rule at open</td><td>01, 08</td><td>Configure</td><td>Rule on history fields; flag field</td><td>Customer-level only; fewer indicators</td><td>DP-08; CE-005</td><td>FG-2</td></tr>
+<tr class="C"><td>SC1-04</td><td>Party-completeness rule by customer type</td><td>01, 06</td><td>Configure</td><td>Rule on party roles</td><td>Checklist (fallback)</td><td>C1</td><td>FG-2</td></tr>
+<tr class="C"><td>SC1-05</td><td>Scope capture; pattern and parameter set; structural validation</td><td>03, 06</td><td>Configure</td><td>Conditional screens; rule-based routing</td><td>—</td><td>DP-01</td><td>FG-1</td></tr>
+<tr class="G"><td>SC1-06</td><td>Lead capture with SLA (customer-facing)</td><td>10</td><td>Gap R1</td><td>Portal present → Configure</td><td>RM-created lead (fallback)</td><td>OP-14 (part)</td><td>FG-3</td></tr>
+<tr class="C"><td>SC1-07</td><td>Pre-screen rule with reason code</td><td>01</td><td>Configure</td><td>Rule + code list</td><td>—</td><td>C0; CE-006</td><td>FG-2</td></tr>
+<tr class="X"><td>SC1-08</td><td>CIF search / match / create</td><td>07</td><td>Custom (Programme) unless connector</td><td>Existing CIF connector</td><td>None; precondition</td><td>C1; INT-02</td><td>FG-3</td></tr>
+<tr class="C"><td>SC1-09</td><td>Tranche schedule entity</td><td>06</td><td>Configure</td><td>Child entity or repeating group</td><td>Custom entity</td><td>P4; DP-09</td><td>FG-1</td></tr>
+<tr class="F"><td>SC1-10</td><td>SSO; queue landing page</td><td>04, 07</td><td>Fit / Configure</td><td>SSO standard; landing config</td><td>Platform login</td><td>OP-14</td><td>FG-3</td></tr>
+<tr class="C"><td>SC2-01</td><td>Route selection by rule; segment switch</td><td>01, 03</td><td>Configure</td><td>Rule outcome drives workflow branch; suspension flag</td><td>External rules (Custom)</td><td>DP-01; OP-01/02 (L)</td><td>FG-1, FG-2</td></tr>
+<tr class="C"><td>SC2-02</td><td>Required-items checklist enforced</td><td>01, 06</td><td>Configure</td><td>Collect rule; document-type presence check</td><td>Manual checklist with Credit waiver</td><td>DP-02; OP-17</td><td>FG-2</td></tr>
+<tr class="C"><td>SC2-03</td><td>DA matrix as data; lookup; evidence</td><td>01, 05</td><td>Configure</td><td>Lookup table rule; evidence log</td><td>Custom rules component (DP-02; OP-06 M)</td><td>C5; CE-009</td><td>FG-2</td></tr>
+<tr class="C"><td>SC2-04</td><td>Approval with attached evidence; sampling tag</td><td>03, 05</td><td>Configure</td><td>Approval step shows rule evidence; tag field</td><td>—</td><td>CE-001</td><td>FG-1</td></tr>
+<tr class="F"><td>SC2-05</td><td>Credit queue with SLA and visibility</td><td>04</td><td>Fit</td><td>Team queue standard</td><td>Status-only visibility</td><td>DP-04; OP-11</td><td>FG-1</td></tr>
+<tr class="C"><td>SC2-06</td><td>Decision with structured conditions</td><td>06</td><td>Configure</td><td>Conditions entity feeds CP / security</td><td>Free-text conditions + manual CP items</td><td>C6; OP-13</td><td>FG-1</td></tr>
+<tr class="C"><td>SC2-07</td><td>Withdraw reason codes</td><td>06</td><td>Configure</td><td>Code list</td><td>—</td><td>DDR-003</td><td>FG-2</td></tr>
+<tr class="C"><td>SC2-08</td><td>Sampling selection; findings; suspension</td><td>01, 09</td><td>Configure</td><td>Random / weighted rule; findings fields; switch</td><td>Monthly extract and manual selection</td><td>CE-001/003</td><td>FG-2</td></tr>
+<tr class="C"><td>SC2-09</td><td>Limit arithmetic hard block; schedule regeneration</td><td>01, 06</td><td>Configure</td><td>Validation rule on sum; schedule calc</td><td>Custom calc</td><td>C19; CE-013</td><td>FG-2</td></tr>
+<tr class="C"><td>SC3-01</td><td>Template generation with conditionals</td><td>02</td><td>Configure</td><td>Template designer; tranche letter demo</td><td>More templates; or Custom (DP-06; OP-15 XL)</td><td>DP-06; OP-15</td><td>FG-3</td></tr>
+<tr class="X"><td>SC3-02</td><td>E-delivery and e-signature</td><td>02, 07</td><td>Custom (partner connector)</td><td>Certified e-signature integration</td><td>Generate + track; manual send (fallback)</td><td>DP-06; OP-15 (XL)</td><td>FG-3</td></tr>
+<tr class="C"><td>SC3-03</td><td>Reconciliation of signed document to terms</td><td>02</td><td>Configure (field compare)</td><td>Signed-field return; compare rule</td><td>Manual C8 (fallback)</td><td>CE-004</td><td>FG-3</td></tr>
+<tr class="C"><td>SC3-04</td><td>Staleness timers; chase; re-validation rule</td><td>01, 03</td><td>Configure</td><td>Timers on document status; rule at 3 months</td><td>Custom scheduler; interim OP-30</td><td>DP-07; CE-002; OP-16</td><td>FG-1</td></tr>
+<tr class="C"><td>SC3-05</td><td>Security instruction from conditions; LS queue</td><td>03, 04, 06</td><td>Configure</td><td>Task generated with condition content</td><td>Instruction as document (Configure)</td><td>C23; OP-21</td><td>FG-1</td></tr>
+<tr class="C"><td>SC3-06</td><td>CP items from conditions; gate view</td><td>06, 03</td><td>Configure</td><td>CP entity; gate status screen</td><td>Manual CP items</td><td>C9; OP-13</td><td>FG-1</td></tr>
+<tr class="F"><td>SC3-07</td><td>Fulfilment task on gate completion</td><td>03, 04</td><td>Fit</td><td>Task from workflow state</td><td>—</td><td>DP-04; OP-11</td><td>FG-1</td></tr>
+<tr class="C"><td>SC3-08</td><td>Removal sequence with checks</td><td>01, 03, 07</td><td>Configure (+ INT-01 for balance)</td><td>Sequenced tasks; balance via integration or manual confirm</td><td>Manual balance confirmation with four-eyes</td><td>C10, C12</td><td>FG-1</td></tr>
+<tr class="C"><td>P5-01..05</td><td>Referral record; parallel review switch; structured memo; ownership transfer; SBS queue</td><td>03, 05, 06</td><td>Configure</td><td>Record type; parallel approval; transfer with audit</td><td>Sequential; memo as document</td><td>DP-08; C13–C18, C26</td><td>FG-1</td></tr>
+<tr class="C"><td>EXA-01..03</td><td>Decline reason codes; templated comms; independent reviewer assignment</td><td>01, 02, 03</td><td>Configure</td><td>Code list; template; assignment rule ≠ assessor</td><td>Manual reviewer assignment</td><td>C20, C21; OP-08</td><td>FG-2</td></tr>
+<tr class="C"><td>EXB-01..02</td><td>Structured request; counter; escalation; assessor retention</td><td>03, 06</td><td>Configure</td><td>Request entity; counter; assignment retention</td><td>—</td><td>DP-07; RS-09</td><td>FG-1</td></tr>
+<tr class="G"><td>EXB-03</td><td>Customer response through platform</td><td>10</td><td>Gap R1</td><td>Portal → Configure</td><td>RM uploads (fallback)</td><td>OP-18 (part)</td><td>FG-3</td></tr>
+<tr class="C"><td>EXC-01</td><td>Field-change capture; materiality rule; return with highlight</td><td>01, 03</td><td>Configure</td><td>Change tracking; rule; re-entry</td><td>—</td><td>C22; RS-12</td><td>FG-2</td></tr>
+<tr class="C"><td>PAT-01, P1-01, P2-01, P2-02, P3-01, P4-01</td><td>Pattern compositions; parameters; EPR counter; segment switch; taxonomy; allocation screens</td><td>03, 06</td><td>Configure</td><td>Sub-process reuse; parameters; counters</td><td>Separate pattern builds (more Configure)</td><td>DP-01, DP-10; OP-03</td><td>FG-1</td></tr>
+<tr class="C"><td>RUL-01..05</td><td>Rules as versioned data; evidence; hit policies; suspension; conservative evaluation</td><td>01, 12</td><td>Configure</td><td>Rule editor; log; policies</td><td>External rules component (Custom)</td><td>DP-02</td><td>FG-2</td></tr>
+<tr class="F"><td>NFR-01, 02</td><td>Audit trail; attribute-based access; role segregation</td><td>05</td><td>Fit</td><td>Audit schema; ABAC config</td><td>Custom (non-negotiable)</td><td>DP-03; C27</td><td>FG-3</td></tr>
+<tr class="C"><td>NFR-03, 04</td><td>Configuration governance; reporting extract</td><td>12, 09</td><td>Configure</td><td>Environments and promotion; extract</td><td>Vendor change requests; Bank MI from extract</td><td>2.9 §5</td><td>FG-3</td></tr>
+<tr class="U"><td>NFR-05</td><td>Performance targets</td><td>—</td><td>—</td><td>Programme confirms</td><td></td><td></td><td>FG-3</td></tr></table></div>
+
+<div class="pb"><h1>4. Interface assessment</h1>
+<table><tr><th style="width:7%">ID</th><th style="width:18%">Interface</th><th style="width:8%">Priority</th><th style="width:10%">Expected</th><th style="width:26%">Confirming evidence</th><th>Release 1 position</th></tr>
+<tr class="X"><td>INT-02</td><td>CIF Portal</td><td>Must</td><td>Custom (Programme) or connector</td><td>Existing Bank connector; API</td><td>Precondition; no fallback; Programme integration scope from day one</td></tr>
+<tr class="X"><td>INT-08</td><td>Regulatory and MI extract</td><td>Must</td><td>Configure (extract) + Custom (Bank-side mapping)</td><td>Extract or warehouse feed; field availability per 1.8</td><td>Precondition; lineage register drives mapping</td></tr>
+<tr class="X"><td>INT-06</td><td>E-signature service</td><td>Should</td><td>Partner connector (Custom-light)</td><td>Certified integration</td><td>If absent: SC3-02 fallback; Release 2</td></tr>
+<tr class="F"><td>INT-07</td><td>Bank identity (SSO)</td><td>Should</td><td>Fit</td><td>SAML / OIDC support</td><td>Fallback: platform login</td></tr>
+<tr class="G"><td>INT-01</td><td>MEO / IMPACS balances and conduct</td><td>Should</td><td>Gap R1 → Custom R2</td><td>API availability on Bank side</td><td>Batch feed with timestamp; manual balance confirmation for removal; RS-11 conduct indicator conservative</td></tr>
+<tr class="G"><td>INT-03</td><td>TELLER fees</td><td>Could</td><td>Gap R1 → Custom R2</td><td>—</td><td>Fulfilment keys fees (as-is)</td></tr>
+<tr class="G"><td>INT-04</td><td>Product systems</td><td>Could</td><td>Gap R1 → Custom R2</td><td>—</td><td>Fulfilment keys from task; C11 four-eyes retained</td></tr>
+<tr class="G"><td>INT-05</td><td>External credit checks</td><td>Could</td><td>Gap R1 → Custom R2 (or vendor bureau connector)</td><td>Bureau connector catalogue</td><td>Manual upload with date; RS-04 enforces presence</td></tr>
+<tr class="G"><td>INT-09</td><td>LS registration systems</td><td>Could</td><td>Gap</td><td>—</td><td>LS updates status with evidence</td></tr></table>
+<p>Two interfaces are preconditions (INT-02, INT-08) and sit with the Programme regardless of fit-gap outcome. One (INT-06) carries large value and has a stated fallback. The rest are Release 2 by design: the Release 1 process works without them, at the cost of retained re-keying that 1.7 already identified.</p></div>
+
+<div class="pb"><h1>5. Expected custom list and degradation plan</h1>
+<h2>5.1 Custom list <span class="ph">(expected; approved as a whole by the Design Authority at v1.0)</span></h2>
+<table><tr><th style="width:6%">#</th><th style="width:24%">Item</th><th style="width:12%">Stories</th><th style="width:14%">Principle requiring it</th><th style="width:14%">Value depending on it</th><th style="width:10%">Expected effort (2.12)</th><th>Alternative if not approved</th></tr>
+<tr><td>CL-01</td><td>CIF integration (search, match, create)</td><td>SC1-08; INT-02</td><td>DP-09; C1 (KYC)</td><td>Precondition</td><td class="ph">M–L</td><td>None</td></tr>
+<tr><td>CL-02</td><td>Regulatory and MI extract with lineage mapping</td><td>INT-08; NFR-04</td><td>DP-09; RFP §7</td><td>Precondition; benefits tracking</td><td class="ph">M</td><td>None</td></tr>
+<tr><td>CL-03</td><td>E-signature partner integration</td><td>SC3-02; INT-06</td><td>DP-06</td><td>OP-15 (XL), OP-16</td><td class="ph">M</td><td>Generate and track; manual send; Release 2</td></tr>
+<tr><td>CL-04</td><td>Rules evidence write-back (only if the native engine lacks an evaluation log)</td><td>RUL-02</td><td>DP-02, DP-03</td><td>All CE entries</td><td class="ph">S–M</td><td>Workflow fields capture evidence (weaker but acceptable if second line agrees)</td></tr>
+<tr><td>CL-05</td><td>External rules component (only if the native engine lacks hit policies / versioning)</td><td>RUL-01..05</td><td>DP-02</td><td>OP-01, 02, 06, 07, 17</td><td class="ph">L</td><td>Shallower rules in workflow; manual evidence; threshold changes become releases</td></tr>
+<tr><td>CL-06</td><td>Tranche schedule entity (only if not configurable)</td><td>SC1-09; SC2-09</td><td>DP-09</td><td>P4; OP-05</td><td class="ph">S</td><td>Repeating child records</td></tr>
+<tr><td>CL-07</td><td>Scheduler / timer component (only if workflow lacks timers)</td><td>SC1-01; SC3-04; SC2-05</td><td>DP-04</td><td>OP-10, 11, 12, 16</td><td class="ph">M</td><td>Interim central task lists (OP-31); batch-like jobs (reintroduces W-01 pattern; not preferred)</td></tr></table>
+<p>CL-01 and CL-02 are expected in every scenario. CL-03 is the one Custom item carrying large process value. CL-04 to CL-07 exist only if the platform is weaker than a current commercial lending platform; the workshops are expected to remove most of them. The list is deliberately short: seven items against ninety-five stories, consistent with DP-10 and with 1.7’s finding that thirteen of twenty-three workarounds are met natively.</p>
+<h2>5.2 Degradation plan · what Release 1 delivers at each capability level</h2>
+<table><tr><th style="width:18%">Capability</th><th style="width:27%">Expected (all Configure / Fit)</th><th style="width:27%">Weaker (fallbacks engaged)</th><th>Value retained / lost</th></tr>
+<tr><td>Rules (CAP-01)</td><td>All fourteen rule sets as data; fast routes live on PQ-001</td><td>Rules in workflow; evidence in fields; thresholds change by release</td><td>Value retained; agility lost; CL-04/05 cost</td></tr>
+<tr><td>Documents (CAP-02)</td><td>Generated, e-signed, tracked; staleness control live</td><td>Generated and tracked; manual send; manual C8; chase timers still live</td><td>Letter admin saving largely retained; customer-return time partly lost (OP-15 ≈ half); CE-002 still operable</td></tr>
+<tr><td>Workflow (CAP-03)</td><td>Five patterns from shared segments; timers; counters</td><td>Patterns built separately; interim task lists</td><td>Design intact; configuration effort up; OP-10/12 interim</td></tr>
+<tr><td>Early warning (CAP-08)</td><td>Platform indicators in R1; conduct in R2</td><td>Fewer indicators; conservative eligibility</td><td>Safety retained; some eligible renewals routed R-FULL (lower OP-01 share)</td></tr>
+<tr><td>Integration (CAP-07)</td><td>CIF, extract, e-sign, SSO in R1</td><td>CIF and extract only</td><td>Process works; re-keying retained at fulfilment and fees (as-is)</td></tr>
+<tr><td>Customer channel (CAP-10)</td><td>Gap expected</td><td>—</td><td>RM-mediated; small value</td></tr></table>
+<p><b>Floor outcome:</b> with only CL-01 and CL-02 built and every fallback engaged, Release 1 still delivers the pattern model, automated authority determination, submission standard, bounded loops, queues and gates, generated and tracked letters, and the referral record. That is most of the control value and roughly half the quantified capacity in 1.10. Nothing in the design makes Release 1 contingent on an unconfirmed capability.</p></div>
+
+<div class="pb"><h1>6. Workshop plan and outputs</h1>
+<table><tr><th>Workshop</th><th>Week</th><th>Capabilities</th><th>Participants</th><th>Preparation</th><th>Output</th></tr>
+<tr><td>FG-1 Workflow and work management</td><td>9</td><td>CAP-03, CAP-04, CAP-06 (entities)</td><td>Solution Architect; vendor consultant; Platform Analyst; Bank BA; WS1</td><td>DR-18; 2.3 maps; 2.2 patterns; TC-01 to TC-12</td><td>§3 rows for SC1, SC3, P5, EXB, PAT classified; pattern build approach agreed</td></tr>
+<tr><td>FG-2 Rules, evidence, early warning, sampling</td><td>9</td><td>CAP-01, CAP-05, CAP-08, CAP-09</td><td>As above + Controls Specialist; second line (observer)</td><td>2.4 rule sets; 2.5 evidence requirements; RS-05 demo request</td><td>§3 rows for SC2, RUL, EXA, EXC classified; CL-04/05 decided</td></tr>
+<tr><td>FG-3 Documents, integration, access, governance</td><td>10</td><td>CAP-02, CAP-07, CAP-10, CAP-11, CAP-12</td><td>As above + Programme integration lead; Lending Ops; MI</td><td>2.8 §5–7; template examples (tranche letter); 1.8 lineage</td><td>§4 classified; CL-03, CL-06, CL-07 decided; custom list assembled</td></tr>
+<tr><td>Design Authority</td><td>11 / 12</td><td>Custom list as a whole</td><td>Design Authority</td><td>§5.1 with 2.12 effort</td><td>Custom list approved; 2.8 v1.0 released; DDR adjustments recorded</td></tr></table>
+<h2>6.1 Exit criteria for v1.0</h2>
+<ul><li>Every story in 2.8 carries Fit / Configure / Custom / Gap, confirmed by the Solution Architect against DR-18 or a product demonstration</li><li>Every Gap has its fallback confirmed operable at go-live (NFR-07)</li><li>Every Custom item cites a principle and a value item or control requirement, with effort from 2.12</li><li>Custom list approved as a whole by the Design Authority; exceptions to DP-10 recorded as DDRs</li><li>No protected field left unrepresented</li><li>Map adjustments to platform standard (rule 1) recorded in 2.3 DDR log</li></ul>
+<h2>6.2 Risks</h2>
+<table><tr><th>Risk</th><th>Effect</th><th>Mitigation</th><th>RAID</th></tr>
+<tr><td>Platform not selected by FG-1</td><td>Classification against a generic model</td><td>Run workshops on shortlisted products’ common capability; re-run for selected product in Phase 3; degradation plan holds either way</td><td>R-09</td></tr>
+<tr><td>DR-18 documentation thin</td><td>Expectations unconfirmed</td><td>Demonstration-based confirmation on the reference rules and a tranche letter; vendor consultant attendance</td><td>P-03</td></tr>
+<tr><td>Vendor presents everything as “configurable”</td><td>Custom items hidden until build</td><td>Confirming-evidence column requires a shown artefact, not a statement; TC-01 to TC-12 executed on the product where possible</td><td>new</td></tr>
+<tr><td>Custom list grows during build</td><td>DP-10 eroded</td><td>Design Authority approves additions only with principle and value citation; Phase 4 design assurance checks configuration against 2.3</td><td>R-07</td></tr></table></div>
+</body></html>

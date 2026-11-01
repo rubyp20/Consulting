@@ -7,6 +7,7 @@ const jobs = [
   { html: `${D}/2.4-routing-design-and-rules-tables.html`, pdf: `${D}/2.4-Routing-Design-and-Rules-Tables.pdf`, landscape: false, title: 'BB-BLP-BPR · 2.4 Risk-Based Routing Design and Rules Tables · v0.5 for co-design' },
   { html: `${D}/2.5-control-equivalence-register.html`, pdf: `${D}/2.5-Control-Equivalence-Register.pdf`, landscape: false, title: 'BB-BLP-BPR · 2.5 Control Equivalence Register · v0.6 for second-line review' },
   { html: `${D}/2.6-gap-analysis.html`, pdf: `${D}/2.6-Gap-Analysis.pdf`, landscape: false, title: 'BB-BLP-BPR · 2.6 Gap Analysis · v0.7' },
+  { html: `${D}/2.7-fit-gap-assessment.html`, pdf: `${D}/2.7-Fit-Gap-Assessment.pdf`, landscape: false, title: 'BB-BLP-BPR · 2.7 Fit-Gap Assessment · v0.5 expected classifications for workshops' },
   { html: `${D}/2.8-process-requirements-pack.html`, pdf: `${D}/2.8-Process-Requirements-Pack.pdf`, landscape: false, title: 'BB-BLP-BPR · 2.8 Process Requirements Pack · v0.7 interim release' },
   { html: `${D}/2.9-target-operating-model.html`, pdf: `${D}/2.9-Target-Operating-Model.pdf`, landscape: false, title: 'BB-BLP-BPR · 2.9 Target Operating Model · v0.6' },
 ];
