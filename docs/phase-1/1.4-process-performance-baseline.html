@@ -1,0 +1,210 @@
+<!doctype html><html><head><meta charset="utf-8"><title>1.4 Process Performance Baseline</title><link rel="stylesheet" href="build/style.css"><style>
+.kpi th, .kpi td { font-size: 7.9pt; }
+.dash { border: 1px solid #b8c4d0; padding: 6pt; margin: 6pt 0; }
+</style></head><body>
+
+<div class="cover"><p class="small" style="letter-spacing:1px;text-transform:uppercase">Business Bank · Business Banking Transformation Office · BB-BLP-BPR</p>
+<h1>1.4 Process Performance Baseline<br/><span style="font-size:15pt;color:#1f4f82">Metric dictionary, stage model, analysis specification, dashboard design and illustrative run</span></h1>
+<table class="meta" style="width:65%;margin-top:20pt"><tr><td>Deliverable</td><td>1.4 Process performance baseline per journey: volume, cycle time, touch time, wait time, first-time-right, rework, cost per deal</td></tr><tr><td>Version</td><td>0.5 – metric definitions and analysis specification (Week 3). v1.0 populated from DR-01/02/03/04/08/12/14 and 1.5 at Week 7, endorsed at G1</td></tr>
+<tr><td>Source</td><td>Data request 0.7; 1.2 maps (stage and loop definitions); 1.3 matrix (deal-type grouping); 1.5 (touch time); DR-16 (cost rates)</td></tr><tr><td>Owner</td><td>WS3 Data &amp; MI (Data/MI Analyst)</td></tr><tr><td>Accepted by</td><td>SteerCo at G1 as the reference for benefits; Head of MI &amp; Regulatory Reporting (definitions)</td></tr>
+<tr><td>Tests</td><td>Hypotheses A1, A3, A4 (servicing over-processing); C1–C4 (rework and wait dominate cycle time)</td></tr></table>
+<div class="ph-box" style="margin-top:24pt"><b>Status of the numbers in this document.</b> Section 7 is an <u>illustrative run</u> on assumed values to show the SteerCo the shape of what it will endorse. Every figure there is marked <span class="ph">illustrative</span>. The measured baseline is produced in Weeks 5–7 from Bank data. Nothing in section 7 is a finding.</div></div>
+
+<div class="pb"><h1>1. Purpose and principles</h1>
+<p>This is the document the business case is measured against. Every KPI target in Phase 2 and every benefit tracked in Phase 4 refers back to a number defined and measured here. Four principles govern it:</p>
+<ol><li><b>Definitions before data.</b> Each metric has a precise start event, end event, population and exclusion rule, agreed with MI before the extract is analysed, so that the same definition can be re-measured on the replacement platform.</li>
+<li><b>Distributions, not averages.</b> Means hide the tail, and the tail is where rework lives. Every time metric is reported at P50, P80 and P95 with the count.</li>
+<li><b>Ranges where sources disagree.</b> Where DR-02 coverage is partial or survey and timestamps diverge, the baseline is a range. The SteerCo endorses the range.</li>
+<li><b>Restated volume base.</b> ESR Cleanse is excluded (SD-01, 1.3 §5.1). All percentages use live customer deals (26,745) unless stated.</li></ol>
+<h3>What the baseline is not</h3>
+<p>It is not an effort measure (that is 1.5, which feeds the touch-time and cost lines here), not a control assessment (1.6), and not a root-cause analysis (1.9). It is the quantified description of how long things take, how often they go wrong, and what they cost.</p></div>
+
+<div class="pb"><h1>2. Stage model</h1>
+<p>Cycle time is measured against a common stage model so that journeys are comparable. The model is derived from the 1.2 maps; the mapping from BLP status codes to stages is agreed with MI on receipt of the DR-02 sample extract (Week 3) and recorded in Appendix A.</p>
+<table><tr><th>Stage</th><th>Start event</th><th>End event</th><th>Applies to</th><th>Maps</th></tr>
+<tr><td>S0 Pre-deal</td><td>Lead / trigger received (where captured) or customer contact</td><td>Deal created</td><td>NM, SL only where lead data exists; RN from BDRM report date</td><td>*-1</td></tr>
+<tr><td>S1 Preparation</td><td>Deal created</td><td>Deal submitted (validation passed; DA determination made)</td><td>All</td><td>*-2 R1–D2</td></tr>
+<tr><td>S2 Decision</td><td>Deal submitted</td><td>Decision recorded (approved within DA; or Credit approved / declined)</td><td>All</td><td>*-2 D2–S5</td></tr>
+<tr><td>S2a Credit queue</td><td>Transferred to Credit</td><td>Assessment started (first Credit action)</td><td>Deals outside DA</td><td>*-2 S4–K1</td></tr>
+<tr><td>S2b Credit assessment</td><td>Assessment started</td><td>Decision recorded</td><td>Deals outside DA</td><td>*-2 K1–D4</td></tr>
+<tr><td>S3 Documentation</td><td>Decision approved</td><td>Facility letter marked complete (or “ready for fulfilment” where no letter)</td><td>All except CS</td><td>*-3 R1–S3</td></tr>
+<tr><td>S3a Letter out</td><td>FAL created</td><td>FAL sent</td><td>As S3</td><td>*-3 S1–S2</td></tr>
+<tr><td>S3b Customer</td><td>FAL sent</td><td>FAL returned</td><td>As S3</td><td>*-3 S2–C1</td></tr>
+<tr><td>S4 Completion</td><td>Decision approved</td><td>Ready for fulfilment (all three conditions met)</td><td>All except CS</td><td>*-3 S3–S6</td></tr>
+<tr><td>S5 Fulfilment</td><td>Ready for fulfilment</td><td>Facility fulfilled / BLP updated</td><td>Where facility changes</td><td>*-3 R5–E1</td></tr>
+<tr><td>S6 SBS</td><td>Transferred to SBS</td><td>Categorised (or returned)</td><td>CR</td><td>CR-2 S4–S5</td></tr>
+<tr class="l2"><td>E2E Decision</td><td>Deal created</td><td>Decision recorded</td><td>All</td><td>S1 + S2</td></tr>
+<tr class="l2"><td>E2E Fulfilment</td><td>Deal created</td><td>Facility fulfilled</td><td>All except CS</td><td>S1–S5</td></tr>
+<tr class="l2"><td>E2E Customer</td><td>Trigger / first contact (where captured)</td><td>Facility fulfilled</td><td>Where S0 exists</td><td>S0–S5</td></tr></table>
+<h3>Clock rules</h3>
+<ul><li>Calendar days, not working days: the customer experiences calendar time. Working-day variants reported for Credit queue (S2a) and Fulfilment (S5) where SLAs are internal.</li><li>Loops do not stop the clock. A deferred deal’s S2 runs from first submission to final decision; the loop is counted separately (section 3, R-metrics).</li><li>A deal reset at the 3-month letter point is one deal with a long S3b, not two deals. Re-originated deals (W-01 batch) are linked to the original by customer and product where DR-01 allows, otherwise flagged.</li><li>Withdrawn and declined deals are included in volume and in S1/S2 timing; excluded from S3–S5.</li></ul></div>
+
+<div class="pb"><h1>3. Metric dictionary</h1>
+<table class="kpi"><tr><th style="width:6%">ID</th><th style="width:16%">Metric</th><th style="width:30%">Definition</th><th style="width:10%">Unit / stat</th><th style="width:12%">Cut by</th><th style="width:10%">Source</th><th>Hypothesis / objective</th></tr>
+<tr class="l1"><td colspan="7">VOLUME</td></tr>
+<tr><td>V1</td><td>Deals created</td><td>Count of deals created in period, by deal type; ESR Cleanse reported separately</td><td>Count</td><td>Type, segment, month</td><td>DR-01</td><td>Base for all rates</td></tr>
+<tr><td>V2</td><td>Deals decided</td><td>Count reaching a decision (approved / declined / withdrawn) in period</td><td>Count; % of V1</td><td>Type, segment, outcome</td><td>DR-03</td><td>O1</td></tr>
+<tr><td>V3</td><td>Deals outside DA</td><td>Share of decided deals transferred to Credit</td><td>%</td><td>Type, segment</td><td>DR-03</td><td>A1, A2, E2</td></tr>
+<tr><td>V4</td><td>Work in progress</td><td>Open deals at period end; age distribution</td><td>Count; P50/P80 age</td><td>Type, stage</td><td>DR-02</td><td>O1</td></tr>
+<tr><td>V5</td><td>Fast-track eligible renewals</td><td>Share of renewals meeting all draft criteria (limit unchanged; grade within band; covenants compliant; no watch-list; no EPR in 12 m)</td><td>%</td><td>Segment</td><td>DR-02/04/05</td><td>A2</td></tr>
+<tr class="l1"><td colspan="7">CYCLE TIME (calendar days unless stated)</td></tr>
+<tr><td>T1</td><td>E2E Decision time</td><td>Deal created → decision recorded</td><td>P50 / P80 / P95; n</td><td>Type, segment, DA vs Credit</td><td>DR-02</td><td>O1; A1</td></tr>
+<tr><td>T2</td><td>E2E Fulfilment time</td><td>Deal created → facility fulfilled</td><td>P50 / P80 / P95; n</td><td>Type, segment</td><td>DR-02</td><td>O1</td></tr>
+<tr><td>T3</td><td>Stage time</td><td>Per stage S1–S6 per table in §2</td><td>P50 / P80; n</td><td>Type, segment</td><td>DR-02</td><td>C4</td></tr>
+<tr><td>T4</td><td>Credit queue time</td><td>S2a; working days</td><td>P50 / P80</td><td>Type, segment</td><td>DR-02</td><td>C4</td></tr>
+<tr><td>T5</td><td>Letter turnaround</td><td>S3b: sent → returned</td><td>P50 / P80; % &gt; 30 d; % &gt; 90 d</td><td>Type, segment, method (post / email)</td><td>DR-08</td><td>C2</td></tr>
+<tr><td>T6</td><td>Fulfilment time</td><td>S5; working days</td><td>P50 / P80</td><td>Type</td><td>DR-02/12</td><td>C4</td></tr>
+<tr><td>T7</td><td>Renewal lateness</td><td>Review date → renewal deal created (negative = early)</td><td>P50; % late</td><td>Segment</td><td>DR-01/04</td><td>W-11; O1</td></tr>
+<tr><td>T8</td><td>Distress to categorisation</td><td>CAP Referral created → categorised</td><td>P50 / P80</td><td>—</td><td>DR-14</td><td>L10</td></tr>
+<tr class="l1"><td colspan="7">TOUCH AND WAIT</td></tr>
+<tr><td>W1</td><td>Touch time per deal</td><td>From 1.5 unit times, by stage and role</td><td>Minutes</td><td>Type</td><td>1.5</td><td>O2</td></tr>
+<tr><td>W2</td><td>Wait time per deal</td><td>T2 (hours) − W1 (hours)</td><td>Hours; % of E2E</td><td>Type, stage</td><td>DR-02 + 1.5</td><td>C4</td></tr>
+<tr><td>W3</td><td>Flow efficiency</td><td>W1 ÷ (W1 + W2)</td><td>%</td><td>Type</td><td>Derived</td><td>C4 (expect &lt; 10%)</td></tr>
+<tr class="l1"><td colspan="7">QUALITY AND REWORK</td></tr>
+<tr><td>R1</td><td>First-time-right at Credit</td><td>Share of deals transferred to Credit that reach a decision without a deferral</td><td>%</td><td>Type, segment</td><td>DR-02/03</td><td>O4; C1</td></tr>
+<tr><td>R2</td><td>Deferral loops per deal</td><td>Count of “deferred – further info” events per deal</td><td>Mean; % with ≥ 2</td><td>Type, segment</td><td>DR-02</td><td>C1</td></tr>
+<tr><td>R3</td><td>Days added by deferral</td><td>T1 for deals with ≥ 1 deferral minus T1 for deals with none (same type)</td><td>Days (P50)</td><td>Type</td><td>DR-02</td><td>C1</td></tr>
+<tr><td>R4</td><td>Letter reset rate</td><td>Share of issued letters hitting the 3-month unreturned reset</td><td>%; count</td><td>Type, segment</td><td>DR-08</td><td>C2</td></tr>
+<tr><td>R5</td><td>Post-approval re-processing</td><td>Share of approved deals returned to pre-credit after approval (excluding R4)</td><td>%</td><td>Type</td><td>DR-02</td><td>C3</td></tr>
+<tr><td>R6</td><td>EPR chains</td><td>Share of EPRs preceded by an EPR; share reaching 3</td><td>%</td><td>Segment</td><td>DR-04</td><td>A3</td></tr>
+<tr><td>R7</td><td>Decline and withdrawal rates</td><td>Declined ÷ decided; withdrawn ÷ created</td><td>%</td><td>Type, segment, stage</td><td>DR-03</td><td>O4; EX-01</td></tr>
+<tr><td>R8</td><td>Re-origination rate</td><td>Deals reset by the 90-day batch job ÷ created</td><td>%</td><td>Type</td><td>DR-09/02</td><td>W-01</td></tr>
+<tr class="l1"><td colspan="7">COST</td></tr>
+<tr><td>K1</td><td>Cost per deal</td><td>Σ (W1 per step × loaded rate of role)</td><td>£ (central, range)</td><td>Type</td><td>1.5, DR-16</td><td>O2</td></tr>
+<tr><td>K2</td><td>Annual process cost</td><td>Σ K1 × V1 by type</td><td>£</td><td>Type, role</td><td>Derived</td><td>O2; business case</td></tr>
+<tr><td>K3</td><td>Cost of rework</td><td>K1 for rework steps × loop counts (R2, R4, R5)</td><td>£; % of K2</td><td>Type</td><td>Derived</td><td>O4</td></tr></table></div>
+
+<div class="pb"><h1>4. Data model and quality handling</h1>
+<div class="two"><div>
+<h3>Join structure</h3>
+<table><tr><th>Table</th><th>Grain</th><th>Key</th></tr>
+<tr><td>DR-01 deal register</td><td>Deal</td><td>deal_id</td></tr>
+<tr><td>DR-02 stage history</td><td>Deal × transition</td><td>deal_id, seq</td></tr>
+<tr><td>DR-03 decisions</td><td>Deal × decision</td><td>deal_id, decision_seq</td></tr>
+<tr><td>DR-04 variation / EPR detail</td><td>Deal</td><td>deal_id</td></tr>
+<tr><td>DR-05 risk attributes</td><td>Deal (snapshot)</td><td>deal_id</td></tr>
+<tr><td>DR-08 letter events</td><td>Letter</td><td>deal_id, letter_seq</td></tr>
+<tr><td>DR-12 fulfilment / security</td><td>Deal</td><td>deal_id</td></tr>
+<tr><td>DR-14 CAP events</td><td>Deal × event</td><td>deal_id, event_seq</td></tr>
+<tr><td>1.5 unit times</td><td>Type × step group × role</td><td>type, step</td></tr>
+<tr><td>DR-16 rates</td><td>Role</td><td>role</td></tr></table>
+<h3>Derived fields</h3>
+<ul><li><code>stage</code> from status code via Appendix A mapping</li><li><code>stage_entered</code>, <code>stage_exited</code> per transition; stage duration</li><li><code>loop_count_deferral</code>, <code>loop_count_decline</code>, <code>reset_flag</code>, <code>reprocess_flag</code></li><li><code>da_route</code>: within DA / Credit</li><li><code>fast_track_eligible</code> from DR-05 criteria</li><li><code>segment</code> from DR-01 officer code → DR-11 team</li></ul>
+</div><div>
+<h3>Quality rules (from 0.7 §4, applied here)</h3>
+<table><tr><th>Rule</th><th>Threshold</th><th>Handling</th></tr>
+<tr><td>Deal count reconciles to RFP (30,561 ± 5%)</td><td>Hard</td><td>Reconcile before analysis</td></tr>
+<tr><td>Stage-path completeness</td><td>≥ 85% of deals</td><td>Report T-metrics on complete subset; state coverage per type</td></tr>
+<tr><td>Timestamp sanity</td><td>100% after cleanse</td><td>Exclude and count</td></tr>
+<tr><td>Join rate DR-01 ↔ 02 ↔ 03</td><td>≥ 95%</td><td>Investigate keys</td></tr>
+<tr><td>DR-08 coverage</td><td>May be &lt; 50%</td><td>If so, T5 and R4 from RM mailbox sample (walk-the-process) and reported as a range</td></tr>
+<tr><td>Outliers</td><td>&gt; P99 per metric</td><td>Retained in distribution; flagged; investigated for data error vs. real</td></tr></table>
+<h3>Coverage statement</h3>
+<p>Every table in v1.0 carries: population, n after exclusions, exclusion reasons, and the period. A metric with coverage below 70% of its population is reported as indicative, not baseline.</p>
+<h3>Segment and Corporate handling</h3>
+<p>Segment cuts use the DR-11 team mapping. Corporate deals are analysed by the Bank BA; the partner receives aggregates only (SD-02).</p>
+</div></div></div>
+
+<div class="pb"><h1>5. Analysis specification (Weeks 4–7)</h1>
+<table><tr><th>Step</th><th>Week</th><th>Analysis</th><th>Output</th><th>Tests</th></tr>
+<tr><td>1</td><td>3</td><td>Sample extract: confirm status-code → stage mapping with MI; agree Appendix A</td><td>Appendix A v1</td><td>—</td></tr>
+<tr><td>2</td><td>4</td><td>Load, cleanse, reconcile volumes; coverage per deal type</td><td>Coverage statement</td><td>—</td></tr>
+<tr><td>3</td><td>4</td><td>Stage-path analysis: sequence of stages per deal type; share following the full path</td><td>Path table; Sankey per type</td><td>A1 (renewal path = new money path?)</td></tr>
+<tr><td>4</td><td>5</td><td>Cycle-time distributions T1–T8 by type and segment; DA vs Credit split</td><td>Distribution tables and charts</td><td>O1 baseline</td></tr>
+<tr><td>5</td><td>5</td><td>Loop analysis R1–R3, R5, R8: deferral counts, days added, re-processing</td><td>Rework tables</td><td>C1, C3</td></tr>
+<tr><td>6</td><td>5</td><td>Letter analysis T5, R4 from DR-08 (or mailbox sample)</td><td>Letter table</td><td>C2</td></tr>
+<tr><td>7</td><td>5</td><td>EPR sequence analysis R6; variation reason classification (DR-04 + sample of 50)</td><td>Tables</td><td>A3, A4</td></tr>
+<tr><td>8</td><td>6</td><td>Fast-track cohort V5: eligible share; 12-month outcomes (DR-06) vs full-review cohort</td><td>Cohort table</td><td>A2</td></tr>
+<tr><td>9</td><td>6</td><td>Touch vs wait W1–W3 using 1.5 unit times; flow efficiency per type</td><td>Wait tables</td><td>C4</td></tr>
+<tr><td>10</td><td>6</td><td>Cost K1–K3 with DR-16</td><td>Cost tables</td><td>O2</td></tr>
+<tr><td>11</td><td>7</td><td>Assemble baseline pack: one dashboard per journey pattern; ranges; coverage; hypothesis read-out</td><td>1.4 v1.0; input to 1.11</td><td>All</td></tr></table>
+<h3>Hypothesis test criteria (pre-registered)</h3>
+<table><tr><th>Hyp.</th><th>Confirmed if</th><th>Metric</th></tr>
+<tr><td>A1</td><td>≥ 90% of renewals follow the same stage sequence as New Money</td><td>Step 3</td></tr>
+<tr><td>A2</td><td>≥ 40% of renewals eligible AND eligible cohort’s 12-month downgrade / arrears rate ≤ full-review cohort</td><td>V5; step 8</td></tr>
+<tr><td>A3</td><td>≥ 30% of EPRs preceded by an EPR</td><td>R6</td></tr>
+<tr><td>A4</td><td>≤ 30% of variations change limit, security or pricing</td><td>Step 7</td></tr>
+<tr><td>C1</td><td>R1 &lt; 80% (i.e. ≥ 20% of Credit-routed deals defer) AND R3 ≥ 5 days</td><td>R1, R3</td></tr>
+<tr><td>C2</td><td>S3b is the longest single stage at P80 AND R4 ≥ 5%</td><td>T3, T5, R4</td></tr>
+<tr><td>C3</td><td>R5 ≥ 10% on New / Increase</td><td>R5</td></tr>
+<tr><td>C4</td><td>W2 ≥ 3 × W1 at S2a and S5; flow efficiency &lt; 10%</td><td>W2, W3</td></tr></table></div>
+
+<div class="pb"><h1>6. Dashboard design</h1>
+<p>One page per journey pattern (P1–P5 from 1.3), same layout, so the SteerCo reads five pages the same way. The layout below is the template; the illustrative version in §7 shows it filled with assumed numbers for P2 Renewal.</p>
+<div class="dash">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 300" width="100%" font-family="Arial, Helvetica, sans-serif">
+<rect x="0" y="0" width="700" height="300" fill="#fff"/>
+<text x="10" y="18" font-size="12" font-weight="bold" fill="#0b3d6b">P2 · Renewal and EPR — baseline (period, n, coverage)</text>
+<g font-size="8">
+<rect x="10" y="30" width="130" height="50" fill="#e6edf5" stroke="#b8c4d0"/><text x="18" y="44" fill="#555">Volume</text><text x="18" y="66" font-size="16" font-weight="bold" fill="#0b3d6b">V1</text><text x="48" y="66" fill="#333">deals · V3 % Credit</text>
+<rect x="150" y="30" width="130" height="50" fill="#e6edf5" stroke="#b8c4d0"/><text x="158" y="44" fill="#555">E2E decision T1</text><text x="158" y="66" font-size="16" font-weight="bold" fill="#0b3d6b">P50 / P80</text>
+<rect x="290" y="30" width="130" height="50" fill="#e6edf5" stroke="#b8c4d0"/><text x="298" y="44" fill="#555">E2E fulfilment T2</text><text x="298" y="66" font-size="16" font-weight="bold" fill="#0b3d6b">P50 / P80</text>
+<rect x="430" y="30" width="130" height="50" fill="#e6edf5" stroke="#b8c4d0"/><text x="438" y="44" fill="#555">First-time-right R1</text><text x="438" y="66" font-size="16" font-weight="bold" fill="#0b3d6b">%</text>
+<rect x="570" y="30" width="120" height="50" fill="#e6edf5" stroke="#b8c4d0"/><text x="578" y="44" fill="#555">Cost per deal K1</text><text x="578" y="66" font-size="16" font-weight="bold" fill="#0b3d6b">£ (range)</text>
+</g>
+<text x="10" y="100" font-size="9" font-weight="bold" fill="#1f4f82">Stage times (P50 / P80, days) — touch vs wait</text>
+<g font-size="7.5" fill="#333">
+<text x="10" y="116">S1 Prep</text><rect x="70" y="109" width="40" height="8" fill="#0b3d6b"/><rect x="110" y="109" width="120" height="8" fill="#c9d6e5"/>
+<text x="10" y="131">S2a Queue</text><rect x="70" y="124" width="6" height="8" fill="#0b3d6b"/><rect x="76" y="124" width="90" height="8" fill="#c9d6e5"/>
+<text x="10" y="146">S2b Credit</text><rect x="70" y="139" width="30" height="8" fill="#0b3d6b"/><rect x="100" y="139" width="60" height="8" fill="#c9d6e5"/>
+<text x="10" y="161">S3 Docs</text><rect x="70" y="154" width="20" height="8" fill="#0b3d6b"/><rect x="90" y="154" width="210" height="8" fill="#c9d6e5"/>
+<text x="10" y="176">S5 Fulfil</text><rect x="70" y="169" width="10" height="8" fill="#0b3d6b"/><rect x="80" y="169" width="50" height="8" fill="#c9d6e5"/>
+<rect x="320" y="109" width="8" height="8" fill="#0b3d6b"/><text x="331" y="116">touch</text><rect x="360" y="109" width="8" height="8" fill="#c9d6e5"/><text x="371" y="116">wait</text>
+</g>
+<text x="400" y="100" font-size="9" font-weight="bold" fill="#1f4f82">Rework and loops</text>
+<g font-size="7.5" fill="#333"><text x="400" y="116">Deferral loops / deal (R2) · % ≥ 2</text><text x="400" y="131">Days added by deferral (R3)</text><text x="400" y="146">Letter reset rate (R4)</text><text x="400" y="161">EPR chains (R6)</text><text x="400" y="176">Decline / withdrawal (R7)</text></g>
+<text x="10" y="200" font-size="9" font-weight="bold" fill="#1f4f82">Segment cut (BD / SF / Corp)</text>
+<g font-size="7.5" fill="#333"><text x="10" y="216">T1 P50 by segment · R1 by segment · V3 by segment</text></g>
+<text x="400" y="200" font-size="9" font-weight="bold" fill="#1f4f82">Fast-track cohort (P2 only)</text>
+<g font-size="7.5" fill="#333"><text x="400" y="216">Eligible share V5 · outcome comparison · T1 eligible vs not</text></g>
+<text x="10" y="245" font-size="9" font-weight="bold" fill="#1f4f82">Coverage and caveats</text>
+<g font-size="7.5" fill="#333"><text x="10" y="260">n, exclusions, DR-02 coverage %, range sources, period</text></g>
+<text x="400" y="245" font-size="9" font-weight="bold" fill="#1f4f82">Hypothesis read-out</text>
+<g font-size="7.5" fill="#333"><text x="400" y="260">A1 · A2 · A3 · C1 · C2 · C4 — confirmed / partly / rejected</text></g>
+</svg></div>
+<p class="small">Template. Tiles use the metric IDs from §3 so each number is traceable. Stage bars show touch (dark) and wait (light) at P50; P80 shown as a tick in the populated version.</p></div>
+
+<div class="pb"><h1>7. Illustrative run <span class="ph">(assumed values — not findings)</span></h1>
+<div class="ph-box">Values below are assumptions chosen to be plausible for a UK business bank with a manual facility-letter process and no workflow timers. They exercise the metric definitions and the dashboard layout so the SteerCo can agree the format before Week 7. They are not Bank data and must not be quoted. Replace every yellow cell with measured values.</div>
+<h3>7.1 Illustrative headline table by pattern</h3>
+<table><tr><th>Pattern</th><th>V1 deals</th><th>V3 % Credit-routed</th><th>T1 decision P50 / P80 (d)</th><th>T2 fulfilment P50 / P80 (d)</th><th>R1 FTR at Credit</th><th>R4 letter reset</th><th>W3 flow efficiency</th><th>K1 £ / deal</th></tr>
+<tr class="ill"><td>P1 New / Increase</td><td class="num">3,033</td><td class="num">70%</td><td class="num">24 / 45</td><td class="num">58 / 110</td><td class="num">62%</td><td class="num">8%</td><td class="num">6%</td><td class="num">820</td></tr>
+<tr class="ill"><td>P2 Renewal + EPR</td><td class="num">14,857</td><td class="num">45%</td><td class="num">14 / 31</td><td class="num">35 / 75</td><td class="num">74%</td><td class="num">5%</td><td class="num">5%</td><td class="num">310</td></tr>
+<tr class="ill"><td>P3 Variation (+ removal)</td><td class="num">7,277</td><td class="num">55%</td><td class="num">16 / 36</td><td class="num">40 / 85</td><td class="num">70%</td><td class="num">6%</td><td class="num">5%</td><td class="num">350</td></tr>
+<tr class="ill"><td>P4 Pre-approved drawdown</td><td class="num">62+</td><td class="num">15%</td><td class="num">5 / 12</td><td class="num">18 / 40</td><td class="num">90%</td><td class="num">3%</td><td class="num">8%</td><td class="num">220</td></tr>
+<tr class="ill"><td>P5 Distressed</td><td class="num">1,516</td><td class="num">100%</td><td class="num">21 / 48 (to categorisation T8)</td><td class="num">n/a</td><td class="num">80%</td><td class="num">n/a</td><td class="num">n/a</td><td class="num">450</td></tr></table>
+<h3>7.2 Illustrative stage breakdown: P2 Renewal (P50 days; touch from 1.5 §6.2 assumptions)</h3>
+<table><tr><th>Stage</th><th>P50 days</th><th>P80 days</th><th>Touch (h)</th><th>Wait (d, approx.)</th><th>Reads as</th></tr>
+<tr class="ill"><td>S1 Preparation</td><td class="num">6</td><td class="num">14</td><td class="num">2.3</td><td class="num">5.7</td><td>RM gathers information; customer wait inside</td></tr>
+<tr class="ill"><td>S2a Credit queue (Credit-routed only)</td><td class="num">4</td><td class="num">9</td><td class="num">0</td><td class="num">4.0</td><td>Pure wait</td></tr>
+<tr class="ill"><td>S2b Credit assessment</td><td class="num">4</td><td class="num">10</td><td class="num">1.0</td><td class="num">3.9</td><td>Includes deferral loops</td></tr>
+<tr class="ill"><td>S3 Documentation (letter out → returned → checked)</td><td class="num">18</td><td class="num">42</td><td class="num">0.6</td><td class="num">17.9</td><td>Longest stage; customer-side; 3-month reset tail</td></tr>
+<tr class="ill"><td>S5 Fulfilment</td><td class="num">3</td><td class="num">7</td><td class="num">0.25</td><td class="num">2.9</td><td>Queue via message</td></tr>
+<tr class="ill l2"><td>E2E fulfilment (T2)</td><td class="num">35</td><td class="num">75</td><td class="num">4.2</td><td class="num">34.4</td><td>Flow efficiency ≈ 4.2 h ÷ 840 h = 0.5% of elapsed; ≈ 5% of working hours</td></tr></table>
+<h3>7.3 Illustrative rework table: P2 Renewal</h3>
+<table><tr><th>Metric</th><th>Value</th><th>Reads as</th></tr>
+<tr class="ill"><td>R1 First-time-right at Credit</td><td class="num">74%</td><td>26% of Credit-routed renewals defer at least once</td></tr>
+<tr class="ill"><td>R2 Deferral loops per deferred deal</td><td class="num">1.4 (18% with ≥ 2)</td><td>A tail of multi-loop deals</td></tr>
+<tr class="ill"><td>R3 Days added by deferral (P50)</td><td class="num">+9</td><td>Would meet C1 threshold (≥ 5)</td></tr>
+<tr class="ill"><td>R4 Letter reset rate</td><td class="num">5%</td><td>c. 740 renewals a year back to pre-credit for a timing failure</td></tr>
+<tr class="ill"><td>R6 EPR preceded by EPR</td><td class="num">35%</td><td>Would meet A3 threshold (≥ 30)</td></tr>
+<tr class="ill"><td>V5 Fast-track eligible</td><td class="num">48%</td><td>Would meet A2 volume threshold; outcome comparison still required</td></tr></table>
+<p><b>What the illustration shows about the method:</b> if the measured renewal profile is anything like this, three facts would drive the design: wait is more than 90% of elapsed time, the documentation stage is half of it, and a quarter of Credit-routed renewals loop at least once. The levers would then be letter automation (L4), fast-track routing (L1) and submission validation (L11), in that order of cycle-time impact. The measured run in Week 7 will confirm, re-order, or overturn that.</p>
+<h3>7.4 What v1.0 will contain</h3>
+<ul><li>§7.1 table measured, with ranges and coverage per cell</li><li>Five dashboards (P1–P5) per the §6 template, plus segment variants for P2 and P3</li><li>Stage-path Sankeys per deal type; cycle-time distributions (histograms) for T1 and T2 per pattern</li><li>Fast-track cohort analysis (V5 and outcomes) in full</li><li>Hypothesis read-out A1–A4, C1–C4 against the pre-registered criteria in §5</li><li>Appendix A: status-code to stage mapping agreed with MI; Appendix B: exclusions and data-quality log</li></ul></div>
+
+<div class="pb"><h1>Appendix A. Status-code to stage mapping <span class="ph">(agreed with MI on sample extract, Week 3)</span></h1>
+<table><tr><th>BLP status / workflow code</th><th>Description</th><th>Stage (§2)</th><th>Start or end event for</th><th>Notes</th></tr>
+<tr><td class="ph">[DR-02 code]</td><td class="ph">Deal created</td><td>S1 start</td><td>T1, T2</td><td></td></tr>
+<tr><td class="ph">[DR-02 code]</td><td class="ph">Validation passed / submitted</td><td>S1 end; S2 start</td><td>T3</td><td></td></tr>
+<tr><td class="ph">[DR-02 code]</td><td class="ph">Transferred to Credit</td><td>S2a start</td><td>T4</td><td>V3 flag</td></tr>
+<tr><td class="ph">[DR-02 code]</td><td class="ph">Credit assessment started</td><td>S2a end; S2b start</td><td>T4</td><td>If not captured, S2a + S2b reported combined</td></tr>
+<tr><td class="ph">[DR-02 code]</td><td class="ph">Deferred – further information</td><td>loop event</td><td>R1, R2, R3</td><td></td></tr>
+<tr><td class="ph">[DR-02 code]</td><td class="ph">Approved (DA) / Approved (Credit) / Declined / Withdrawn</td><td>S2 end</td><td>T1; R7</td><td>DR-03 authority level</td></tr>
+<tr><td class="ph">[DR-02 code]</td><td class="ph">FAL created / sent / returned / complete</td><td>S3a, S3b</td><td>T5, R4</td><td>DR-08; coverage TBC</td></tr>
+<tr><td class="ph">[DR-02 code]</td><td class="ph">Pre-conditions met; security complete</td><td>S4</td><td>T3</td><td></td></tr>
+<tr><td class="ph">[DR-02 code]</td><td class="ph">Ready for fulfilment</td><td>S4 end; S5 start</td><td>T6</td><td></td></tr>
+<tr><td class="ph">[DR-02 code]</td><td class="ph">Fulfilled / BLP updated</td><td>S5 end</td><td>T2</td><td></td></tr>
+<tr><td class="ph">[DR-02 code]</td><td class="ph">Transferred to SBS; Categorised</td><td>S6</td><td>T8</td><td>DR-14</td></tr>
+<tr><td class="ph">[DR-02 code]</td><td class="ph">Re-originated (batch)</td><td>reset event</td><td>R8</td><td>Link to original deal</td></tr></table></div>
+</body></html>
