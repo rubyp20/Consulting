@@ -1,0 +1,141 @@
+<!doctype html><html><head><meta charset="utf-8"><title>1.5 Activity-Based Effort Baseline</title><link rel="stylesheet" href="build/style.css"></head><body>
+
+<div class="cover"><p class="small" style="letter-spacing:1px;text-transform:uppercase">Business Bank · Business Banking Transformation Office · BB-BLP-BPR</p>
+<h1>1.5 Activity-Based Effort Baseline<br/><span style="font-size:15pt;color:#1f4f82">Method, instrument, model and illustrative run</span></h1>
+<table class="meta" style="width:65%;margin-top:20pt"><tr><td>Deliverable</td><td>1.5 Activity-based effort baseline by role (FTE-equivalent)</td></tr><tr><td>Version</td><td>0.5 – method and model shell (Week 3). v1.0 populated with survey, time-and-motion and timestamp data at Week 6</td></tr>
+<tr><td>Source</td><td>1.1 taxonomy (activity categories); DR-11 user register (sampling frame); DR-16 loaded cost rates; activity survey W5; time-and-motion W5–6; DR-02 timestamps</td></tr><tr><td>Owner</td><td>WS3 Data &amp; MI (Data/MI Analyst) with WS5 People &amp; Change</td></tr><tr><td>Accepted by</td><td>SteerCo (G1); Finance Director (method)</td></tr></table>
+<div class="ph-box" style="margin-top:24pt"><b>Status of the numbers in this document.</b> Section 6 contains an <u>illustrative run</u> of the model using assumed inputs, so that the SteerCo and Finance can agree the method and see what the output will look like before data arrives. Every figure in section 6 is marked <span class="ph">illustrative</span> and must not be quoted as a finding. The baseline numbers are produced in Week 6 from Bank data and endorsed at G1.</div></div>
+
+<div class="pb"><h1>1. Purpose</h1>
+<p>Objective O2 (lower cost to serve, release capacity) can only be evidenced against a baseline of <b>where effort goes today</b>: which roles spend how much time on which activities, for which deal types. BLP does not record effort. The baseline therefore has to be constructed, and constructed in a way the SteerCo will accept at G1 and Finance will accept at G2.</p>
+<p>Three sources are triangulated. None is sufficient alone: a survey over-reports “real work” and under-reports admin; time-and-motion observes too few people to generalise; system timestamps show elapsed time, not effort. Together they bound the answer.</p>
+<table><tr><th>Source</th><th>What it measures</th><th>Strength</th><th>Weakness</th><th>Role in the baseline</th></tr>
+<tr><td>A. Activity survey</td><td>Self-reported time by activity category, all roles, one week</td><td>Breadth: every role and segment</td><td>Self-report bias; one week may be atypical</td><td>Primary allocation of time across activities</td></tr>
+<tr><td>B. Time-and-motion</td><td>Observed touch time per instance of the five highest-volume activities</td><td>Accuracy per activity</td><td>Small sample; observer effect</td><td>Calibrates survey touch time per deal; unit times for cost per deal</td></tr>
+<tr><td>C. BLP stage timestamps (DR-02)</td><td>Elapsed time per stage per deal</td><td>Complete population; objective</td><td>Elapsed ≠ effort; stage coverage may be partial</td><td>Wait vs touch split; volumes per activity; cross-check that survey hours × volumes reconcile</td></tr></table></div>
+
+<div class="pb"><h1>2. Activity categories</h1>
+<p>Categories are the 24 L2 processes of the taxonomy (1.1), collapsed to 18 survey lines so the instrument fits in 15 minutes a day, plus four non-process lines. Every line maps back to L2 so results tag to the same structure as the maps, controls and pain points.</p>
+<table><tr><th>Line</th><th>Survey category (as shown to participants)</th><th>L2</th><th>Applies to roles</th></tr>
+<tr><td>A01</td><td>Handling new enquiries and leads; initial screening</td><td>1.1, 1.2</td><td>RM, BD</td></tr>
+<tr><td>A02</td><td>Finding and setting up the customer and parties in BLP</td><td>1.3</td><td>RM, BD, SBS</td></tr>
+<tr><td>A03</td><td>Creating and structuring the deal (products, limits, pricing, covenants, security)</td><td>1.4</td><td>RM, BD, SBS</td></tr>
+<tr><td>A04</td><td>Customer and credit analysis; writing the credit memo</td><td>2.1</td><td>RM, BD, SBS</td></tr>
+<tr><td>A05</td><td>Gathering information from the customer (requests, chasing, receiving)</td><td>2.1, 2.5</td><td>RM, BD</td></tr>
+<tr><td>A06</td><td>Validating the deal and checking facility documents before submission</td><td>2.2, 2.3</td><td>RM, BD, Business Ops</td></tr>
+<tr><td>A07</td><td>Assessing a deal and recording a decision</td><td>2.4</td><td>Credit</td></tr>
+<tr><td>A08</td><td>Dealing with deferrals, declines, appeals and post-approval changes</td><td>2.4, 2.5, 2.6</td><td>RM, BD, Credit</td></tr>
+<tr><td>A09</td><td>Producing, issuing, chasing and checking facility letters</td><td>3.1</td><td>RM, BD, Business Ops, Corp. Associate</td></tr>
+<tr><td>A10</td><td>Instructing, preparing, executing and registering security</td><td>3.2</td><td>RM, Lending Services, Securities</td></tr>
+<tr><td>A11</td><td>Tracking conditions precedent and covenant set-up</td><td>3.3</td><td>RM, BD</td></tr>
+<tr><td>A12</td><td>Fulfilling facilities on product systems; releasing funds</td><td>3.4</td><td>Fulfilment</td></tr>
+<tr><td>A13</td><td>Renewals and extensions (end to end, where not captured above)</td><td>4.1</td><td>RM, BD</td></tr>
+<tr><td>A14</td><td>Variations and facility removals (end to end, where not captured above)</td><td>4.2, 4.4</td><td>RM, BD</td></tr>
+<tr><td>A15</td><td>Drawdowns and shadow limit reallocations</td><td>4.3</td><td>RM</td></tr>
+<tr><td>A16</td><td>Covenant monitoring, tracking items, waivers</td><td>5.1</td><td>RM, BD, Credit</td></tr>
+<tr><td>A17</td><td>Distressed customers: referrals, categorisation, strategy</td><td>5.2, 5.3</td><td>RM, Credit, SBS</td></tr>
+<tr><td>A18</td><td>Deposit opportunities</td><td>E1.1</td><td>RM, BD</td></tr>
+<tr><td>N01</td><td>Customer relationship time not tied to a deal (meetings, calls, planning)</td><td>—</td><td>RM, BD</td></tr>
+<tr><td>N02</td><td>Internal: meetings, training, management, admin not tied to a deal</td><td>—</td><td>All</td></tr>
+<tr><td>N03</td><td>System problems, workarounds, re-keying, chasing other teams</td><td>E2</td><td>All</td></tr>
+<tr><td>N04</td><td>Other (free text)</td><td>—</td><td>All</td></tr></table>
+<p><b>Design note.</b> A13–A15 exist because RMs think in deal types, not process steps. A respondent who spent the morning on a renewal will not reliably split it across A02–A11. The analysis step (section 5) re-allocates A13–A15 to L2 using the per-step unit times from time-and-motion, so the output is still by L2 process.</p></div>
+
+<div class="pb"><h1>3. Sampling frame and instrument</h1>
+<div class="two"><div>
+<h3>Population and sample</h3>
+<table><tr><th>Role</th><th>Population (DR-11, TBC)</th><th>Sample</th><th>Rate</th></tr>
+<tr><td>Relationship Managers (SF, Corporate)</td><td class="num ph">[DR-11]</td><td class="num">60</td><td class="num">—</td></tr>
+<tr><td>Business Direct</td><td class="num ph">[DR-11]</td><td class="num">30</td><td class="num">—</td></tr>
+<tr><td>Credit</td><td class="num ph">[DR-11]</td><td class="num">20</td><td class="num">—</td></tr>
+<tr><td>Lending Services / Securities</td><td class="num ph">[DR-11]</td><td class="num">12</td><td class="num">—</td></tr>
+<tr><td>Fulfilment</td><td class="num ph">[DR-11]</td><td class="num">10</td><td class="num">—</td></tr>
+<tr><td>SBS / PS</td><td class="num ph">[DR-11]</td><td class="num">8</td><td class="num">—</td></tr>
+<tr><td>Business Ops / Corporate Associates</td><td class="num ph">[DR-11]</td><td class="num">10</td><td class="num">—</td></tr>
+<tr class="l2"><td>Total</td><td class="num">c. 900</td><td class="num">150</td><td class="num">c. 17%</td></tr></table>
+<p>Stratified by role and segment; within strata, random from DR-11 active users. Team leaders nominate alternates for absence. Minimum acceptable response: 60% per stratum (R-11).</p>
+<h3>Timing</h3>
+<p>Week 5, Monday to Friday (7–11 December 2026). Avoids month-end and the Christmas run-down. One week is a limitation; the reconciliation to DR-02 volumes (section 5, step 4) tests whether the week was representative.</p>
+</div><div>
+<h3>Instrument</h3>
+<ul><li>Daily form, 15 minutes, end of day: hours (to 0.25) against the 22 lines; must total the working day</li>
+<li>Per line: number of deals touched (for A02–A15), to derive touch time per deal</li>
+<li>One free-text box: “biggest time-waster today”</li>
+<li>Anonymised at source: respondent ID → role × segment × week only</li>
+<li>Delivered as a form link from the team leader (C-05), not from the project</li></ul>
+<h3>Time-and-motion</h3>
+<p>Observed, not self-reported. Five activities selected by expected volume × touch time: (1) renewal submission preparation (A04/A13), (2) credit assessment of a renewal (A07), (3) facility letter production and issue (A09), (4) variation set-up (A03/A14), (5) fulfilment of a facility (A12). Target 8–12 observed instances each across two segments. Records: start/stop per step, system used, interruptions, re-keying.</p>
+<h3>Loaded cost</h3>
+<p>DR-16: fully loaded annual cost per role band from Finance. Converted to cost per productive hour using Finance’s standard productive-hours assumption (to be stated in the model, not assumed by the project).</p>
+</div></div></div>
+
+<div class="pb"><h1>4. Model structure</h1>
+<p>One workbook, five sheets, every output traceable to an input.</p>
+<table><tr><th>Sheet</th><th>Content</th><th>Inputs</th><th>Outputs</th></tr>
+<tr><td>S1 Survey raw</td><td>One row per respondent-day-line: role, segment, line, hours, deals touched</td><td>Survey forms</td><td>—</td></tr>
+<tr><td>S2 Allocation</td><td>Hours by role × segment × line, scaled to population; A13–A15 re-allocated to L2 using S3 unit times</td><td>S1, DR-11 population, S3</td><td>Hours per week by role × L2</td></tr>
+<tr><td>S3 Unit times</td><td>Touch time per deal per step from time-and-motion; survey-derived touch time per deal (hours ÷ deals touched) for comparison</td><td>Observation records, S1</td><td>Minutes per deal per L2 per deal type; calibration factor survey ÷ observed</td></tr>
+<tr><td>S4 Reconciliation</td><td>Survey hours × 52 vs. (DR-02 annual volumes × S3 unit times); variance by L2</td><td>S2, S3, DR-02</td><td>Reconciled range (low / central / high) per L2 per role</td></tr>
+<tr><td>S5 Baseline</td><td>FTE-equivalent by role × L2 (central and range); cost per deal by deal type; touch vs wait per stage</td><td>S4, DR-16, DR-02</td><td>Deliverable 1.5 tables; inputs to 1.4 cost per deal and to business case</td></tr></table>
+<h3>Definitions</h3>
+<table><tr><th>Term</th><th>Definition</th></tr>
+<tr><td>Touch time</td><td>Time a person is actively working on a deal step (survey hours; observed minutes)</td></tr>
+<tr><td>Wait time</td><td>Elapsed time in a stage minus touch time (DR-02 elapsed − S3 touch)</td></tr>
+<tr><td>FTE-equivalent</td><td>Annual hours on an activity ÷ Finance productive hours per FTE. A measure of capacity, not of people</td></tr>
+<tr><td>Cost per deal</td><td>Σ (touch time per step × loaded hourly rate of the role performing it) across the steps a deal type passes through</td></tr>
+<tr><td>Capacity released (Phase 2)</td><td>Baseline FTE-equivalent on steps eliminated or automated, net of new activity added, per benefits counting rule 1 (0.9)</td></tr></table></div>
+
+<div class="pb"><h1>5. Analysis steps (Week 6)</h1>
+<ol><li><b>Clean and scale.</b> Remove incomplete days; scale each stratum to its DR-11 population; report response rate per stratum.</li>
+<li><b>Calibrate.</b> For the five observed activities, compute survey touch-per-deal ÷ observed touch-per-deal. Expect 1.1–1.4 (survey over-reports). Apply the factor to the un-observed activities of the same role, and state it.</li>
+<li><b>Re-allocate deal-type lines.</b> Split A13–A15 hours across L2 steps in proportion to S3 unit times for that deal type.</li>
+<li><b>Reconcile to volume.</b> For each L2: annualised survey hours vs. DR-02 volume × unit time. Variance within ±20% → central estimate is the mean; outside → report both as the range and investigate (usually the survey week was atypical, or a step is performed outside BLP and not timestamped).</li>
+<li><b>Split touch and wait.</b> From DR-02 elapsed per stage minus S3 touch, by deal type. This is the input to hypothesis C4 and to the cycle-time baseline in 1.4.</li>
+<li><b>Cost.</b> Apply DR-16 rates. Produce cost per deal by deal type, and total annual cost of the lending process by role.</li>
+<li><b>Report ranges, not points.</b> G1 endorses a range. Finance has agreed (0.9 counting rules) that the business case uses the central estimate with sensitivity at the bounds.</li></ol>
+<h3>Quality gates before G1</h3>
+<table><tr><th>Check</th><th>Threshold</th><th>If failed</th></tr>
+<tr><td>Response rate per stratum</td><td>≥ 60%</td><td>Extend survey one week for that stratum; widen range</td></tr>
+<tr><td>Daily hours total within 6–10 per respondent</td><td>≥ 90% of days</td><td>Exclude outliers; report count</td></tr>
+<tr><td>Calibration factor</td><td>0.8–1.6</td><td>Outside: investigate instrument; do not apply blindly</td></tr>
+<tr><td>Volume reconciliation</td><td>±20% per L2 for the top 8 L2 by hours</td><td>Report as range; flag in 1.11</td></tr>
+<tr><td>Time-and-motion instances</td><td>≥ 8 per activity, ≥ 2 segments</td><td>Extend observation to W6; widen range</td></tr></table></div>
+
+<div class="pb"><h1>6. Illustrative run <span class="ph">(assumed inputs — not findings)</span></h1>
+<div class="ph-box">Inputs below are assumptions chosen to exercise the model: role populations are placeholders pending DR-11; the activity split is a plausible shape, not Bank data; unit times are round numbers; loaded rates are placeholders pending DR-16. The purpose is to show the SteerCo and Finance the shape and granularity of the output they will be asked to endorse at G1. Replace every yellow cell with measured data in Week 6.</div>
+<h3>6.1 Illustrative allocation: Relationship Managers (SF), share of working week by L2</h3>
+<table><tr><th>L2 / line</th><th>Share of week <span class="ph">(assumed)</span></th><th>Reads as</th></tr>
+<tr class="ill"><td>N01 Customer relationship time (not deal-tied)</td><td class="num">25%</td><td>The number the Bank wants to go up</td></tr>
+<tr class="ill"><td>A04 / 2.1 Customer and credit analysis, memo</td><td class="num">18%</td><td>Largest deal-tied block; renewals dominate it by volume</td></tr>
+<tr class="ill"><td>A09 / 3.1 Facility letters: produce, issue, chase, check</td><td class="num">9%</td><td>Manual issuance; the automation candidate (L4)</td></tr>
+<tr class="ill"><td>A05 Information gathering and chasing</td><td class="num">8%</td><td>Driven by deferral loops (C1) and unstructured requests</td></tr>
+<tr class="ill"><td>A02 + A03 / 1.3–1.4 Customer set-up and deal structuring</td><td class="num">8%</td><td>Includes the five-step deal start repeated per deal</td></tr>
+<tr class="ill"><td>A06 / 2.2–2.3 Validation, document check, authority check</td><td class="num">6%</td><td>Manual DA check (C5)</td></tr>
+<tr class="ill"><td>A11 + A16 / 3.3, 5.1 Conditions and covenant tracking</td><td class="num">5%</td><td></td></tr>
+<tr class="ill"><td>A08 / 2.5–2.6 Deferrals, declines, appeals, post-approval changes</td><td class="num">4%</td><td>Rework (O4)</td></tr>
+<tr class="ill"><td>A10 / 3.2 Security instruction and chasing</td><td class="num">3%</td><td></td></tr>
+<tr class="ill"><td>N03 System problems, workarounds, re-keying, chasing teams</td><td class="num">4%</td><td>Direct measure of H-D1</td></tr>
+<tr class="ill"><td>N02 Internal meetings, training, admin</td><td class="num">10%</td><td></td></tr>
+<tr class="ill"><td>Total</td><td class="num">100%</td><td></td></tr></table>
+<h3>6.2 Illustrative unit times (minutes of touch time per deal) <span class="ph">(assumed)</span></h3>
+<table><tr><th>Step group</th><th>Renewal</th><th>Variation</th><th>New / Increase</th><th>Role</th></tr>
+<tr class="ill"><td>Deal start (1.3–1.4)</td><td class="num">20</td><td class="num">25</td><td class="num">45</td><td>RM</td></tr>
+<tr class="ill"><td>Analysis and memo (2.1)</td><td class="num">90</td><td class="num">75</td><td class="num">240</td><td>RM</td></tr>
+<tr class="ill"><td>Validate, docs, DA check (2.2–2.3)</td><td class="num">30</td><td class="num">30</td><td class="num">45</td><td>RM</td></tr>
+<tr class="ill"><td>Credit assessment (2.4)</td><td class="num">60</td><td class="num">60</td><td class="num">150</td><td>Credit</td></tr>
+<tr class="ill"><td>Facility letter (3.1)</td><td class="num">35</td><td class="num">40</td><td class="num">50</td><td>RM / Bus Ops</td></tr>
+<tr class="ill"><td>Security (3.2)</td><td class="num">0</td><td class="num">30</td><td class="num">90</td><td>Lending Services</td></tr>
+<tr class="ill"><td>Fulfilment (3.4)</td><td class="num">15</td><td class="num">25</td><td class="num">40</td><td>Fulfilment</td></tr>
+<tr class="ill l2"><td>Total touch per deal</td><td class="num">250</td><td class="num">285</td><td class="num">660</td><td></td></tr></table>
+<h3>6.3 Illustrative annual effort by deal type <span class="ph">(assumed unit times × RFP volumes)</span></h3>
+<table><tr><th>Deal type</th><th>12-m vol.</th><th>Touch min / deal</th><th>Annual hours</th><th>FTE-eq. @ 1,600 h <span class="ph">(placeholder productive hours)</span></th><th>Share</th></tr>
+<tr class="ill"><td>Renewal + EPR</td><td class="num">14,857</td><td class="num">250</td><td class="num">61,900</td><td class="num">38.7</td><td class="num">44%</td></tr>
+<tr class="ill"><td>Variation</td><td class="num">7,277</td><td class="num">285</td><td class="num">34,570</td><td class="num">21.6</td><td class="num">25%</td></tr>
+<tr class="ill"><td>New + Increase</td><td class="num">3,033</td><td class="num">660</td><td class="num">33,360</td><td class="num">20.9</td><td class="num">24%</td></tr>
+<tr class="ill"><td>CAP Referral + Strategy</td><td class="num">1,516</td><td class="num">360</td><td class="num">9,100</td><td class="num">5.7</td><td class="num">6%</td></tr>
+<tr class="ill"><td>Reallocation / allocation</td><td class="num">62+</td><td class="num">180</td><td class="num">190</td><td class="num">0.1</td><td class="num">0%</td></tr>
+<tr class="ill l2"><td>Total deal-tied effort</td><td class="num">26,745</td><td></td><td class="num">139,100</td><td class="num">87</td><td class="num">100%</td></tr></table>
+<p><b>What the illustration shows about the method, not the Bank:</b> even with New Money touch time at 2.6× a renewal, renewals and variations would carry about 70% of deal-tied effort because of volume. If the measured numbers show anything like this shape, the fast-track and materiality-triage levers (L1, L5) are where capacity sits, and the New Money redesign is secondary. The measured run will confirm or overturn that in Week 6.</p>
+<h3>6.4 Output tables the baseline will contain (populated at v1.0)</h3>
+<ul><li>FTE-equivalent by role × L2 (central, low, high), all segments and by segment</li><li>Touch time per deal by deal type and step group; cost per deal by deal type</li><li>Touch vs wait per stage per deal type (joint with 1.4)</li><li>Share of role time on N03 workarounds and N01 customer time</li><li>Calibration factors and reconciliation variances, with the week’s representativeness assessment</li></ul></div>
+</body></html>
