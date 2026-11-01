@@ -56,6 +56,58 @@ Fintech sources:
 - Bank of Ghana sandbox: https://thebftonline.com/2026/05/12/bog-to-launch-continental-fintech-sandbox-innovation-hub/
 - World Bank digital strategy: https://www.worldbank.org/en/news/press-release/2026/10/20/world-bank-group-launches-first-digital-strategy-to-expand-access-and-create-jobs
 
+## Indian fintech RFPs only (added 1 November 2026)
+
+All entries are [PUBLIC] from the issuer's site or a tender aggregator, and [VERIFY — date-sensitive]. Indian bank sites (*.bank.in) were blocked in the research environment, so scope and dates come from search snippets, not from reading the documents. Nothing was found from NPCI, RBI, the Reserve Bank Innovation Hub, SIDBI or NABARD.
+
+### A. Consulting RFPs: a bank hires an advisory firm
+
+| # | Issuer | RFP | Reference and date | Status |
+|---|---|---|---|---|
+| IN1 | India Post Payments Bank | Consultancy for advisory, governance and implementation assurance of the Digital Personal Data Protection Act 2023 | GEM/2026/B/8039912, about Oct 2026 | Newest found; deadline not confirmed |
+| IN2 | Indian Bank | AI consultancy: strategy, readiness, use cases, GenAI and agentic roadmap, AI CoE | GEM/2026/B/7972585, 28 Aug 2026 | Deadline not confirmed |
+| IN3 | Indian Bank | End-to-end implementation of the Digital Personal Data Protection Act | GEM/2026/B/7080211, 6 Jan 2026 | Likely closed |
+
+### B. Fintech partnership RFPs: fintechs bid to work with a bank
+
+| # | Issuer | RFP | Reference and date | Status |
+|---|---|---|---|---|
+| IN4 | State Bank of India | Startups, fintechs and digital partners for end-to-end digitisation of loan against securities | SBI/CC/DB/DB-Consumer/I&SP/RFP/2026-27/02, 21 Aug 2026 | Deadline not confirmed |
+| IN5 | Canara Bank | Additional empanelment of fintech companies for 2 years | EOI 03/2026-27, 7 Jul 2026 | Deadline not confirmed; previous round closed 27 Apr 2026, Zaggle empanelled 30 Jun 2026 |
+| IN6 | Indian Bank, Digital Business and Fintech Partnership Dept | Fintech empanelment for software solutions and support | Mar–Apr 2026 | Likely closed |
+| IN7 | Bank of Baroda | Fintech and startup empanelment: acquiring, reconciliation, payments, remittances, forex, AI and GenAI | Apr 2026 | Closed 23 Apr 2026 |
+| IN8 | UCO Bank | Rolling fintech empanelment portal | Notices Jan and Jun 2026 | Rolling |
+| IN9 | Bank of India | Fintech empanelment RFP | Date not confirmed | Unknown |
+
+### C. Fintech platform RFPs: a bank buys a digital lending, onboarding or payments system
+
+| # | Issuer | RFP | Reference and date | Status |
+|---|---|---|---|---|
+| IN10 | IDBI Bank | Digital lending solution for loan origination and monitoring, MSME and agri schemes including KCC | IDBI-Bank/ITD/PPG RFP/26-27/12, 30 May 2026 | Likely closed |
+| IN11 | Bank of Baroda | AI-enabled omnichannel digital onboarding for current and savings accounts | Aug 2026 | Closed Sep 2026 |
+| IN12 | Indian Bank | AI-enabled corporate credit intelligence platform | EOI, Sep 2026 | Limited RFP to follow |
+| IN13 | Central Bank of India | Integrated core banking for its GIFT City IFSC operations | CO/DIT/2025-26/439, Dec 2025 | Likely closed |
+| IN14 | Central Bank of India | CBDC (e-rupee) solution | RFP/2025-26/01, Apr 2025 | Closed; useful reference |
+
+### D. Ecosystem
+
+| # | Issuer | RFP | Date |
+|---|---|---|---|
+| IN15 | GIFT City | Branding and digital services for the GIFT International FinTech Institute and Innovation Hub | Aug 2026 |
+
+Indian fintech sources:
+- IPPB DPDPA consultancy RFP: https://ippbonline.bank.in/documents/31498/129735/1790831752704.pdf
+- SBI loan against securities fintech RFP: https://sbi.bank.in/documents/39129/51516783/NOTICE+INVITING+TENDER20260821133311918.pdf
+- Canara Bank EOI page: https://www.canarabank.bank.in/pages/expression-of-interest
+- Zaggle empanelment with Canara Bank: https://www.businessupturn.com/business/zaggle-secures-empanelment-with-canara-bank-for-fintech-services/
+- Indian Bank fintech RFP: https://indianbank.bank.in/documents/551657/2124614/RFP-Fintech_Final2026_04_02_16_47_34.pdf/e9681721-ff15-5c3d-dc79-e86dd198a2ca
+- Indian Bank DPDP consultant RFP: https://indianbank.bank.in/documents/20117/518589/RFPDPDP2026_04_14_20_54_57.pdf/d57920a4-5caf-7ac9-4534-53acdfa8c4ce
+- UCO Bank fintech portal: https://www.uco.bank.in/web/fintech
+- Bank of India fintech RFP post: https://x.com/BankofIndia_IN/status/1859574986287218845
+- IDBI digital lending RFP: https://www.tenderfiles.com/tenderdocuments/62026/1/b6d7b272-d3eb-427e-b129-8edc58e4e2ba?FileName=b6d7b272-d3eb-427e-b129-8edc58e4e2ba.pdf
+- Central Bank of India GIFT City core banking RFP: https://centralbank.bank.in/sites/default/files/2026-01/Final_RFP_GIFT%20city%20IT%20Solutions_15122025.pdf
+- GIFT FinTech Hub RFP: https://api.giftgujarat.in/public/tenders/tenders_1785759895767_RFP_document_03-08-2026.pdf
+
 ## Recommendation
 
 Run Indian Bank's AI Consultancy Services RFP (#1) as the engagement. It is a real, current, FS-specific AI strategy brief covering strategy, readiness assessment, use-case prioritisation, a GenAI and agentic roadmap and an AI CoE. That is the exact scope interviewers test. Pair it with #6 (Indian Bank credit intelligence EOI) as the "wave 1 use case" inside the roadmap, and use #5 (SBI) as the competitor benchmark for what an Indian PSU bank's AI platform build looks like.
