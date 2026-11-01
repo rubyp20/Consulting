@@ -13,6 +13,7 @@ const jobs = [
   { html: `${D}/1.5-activity-based-effort-baseline.html`, pdf: `${D}/1.5-Activity-Based-Effort-Baseline.pdf`, landscape: false, title: 'BB-BLP-BPR · 1.5 Activity-Based Effort Baseline · v0.5 method and model shell' },
   { html: `${D}/1.6-control-policy-da-inventory.html`, pdf: `${D}/1.6-Control-Policy-DA-Inventory.pdf`, landscape: false, title: 'BB-BLP-BPR · 1.6 Control, Policy and Delegated-Authority Inventory · v0.6' },
   { html: `${D}/1.7-workaround-inventory.html`, pdf: `${D}/1.7-Workaround-Inventory.pdf`, landscape: false, title: 'BB-BLP-BPR · 1.7 Workaround Inventory · v0.6' },
+  { html: `${D}/1.8-regulatory-mi-data-lineage.html`, pdf: `${D}/1.8-Regulatory-MI-Data-Lineage.pdf`, landscape: false, title: 'BB-BLP-BPR · 1.8 Regulatory Reporting and MI Data Lineage · v0.4' },
 ];
 (async () => {
   const b = await chromium.launch();

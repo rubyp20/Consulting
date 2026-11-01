@@ -1,0 +1,150 @@
+<!doctype html><html><head><meta charset="utf-8"><title>1.8 Regulatory Reporting and MI Data Lineage</title><link rel="stylesheet" href="build/style.css"><style>.inv th, .inv td { font-size: 7.8pt; padding: 2pt 3.5pt; }</style></head><body>
+
+<div class="cover"><p class="small" style="letter-spacing:1px;text-transform:uppercase">Business Bank · Business Banking Transformation Office · BB-BLP-BPR</p>
+<h1>1.8 Regulatory Reporting and MI Data Lineage<br/><span style="font-size:15pt;color:#1f4f82">Which BLP data feeds which report, where it is captured in the process, and what the redesign must protect</span></h1>
+<table class="meta" style="width:65%;margin-top:20pt"><tr><td>Deliverable</td><td>1.8 Regulatory reporting and MI data lineage; protected-fields list</td></tr><tr><td>Version</td><td>0.4 – structure, data domain model, capture-point mapping and draft protected-fields list from 1.2 maps (Week 3). Report inventory and field-level lineage populated from DR-10 and MI interviews (Weeks 4–6) → v1.0</td></tr>
+<tr><td>Source</td><td>RFP (BLP as key source for regulatory reporting and operational MI); 1.2 maps (capture points); 1.6 (REG-class controls); DR-10 lineage extract <span class="ph">[pending W4]</span>; DR-15 MI packs; MI Manager interview (H-F2)</td></tr><tr><td>Owner</td><td>WS3 Data &amp; MI (Data/MI Analyst) with Bank BA</td></tr><tr><td>Accepted by</td><td>Head of MI &amp; Regulatory Reporting; noted by second-line Risk</td></tr>
+<tr><td>Tests</td><td>Hypotheses F1 (field-level lineage undocumented), F2 (manual MI adjustment because capture varies). Feeds dependency B-07 (protected fields to the Replacement Programme, W7) and design decision DD-09</td></tr></table>
+<div class="ph-box" style="margin-top:24pt"><b>What is and is not known.</b> The RFP states that BLP is a key data source for regulatory reporting and operational MI. It does not say which returns. Section 3 lists the returns a UK business bank would <i>typically</i> source from a lending platform, as a <u>candidate list for Regulatory Reporting to confirm or strike</u>, not as a statement of what the Bank submits. Nothing in this document should be read as asserting the Bank’s regulatory obligations.</div></div>
+
+<div class="pb"><h1>1. Purpose and the rule this document enforces</h1>
+<p>Objective O6 and RFP constraint §7 say the same thing: no design may remove a reporting data point without MI / Regulatory Reporting sign-off. That rule cannot be applied unless someone knows which data points those are. Today, per hypothesis F1, that knowledge sits in extract scripts and in people’s heads. This document makes it explicit in three layers:</p>
+<table><tr><th>Layer</th><th>Question answered</th><th>Source</th><th>Status at v0.4</th></tr>
+<tr><td>A. Report inventory</td><td>Which regulatory returns and MI reports take data from BLP?</td><td>DR-10; Reg Reporting; MI Manager</td><td class="ph">Candidate list; to confirm</td></tr>
+<tr><td>B. Field lineage</td><td>For each report, which BLP fields, through what transformation, with what manual adjustment?</td><td>DR-10 extract scripts; MI packs</td><td class="ph">Register template; populated W4–6</td></tr>
+<tr><td>C. Capture-point mapping</td><td>At which process step, by whom, is each field created or changed?</td><td>1.2 maps; 1.6 controls</td><td><b>Built</b> from the maps (section 5)</td></tr></table>
+<p>Layer C is the one the redesign actually needs: it tells the Phase 2 team that if a step is eliminated or automated, these fields must still be captured, by some step, to the same definition. The <b>protected-fields list</b> (section 6) is the intersection of layers B and C, and is dependency B-07 to the Replacement Programme.</p>
+<h3>Definitions</h3>
+<table><tr><th>Term</th><th>Meaning here</th></tr>
+<tr><td>Protected field</td><td>A BLP data element that feeds a regulatory return, a statutory or audited figure, or a SteerCo-level MI measure. Its definition, capture and timing may not change without the owner’s sign-off</td></tr>
+<tr><td>Capture point</td><td>The process step (map · step ID) at which a field is first populated or materially changed</td></tr>
+<tr><td>Manual adjustment</td><td>Any step between BLP extract and reported figure performed outside a controlled, documented transformation (spreadsheet correction, re-classification, exclusion list)</td></tr>
+<tr><td>Lineage</td><td>Source field → transformation → report line, with owner and frequency</td></tr></table></div>
+
+<div class="pb"><h1>2. Data domain model (from the maps)</h1>
+<p>The entities BLP holds, as implied by the 1.2 maps and the RFP description. This is a logical model for lineage purposes, not BLP’s physical schema (which the Replacement Programme holds).</p>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 300" width="100%" font-family="Arial, Helvetica, sans-serif" font-size="8">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#555"/></marker></defs>
+<g stroke="#0b3d6b" fill="#e6edf5">
+<rect x="20" y="20" width="120" height="44" rx="2"/><rect x="20" y="110" width="120" height="44" rx="2"/><rect x="200" y="110" width="120" height="44" rx="2"/><rect x="380" y="110" width="120" height="44" rx="2"/><rect x="560" y="110" width="120" height="44" rx="2"/>
+<rect x="200" y="200" width="120" height="44" rx="2"/><rect x="380" y="200" width="120" height="44" rx="2"/><rect x="560" y="200" width="120" height="44" rx="2"/><rect x="20" y="200" width="120" height="44" rx="2"/>
+<rect x="380" y="20" width="120" height="44" rx="2"/><rect x="560" y="20" width="120" height="44" rx="2"/>
+</g>
+<g fill="#0b3d6b" font-weight="bold" text-anchor="middle">
+<text x="80" y="38">Connection /</text><text x="80" y="50">Customer</text>
+<text x="80" y="128">Party</text><text x="80" y="140" font-weight="normal" font-size="7">guarantors, directors, associated</text>
+<text x="260" y="128">Deal</text><text x="260" y="140" font-weight="normal" font-size="7">type, status, dates, officer</text>
+<text x="440" y="128">Facility / Product</text><text x="440" y="140" font-weight="normal" font-size="7">limit, rate, margin, expiry, repayment</text>
+<text x="620" y="128">Decision</text><text x="620" y="140" font-weight="normal" font-size="7">outcome, authority, date, DCA</text>
+<text x="260" y="218">Security / Asset</text><text x="260" y="230" font-weight="normal" font-size="7">type, value, allocation, status</text>
+<text x="440" y="218">Covenant / Condition</text><text x="440" y="230" font-weight="normal" font-size="7">test, due date, waiver, status</text>
+<text x="620" y="218">Risk &amp; Recovery</text><text x="620" y="230" font-weight="normal" font-size="7">grade, forbearance, ERV, provision</text>
+<text x="80" y="218">Document</text><text x="80" y="230" font-weight="normal" font-size="7">FAL, memo, status, dates</text>
+<text x="440" y="38">Exposure</text><text x="440" y="50" font-weight="normal" font-size="7">total, personal, NAG, group</text>
+<text x="620" y="38">Workflow event</text><text x="620" y="50" font-weight="normal" font-size="7">stage, timestamp, actor</text>
+</g>
+<g stroke="#555" fill="none" marker-end="url(#a)">
+<path d="M80,64 L80,110"/><path d="M140,132 L200,132"/><path d="M320,132 L380,132"/><path d="M500,132 L560,132"/>
+<path d="M260,154 L260,200"/><path d="M440,154 L440,200"/><path d="M620,154 L620,200"/><path d="M200,222 L140,222"/>
+<path d="M140,42 L380,42"/><path d="M500,42 L560,42"/><path d="M620,64 L620,110"/>
+</g>
+<text x="20" y="280" font-size="7.5" fill="#555">Arrows show the main containment / reference direction. Exposure is aggregated from facilities across the connection; workflow events attach to the deal.</text>
+</svg>
+<h3>Domains by reporting relevance (hypothesised; confirmed in layer B)</h3>
+<table><tr><th>Domain</th><th>Likely regulatory relevance</th><th>Likely MI relevance</th><th>REG-class controls (1.6)</th></tr>
+<tr><td>Risk &amp; Recovery</td><td class="red">High: forbearance, impairment inputs (ERV, provisions, write-offs), risk grade</td><td>High: watch-list, CAP MI</td><td>C15, C17</td></tr>
+<tr><td>Facility / Product; Exposure</td><td class="red">High: exposure, limits, product classification, maturity, interest rate</td><td>High: pipeline, book composition</td><td>C5 (authority), C27</td></tr>
+<tr><td>Connection / Customer; Party</td><td class="amb">Medium: counterparty classification, SME status, sector, connected exposures</td><td>Medium</td><td>C1</td></tr>
+<tr><td>Decision</td><td class="amb">Medium: decline data, authority evidence</td><td>High: approval rates, cycle time</td><td>C5, C6, C20</td></tr>
+<tr><td>Security / Asset</td><td class="amb">Medium: collateral values for credit risk mitigation</td><td>Medium</td><td>C10</td></tr>
+<tr><td>Covenant / Condition</td><td class="grn">Low: indirect (breach → forbearance)</td><td>Medium: monitoring</td><td>C9, C25</td></tr>
+<tr><td>Document; Workflow event</td><td class="grn">Low</td><td>High: operational MI, SLAs</td><td>C8</td></tr></table></div>
+
+<div class="pb"><h1>3. Layer A — Report inventory <span class="ph">(candidate list; confirm or strike with Regulatory Reporting, W4)</span></h1>
+<p>Returns a UK business bank commonly sources, in whole or part, from a business lending platform. Each row is confirmed, amended or struck by the Head of MI &amp; Regulatory Reporting against DR-10. Rows that survive get a field-level lineage entry in section 4.</p>
+<table class="inv"><tr><th>ID</th><th>Report (candidate)</th><th>Regulator / audience</th><th>Likely BLP contribution</th><th>Frequency</th><th>Owner</th><th>Status</th></tr>
+<tr><td>RR-01</td><td>Credit risk capital returns (COREP credit risk templates)</td><td>PRA</td><td>Exposure, product class, counterparty type, collateral, risk grade</td><td>Quarterly</td><td class="ph">[DR-10]</td><td class="ph">Confirm</td></tr>
+<tr><td>RR-02</td><td>Financial reporting / FINREP incl. forbearance and non-performing exposure templates</td><td>PRA</td><td>Forbearance status, NPE flags, impairment stage inputs</td><td>Quarterly</td><td class="ph">[DR-10]</td><td class="ph">Confirm</td></tr>
+<tr><td>RR-03</td><td>IFRS 9 impairment (ECL) model inputs</td><td>Finance / auditors</td><td>Risk grade, grade migration, arrears, forbearance, ERV, provisions, write-offs</td><td>Monthly / quarterly</td><td class="ph">[DR-10]</td><td class="ph">Confirm</td></tr>
+<tr><td>RR-04</td><td>Large exposures / connected counterparties</td><td>PRA</td><td>Connection, group and NAG exposure aggregation</td><td>Quarterly</td><td class="ph">[DR-10]</td><td class="ph">Confirm</td></tr>
+<tr><td>RR-05</td><td>Bank of England lending statistics (business lending, SME lending by sector and size)</td><td>BoE</td><td>New lending, facilities, limits, sector, SME classification</td><td>Monthly / quarterly</td><td class="ph">[DR-10]</td><td class="ph">Confirm</td></tr>
+<tr><td>RR-06</td><td>Scheme and guarantee reporting (any government-backed lending schemes in the book)</td><td>Scheme administrator</td><td>Facility, drawdown, status</td><td>Per scheme</td><td class="ph">[DR-10]</td><td class="ph">Confirm / strike</td></tr>
+<tr><td>RR-07</td><td>Conduct and SME lending conduct data (declines, appeals, complaints linkage)</td><td>FCA / internal conduct</td><td>Decline reasons, appeal outcomes</td><td>Periodic</td><td class="ph">[DR-10]</td><td class="ph">Confirm</td></tr>
+<tr><td>RR-08</td><td>Internal risk appetite and board risk reporting</td><td>Board / Risk Committee</td><td>Book composition, watch-list, CAP, concentrations</td><td>Monthly</td><td class="ph">[DR-10]</td><td class="ph">Confirm</td></tr>
+<tr><td>RR-09</td><td>Audit and second-line control testing extracts (delegated authority, approvals)</td><td>Internal Audit / 2nd line</td><td>Decision, authority level, approver</td><td>Periodic</td><td class="ph">[request]</td><td class="ph">Confirm</td></tr>
+<tr class="l2"><td colspan="7">Operational MI (from DR-15 packs)</td></tr>
+<tr><td>MI-01</td><td>Pipeline and deals-in-progress</td><td>Business Banking leadership</td><td>Deal, stage, officer, value</td><td>Weekly</td><td class="ph">MI</td><td class="ph">Confirm</td></tr>
+<tr><td>MI-02</td><td>Renewals due / overdue (BDRM)</td><td>Segment heads, RMs</td><td>Facility review and maturity dates</td><td>Weekly</td><td class="ph">MI</td><td class="ph">Confirm; W-11</td></tr>
+<tr><td>MI-03</td><td>Credit throughput and queue</td><td>Credit</td><td>Transfers, decisions, timing</td><td>Weekly</td><td class="ph">MI</td><td class="ph">Confirm</td></tr>
+<tr><td>MI-04</td><td>CAP / SBS caseload</td><td>SBS</td><td>Referrals, categorisation, strategy</td><td>Monthly</td><td class="ph">MI</td><td class="ph">Confirm</td></tr>
+<tr><td>MI-05</td><td>Covenant and waiver status</td><td>RMs, Credit</td><td>Covenant records; batch outputs</td><td>Monthly</td><td class="ph">MI</td><td class="ph">Confirm</td></tr>
+<tr><td>MI-06</td><td>Deposit opportunity pipeline</td><td>Segment heads</td><td>Opportunities and status</td><td>Monthly</td><td class="ph">MI</td><td class="ph">Confirm; SD-03</td></tr></table></div>
+
+<div class="pb wide"><h1>4. Layer B — Field-level lineage register <span class="ph">(template; populated from DR-10, W4–6)</span></h1>
+<p>One row per report × BLP field. The two example rows show the required level of detail; they are drawn from the maps and are themselves to be confirmed.</p>
+<table class="inv"><tr><th style="width:5%">Report</th><th style="width:9%">Report line / template cell</th><th style="width:10%">BLP field (logical)</th><th style="width:7%">Domain</th><th style="width:9%">Capture point (map · step)</th><th style="width:7%">Captured by</th><th style="width:12%">Transformation</th><th style="width:11%">Manual adjustment (H-F2)</th><th style="width:6%">Frequency</th><th style="width:7%">Owner</th><th style="width:7%">Protected?</th><th>Notes</th></tr>
+<tr><td>RR-02 <span class="ph">(ex.)</span></td><td class="ph">Forborne exposures</td><td>Forbearance status; forbearance date; measure type</td><td>Risk &amp; Recovery</td><td>CR-2 S7 (assessment); W-02 batch (status)</td><td>SBS; batch</td><td class="ph">Status → forborne flag; aggregation by facility</td><td class="ph">[DR-10: e.g. re-classification of statuses set by batch after cut-off]</td><td>Quarterly</td><td class="ph">[DR-10]</td><td><b>Yes</b></td><td>Control C15; batch W-02 sets status outside the workflow audit trail</td></tr>
+<tr><td>RR-03 <span class="ph">(ex.)</span></td><td class="ph">Expected recovery / provision inputs</td><td>ERV; provision; write-off amount; recovery team</td><td>Risk &amp; Recovery</td><td>CS-2 S4 (recovery updates)</td><td>SBS</td><td class="ph">Direct feed to impairment model</td><td class="ph">[DR-10]</td><td>Monthly</td><td class="ph">[DR-10]</td><td><b>Yes</b></td><td>Control C17; memo content off-platform (W-09) so narrative not reportable</td></tr>
+<tr><td class="ph">RR-xx</td><td class="ph"></td><td class="ph"></td><td class="ph"></td><td class="ph"></td><td class="ph"></td><td class="ph"></td><td class="ph"></td><td class="ph"></td><td class="ph"></td><td class="ph"></td><td class="ph">one row per report × field</td></tr>
+<tr><td class="ph">MI-xx</td><td class="ph"></td><td class="ph"></td><td class="ph"></td><td class="ph"></td><td class="ph"></td><td class="ph"></td><td class="ph"></td><td class="ph"></td><td class="ph"></td><td class="ph"></td><td class="ph"></td></tr></table>
+<h3>Manual adjustment log (H-F2) <span class="ph">(populated from MI Manager interview and DR-15, W4)</span></h3>
+<table class="inv"><tr><th>ID</th><th>Report</th><th>Adjustment performed</th><th>Why (capture gap, timing, classification)</th><th>Where (spreadsheet / script)</th><th>Hours per cycle</th><th>Error exposure</th><th>Root cause in process</th><th>Closed by lever</th></tr>
+<tr><td class="ph">MA-01</td><td class="ph">[DR-15]</td><td class="ph">e.g. re-classify deal types recorded as Variation that are removals</td><td class="ph">No removal type (W-17)</td><td class="ph"></td><td class="ph"></td><td class="ph"></td><td>Deal-type model</td><td>L12</td></tr>
+<tr><td class="ph">MA-02</td><td class="ph">[DR-15]</td><td class="ph">e.g. exclude ESR Cleanse from volume MI</td><td class="ph">Non-customer deals in deal table (W-18)</td><td class="ph"></td><td class="ph"></td><td class="ph"></td><td>Deal-type model</td><td>L6</td></tr>
+<tr><td class="ph">MA-03</td><td class="ph">[DR-15]</td><td class="ph">e.g. segment attribution from officer code after mass reassignment</td><td class="ph">W-04 batch without history</td><td class="ph"></td><td class="ph"></td><td class="ph"></td><td>Ownership audit trail</td><td>L14</td></tr>
+<tr><td class="ph">MA-xx</td><td class="ph"></td><td class="ph"></td><td class="ph"></td><td class="ph"></td><td class="ph"></td><td class="ph"></td><td class="ph"></td><td class="ph"></td></tr></table>
+<p class="small">The three example adjustments are hypotheses derived from the workaround inventory (1.7); they illustrate the kind of adjustment H-F2 predicts. The interview establishes which actually occur.</p></div>
+
+<div class="pb wide"><h1>5. Layer C — Capture-point mapping (built from 1.2)</h1>
+<p>For each reporting-relevant field group, the process step that creates or changes it. This is the layer the redesign uses: any lever that eliminates, automates or moves one of these steps must show where the field is captured in the to-be. Confirmed against DR-10 in Week 4; field groups not in any report are dropped from the protected list but kept here for MI.</p>
+<table class="inv"><tr><th style="width:4%">#</th><th style="width:14%">Field group</th><th style="width:8%">Domain</th><th style="width:16%">Capture point(s) — map · step</th><th style="width:9%">Captured by</th><th style="width:7%">Mode</th><th style="width:9%">Control</th><th style="width:12%">Likely reports</th><th style="width:10%">Levers that touch the step</th><th>Redesign risk and mitigation</th></tr>
+<tr><td>F01</td><td>Customer identity; counterparty type; sector; SME classification</td><td>Customer</td><td>NM-1 S3–S5; SL-1 S5 (new); CIF for existing</td><td>RM</td><td>Manual / CIF</td><td>C1</td><td>RR-01, RR-04, RR-05</td><td>L2 (deal start)</td><td class="grn">Low: deal-start component retains capture; pull from CIF improves quality</td></tr>
+<tr><td>F02</td><td>Parties, guarantors, associated persons; connection membership</td><td>Party</td><td>NM-1 D1/S3 loop; VA-1 S5; CS-2 (deal members)</td><td>RM; SBS</td><td>Manual</td><td>C1</td><td>RR-04 (connected exposure)</td><td>L2</td><td class="amb">Medium: party-completeness rule must be in the to-be; removal journeys must update associated parties (RF-2 TBC)</td></tr>
+<tr><td>F03</td><td>Deal type; facility request type; restructure flag; dates (created, review, maturity)</td><td>Deal</td><td>NM-1 S7; RN-1 S5; SR-1 S6; SD-1 S6</td><td>RM</td><td>Manual</td><td>—</td><td>MI-01, MI-02; RR-05 (new lending)</td><td>L12 (deal-type model)</td><td class="red">High: deal types change to patterns; every report keyed on deal type needs a mapping table from old types to new; retired types (ESR Cleanse) must be excluded consistently from history</td></tr>
+<tr><td>F04</td><td>Product; limit; interest rate (reference + margin); fees; repayment schedule; expiry</td><td>Facility</td><td>NM-1 S8; SL-1 S8–S9; SR-1 S7–S8; SD-1 S7–S8; CS-2 S1 (limits reduced)</td><td>RM; SBS</td><td>Manual</td><td>C19</td><td>RR-01, RR-03, RR-05, RR-06</td><td>L1, L5, L12</td><td class="amb">Medium: fast-track renewal (L1) must still re-confirm limit and dates; automated limit arithmetic (C19) strengthens</td></tr>
+<tr><td>F05</td><td>Exposure: total, personal, NAG, group</td><td>Exposure</td><td>Derived; updated by ESR Cleanse (E2.5) for personal and NAG exposure</td><td>System; RM (ESR)</td><td>Derived / manual</td><td>—</td><td>RR-01, RR-04</td><td>L6 (retire ESR Cleanse as deal)</td><td class="red">High: SD-01 option (c) exists precisely because these updates must survive; migration spec must carry them</td></tr>
+<tr><td>F06</td><td>Risk grade; ECRS classification; lending category; debt-servicing result</td><td>Risk</td><td>*-2 R3 (credit analytics); CR-2 R3</td><td>RM</td><td>Manual (some off-platform, W-10)</td><td>C2</td><td>RR-01, RR-03, RR-08</td><td>L1, L11, L14</td><td class="red">High: fast-track renewals skip full analytics; grade must still be refreshed at renewal (policy question for WS-13); capture-once design must not drop classification fields</td></tr>
+<tr><td>F07</td><td>Decision; authority level; approver; DCA; decline reason</td><td>Decision</td><td>*-2 D2, R6, D4, S5; EX-01 S1</td><td>RM; Credit</td><td>Manual</td><td>C5, C6, C20</td><td>RR-07, RR-09, MI-03</td><td>L1, L3</td><td class="amb">Medium: automated DA determination (L3) must record authority level as evidence, not just route; decline reason code is new capture (improves RR-07)</td></tr>
+<tr><td>F08</td><td>Security: type, value, allocation, perfection status, release</td><td>Security</td><td>EX-05 G2–S1; RF-2 S2–S3; NM-3 S5</td><td>Lending Services; Securities</td><td>Manual</td><td>C10, C23</td><td>RR-01 (CRM)</td><td>L8, L15</td><td class="amb">Medium: on-platform instruction (L8) must keep value and allocation fields; release sequence correction changes timing of status</td></tr>
+<tr><td>F09</td><td>Covenants; tracking items; waivers and expiry</td><td>Covenant</td><td>VA-3 S4; RF-2 S4; W-03 batch</td><td>RM; batch</td><td>Manual / batch</td><td>C9, C25</td><td>MI-05</td><td>L7 (retire batch)</td><td class="grn">Low: native lifecycle replaces batch; status definitions must match</td></tr>
+<tr><td>F10</td><td>Forbearance status, date, measure</td><td>Risk &amp; Recovery</td><td>CR-2 S7; W-02 batch</td><td>SBS; batch</td><td>Manual / batch</td><td>C15 (REG)</td><td>RR-02, RR-03</td><td>L7, L10</td><td class="red">High: regulatory. Native status logic must reproduce batch rules exactly; cut-over reconciliation required</td></tr>
+<tr><td>F11</td><td>ERV; provisions; write-offs; recovery team; categorisation cause</td><td>Risk &amp; Recovery</td><td>CS-2 S4; CR-2 S5–S6</td><td>SBS</td><td>Manual</td><td>C17 (REG), C14</td><td>RR-02, RR-03, RR-08</td><td>L14, L15 (memo on-platform)</td><td class="red">High: regulatory. Structured memo (W-09) adds fields; existing fields unchanged; validation rules on entry</td></tr>
+<tr><td>F12</td><td>Officer code; segment; team</td><td>Deal</td><td>Deal creation; CR-2 S8; W-04 batch</td><td>RM; SBS; batch</td><td>Manual / batch</td><td>C26, C27</td><td>All MI segment cuts; RR-08</td><td>L7, L14</td><td class="amb">Medium: ownership transfer with history enables correct segment attribution over time (MA-03)</td></tr>
+<tr><td>F13</td><td>Facility letter status and dates; document references</td><td>Document</td><td>*-3 S1–S3; DR-08 coverage TBC</td><td>RM; system</td><td>Manual</td><td>C8</td><td>MI (SLA); RR-07 (evidence)</td><td>L4</td><td class="grn">Low: automation creates these fields properly for the first time</td></tr>
+<tr><td>F14</td><td>Workflow stage, timestamps, actor</td><td>Workflow event</td><td>Every transition</td><td>System</td><td>Auto</td><td>—</td><td>MI-01, MI-03; 1.4 baseline</td><td>All</td><td class="amb">Medium: stage model changes with patterns; 1.4 Appendix A mapping must be re-issued for the to-be so baselines remain comparable</td></tr>
+<tr><td>F15</td><td>Deposit opportunity status and value</td><td>Deal</td><td>NM-1 S6; DP-1</td><td>RM</td><td>Manual</td><td>—</td><td>MI-06</td><td>SD-03</td><td class="grn">Low: if deposits move to CRM, MI-06 moves with them</td></tr></table></div>
+
+<div class="pb"><h1>6. Draft protected-fields list (dependency B-07; design decision DD-09)</h1>
+<p>Fields proposed as protected pending confirmation of the report inventory. The list goes to the Replacement Programme at Week 7 so the data model is designed around them.</p>
+<table><tr><th>Field group</th><th>Protection level (H)</th><th>Rule for Phase 2 design</th><th>Confirm with</th></tr>
+<tr><td>F10 Forbearance; F11 ERV, provisions, write-offs, categorisation</td><td class="red"><b>P1 Regulatory</b></td><td>Definition, capture and timing unchanged. Any change in capture mechanism requires parallel-run reconciliation at cut-over. Second line informed</td><td>Reg Reporting; Finance; 2nd line</td></tr>
+<tr><td>F04 Limits, rates, expiry; F05 Exposure; F06 Risk grade and classifications; F08 Security values</td><td class="red"><b>P1 Regulatory</b></td><td>As above; fast-track and capture-once levers must demonstrate the field is still populated at the same or earlier point</td><td>Reg Reporting; Credit Risk</td></tr>
+<tr><td>F01 Customer classification; F02 Parties and connection</td><td class="amb"><b>P2 Regulatory-derived</b></td><td>Definition unchanged; capture may move to CIF pull-through if equivalence shown</td><td>Reg Reporting; Compliance</td></tr>
+<tr><td>F07 Decision, authority, decline reason; F12 Officer, segment</td><td class="amb"><b>P2 Audit and MI</b></td><td>Authority evidence must be captured by the automated determination; history of ownership retained</td><td>2nd line; Audit; MI</td></tr>
+<tr><td>F03 Deal type and dates; F14 Workflow events</td><td class="amb"><b>P3 MI continuity</b></td><td>Old-to-new mapping table maintained for 24 months; stage mapping re-issued for the to-be</td><td>MI</td></tr>
+<tr><td>F09 Covenants; F13 Documents; F15 Deposits</td><td class="grn"><b>P4 Operational</b></td><td>May change with MI owner agreement</td><td>MI; Lending Ops</td></tr></table>
+
+<h2>6.1 Lever impact summary</h2>
+<table><tr><th>Lever</th><th>Field groups touched</th><th>Highest protection touched</th><th>Design obligation</th></tr>
+<tr><td>L1 Fast-track renewals</td><td>F04, F06, F07</td><td class="red">P1</td><td>Define which risk fields are refreshed on fast-track and by what mechanism; grade staleness rule</td></tr>
+<tr><td>L2 Shared deal start</td><td>F01, F02</td><td class="amb">P2</td><td>Party-completeness rule; CIF pull-through equivalence</td></tr>
+<tr><td>L3 Automated DA</td><td>F07</td><td class="amb">P2</td><td>Record authority level and rule version as evidence</td></tr>
+<tr><td>L6 Retire ESR Cleanse</td><td>F05</td><td class="red">P1</td><td>Migration spec for personal and NAG exposure updates (SD-01 c)</td></tr>
+<tr><td>L7 Retire batch jobs</td><td>F09, F10, F12</td><td class="red">P1</td><td>Native rules reproduce batch logic; cut-over reconciliation for forbearance</td></tr>
+<tr><td>L12 Deal-type model</td><td>F03</td><td class="amb">P3</td><td>Mapping table; restated history</td></tr>
+<tr><td>L14 / L15 Capture once; on-platform documents</td><td>F06, F11</td><td class="red">P1</td><td>No field dropped; structured memo adds, never replaces</td></tr></table></div>
+
+<div class="pb"><h1>7. Plan to v1.0 and WS-13 / MI agenda</h1>
+<table><tr><th>Week</th><th>Activity</th><th>Output</th><th>Owner</th></tr>
+<tr><td>3</td><td>MI Manager interview: report list, extract scripts, known adjustments (H-F2)</td><td>§3 confirmed or struck; §4 adjustment log seeded</td><td>Data/MI Analyst</td></tr>
+<tr><td>4</td><td>DR-10 received: field-level lineage per surviving report; DR-15 MI packs reviewed</td><td>§4 register populated</td><td>Data/MI Analyst; Bank BA</td></tr>
+<tr><td>5</td><td>Cross-check §5 capture points against DR-10 fields; identify fields captured off-platform (W-10) or by batch</td><td>§5 confirmed; gaps listed</td><td>Data/MI Analyst</td></tr>
+<tr><td>6</td><td>WS-13 (joint with 1.6): protection levels agreed; second line informed</td><td>§6 agreed</td><td>Controls Specialist; Head of MI</td></tr>
+<tr><td>7</td><td>Protected-fields list issued to Replacement Programme (B-07; DD-09)</td><td>v1.0</td><td>Platform Analyst</td></tr></table>
+<h3>Hypothesis read-out criteria</h3>
+<table><tr><th>Hyp.</th><th>Confirmed if</th></tr>
+<tr><td>F1</td><td>Fewer than half of surviving reports have documented field-level lineage before this exercise (evidence: DR-10 contents vs. §4 requirement)</td></tr>
+<tr><td>F2</td><td>At least three recurring manual adjustments identified, each traceable to a capture or classification gap in the process</td></tr></table>
+<h3>Exit criteria for v1.0</h3>
+<ul><li>Every surviving report in §3 has at least one row in §4 per BLP field it uses</li><li>Every field in §4 has a capture point in §5</li><li>Protection level agreed for every field group in §6, with named confirmer</li><li>Manual adjustment log complete, each with root cause and lever</li><li>B-07 list acknowledged by the Replacement Programme Data Lead</li></ul></div>
+</body></html>
