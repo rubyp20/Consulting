@@ -28,6 +28,34 @@ Purpose: pick one real, public RFP and run it as a full engagement simulation (b
 | 10 | Florida State University | ITN for an enterprise-wide AI strategic roadmap | Closed 21 Oct 2026; strategy scope, not financial services |
 | 11 | FCA and Bank of England | Planned multi-lot Consultancy and Skilled Persons framework (planning notice, 2025) | Launch status unknown; the route by which UK regulators buy advisory work |
 
+## Fintech and payments RFPs, India and international (added 1 November 2026)
+
+Private fintechs rarely publish RFPs; consulting work with them comes through relationships. Public fintech RFPs come from three places: banks buying from fintechs, central banks building payment rails, and donors funding digital finance. All entries are [PUBLIC] and [VERIFY — date-sensitive]; documents marked "snippet" were not opened because the issuer site is blocked in the research environment.
+
+| # | Issuer | RFP | Region | Status | Why it fits |
+|---|---|---|---|---|---|
+| F1 | Central Bank of Sudan | National Instant Payment System, RFP CDNIPS202601 (document "NIPS RFP 2026 Ver 6.4") | Africa | 2026; deadline not confirmed (snippet) | Full instant-payments build; your RTP and ISO 20022 depth applies directly |
+| F2 | Central Bank of The Bahamas with Ministry of Finance | Government digital payment system solution | Caribbean | Closed 14 Aug 2026 | Government-to-person and person-to-government payments; public RFP document |
+| F3 | Central Bank of Barbados | Design, supply, installation and support of an instant payments system, 18-month build | Caribbean | Jan 2025; likely closed | Instant-payments RFP with a published scope |
+| F4 | PATH, for Bank of South Sudan | Instant payment infrastructure for primary and disaster-recovery sites (RFQ 2026-112; related RFP 2026-068) | Africa | Reported due 2 Nov 2026; reference not confirmed by a second search | Donor-run procurement for a national payment switch |
+| F5 | Bank of Baroda | Empanelment of fintechs and startups for digital solutions: acquiring, reconciliation, payments, remittances, forex, AI and GenAI | India | Closed 23 Apr 2026 | A bank buying from fintechs; shows how Indian banks scope fintech partnerships |
+| F6 | Central Bank of India | CBDC (e-rupee) solution, RFP/2025-26/01 | India | Apr 2025; closed | Detailed CBDC requirements from an Indian public-sector bank |
+| F7 | Inter-American Development Bank | Update of the Latin America and Caribbean fintech ecosystem report | Latin America | Closed 9 Mar 2026 | Fintech market-study advisory, the classic strategy-firm format |
+
+Signals rather than tenders: NPCI applied to open a tech-finance unit in GIFT City (Jul 2026) and is working on agentic payment use cases; Nepal Rastra Bank published a 2026/27–2030/31 fintech strategy (Sep 2026); Bank of Ghana plans a continental fintech sandbox and innovation hub; the World Bank Group launched its first digital strategy on 20 Oct 2026, covering ID and payments.
+
+Fintech sources:
+- Central Bank of Sudan NIPS RFP: https://cbos.gov.sd/sites/default/files/NIPS%20RFP%202026%20Ver%206.4.pdf
+- Central Bank of The Bahamas RFP: https://www.centralbankbahamas.com/news/public-procurement/request-for-proposals-rfp-for-bahamas-government-digital-payment-system-solution
+- Central Bank of Barbados RFP: https://www.centralbank.org.bb/news/general-press-release/request-for-proposal-information-systems-design-supply-installation-and-support-of-an-instant-payments-system
+- PATH procurement page: https://www.path.org/who-we-are/current-request-proposal/
+- Bank of Baroda fintech empanelment: https://bankofbaroda.bank.in/tenders/corporate-office/request-for-proposal-rfp-for-empanelment-30-04
+- Central Bank of India CBDC RFP: https://centralbank.bank.in/sites/default/files/2025-04/WEBSITE-CBDC-RFP.pdf
+- IDB fintech report EOI: https://ewsdata.rightsindevelopment.org/files/documents/80/IADB-RG-T4880.pdf
+- NPCI GIFT City: https://www.newsbytesapp.com/news/business/npci-applies-to-open-tech-finance-unit-in-gift-city/tldr
+- Bank of Ghana sandbox: https://thebftonline.com/2026/05/12/bog-to-launch-continental-fintech-sandbox-innovation-hub/
+- World Bank digital strategy: https://www.worldbank.org/en/news/press-release/2026/10/20/world-bank-group-launches-first-digital-strategy-to-expand-access-and-create-jobs
+
 ## Recommendation
 
 Run Indian Bank's AI Consultancy Services RFP (#1) as the engagement. It is a real, current, FS-specific AI strategy brief covering strategy, readiness assessment, use-case prioritisation, a GenAI and agentic roadmap and an AI CoE. That is the exact scope interviewers test. Pair it with #6 (Indian Bank credit intelligence EOI) as the "wave 1 use case" inside the roadmap, and use #5 (SBI) as the competitor benchmark for what an Indian PSU bank's AI platform build looks like.
