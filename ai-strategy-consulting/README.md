@@ -19,6 +19,10 @@ A complete self-study programme for an experienced financial-services consultant
 
 Every module follows the same nine-part structure: why a client cares; concept and mechanism; frameworks with attribution; worked BFSI example with numbers; real-world public case; consultant language; common junior mistakes; interview questions with model answers; five-question self-check.
 
+## Real RFPs to practise on
+
+[`rfp-shortlist-2026-11.md`](rfp-shortlist-2026-11.md) lists live and recent public AI RFPs in financial services (Indian Bank, SBI, Bank of Baroda, Punjab & Sind Bank, HM Treasury, USAC and others), tiered by how closely they match an AI strategy engagement, with a recommendation on which to run as a full simulation.
+
 ## Labelling
 
 Every example and number is labelled `[PUBLIC — source, year]`, `[ILLUSTRATIVE — composite]` or `[ESTIMATE — assumption]`, and anything date-sensitive carries `[VERIFY]`. Nothing illustrative is presented as a real engagement. See `AUTHORING-SPEC.md` for the rules and the list of public facts the modules rely on.
