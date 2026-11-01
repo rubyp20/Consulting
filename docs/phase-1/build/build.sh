@@ -3,6 +3,7 @@ set -euo pipefail
 D=/home/user/Consulting/docs/phase-1
 node "$D/build/build-maps.js"
 node "$D/build/build-painpoints.js"
+node "$D/build/build-opportunities.js"
 cat > "$D/build/print.js" <<'EOF'
 const { chromium } = require('playwright');
 const D = '/home/user/Consulting/docs/phase-1';
@@ -16,6 +17,7 @@ const jobs = [
   { html: `${D}/1.7-workaround-inventory.html`, pdf: `${D}/1.7-Workaround-Inventory.pdf`, landscape: false, title: 'BB-BLP-BPR · 1.7 Workaround Inventory · v0.6' },
   { html: `${D}/1.8-regulatory-mi-data-lineage.html`, pdf: `${D}/1.8-Regulatory-MI-Data-Lineage.pdf`, landscape: false, title: 'BB-BLP-BPR · 1.8 Regulatory Reporting and MI Data Lineage · v0.4' },
   { html: `${D}/1.9-pain-point-register-rca.html`, pdf: `${D}/1.9-Pain-Point-Register-RCA.pdf`, landscape: false, title: 'BB-BLP-BPR · 1.9 Pain-Point Register and Root-Cause Analysis · v0.7' },
+  { html: `${D}/1.10-opportunity-long-list.html`, pdf: `${D}/1.10-Opportunity-Long-List.pdf`, landscape: false, title: 'BB-BLP-BPR · 1.10 Opportunity Long-List, Sized · v0.6' },
 ];
 (async () => {
   const b = await chromium.launch();
