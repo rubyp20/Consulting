@@ -1,0 +1,148 @@
+<!doctype html><html><head><meta charset="utf-8"><title>2.1 Design Principles</title><link rel="stylesheet" href="../phase-1/build/style.css"><style>
+.pr { border: 1px solid #b8c4d0; margin: 0 0 10pt 0; page-break-inside: avoid; }
+.pr .hd { background: #0b3d6b; color: #fff; padding: 5pt 8pt; font-weight: bold; font-size: 10.5pt; }
+.pr .hd span { font-weight: normal; opacity: .85; font-size: 8.5pt; margin-left: 8pt; }
+.pr table { margin: 0; }
+.pr td:first-child { width: 17%; color: #555; background: #f7f9fb; }
+.sig td { height: 22pt; }
+</style></head><body>
+
+<div class="cover"><p class="small" style="letter-spacing:1px;text-transform:uppercase">Business Bank · Business Banking Transformation Office · BB-BLP-BPR</p>
+<h1>2.1 Design Principles<br/><span style="font-size:15pt;color:#1f4f82">The rules every target-state design decision is tested against</span></h1>
+<table class="meta" style="width:65%;margin-top:20pt"><tr><td>Deliverable</td><td>2.1 Design principles for the business lending target state</td></tr><tr><td>Version</td><td>0.9 – for Design Authority sign-off, Week 8 (w/c 4 January 2027). Becomes v1.0 on signature; changes thereafter only by Design Authority decision recorded in the decision log</td></tr>
+<tr><td>Derived from</td><td>1.9 underlying causes U1–U6; 1.6 control inventory; 1.8 protected fields; RFP constraints (fit-to-standard, regulatory data, risk governance); charter objectives O1–O7</td></tr><tr><td>Owner</td><td>WS1 Journeys &amp; Process (BPR/TOM Lead)</td></tr><tr><td>Signed by</td><td>Design Authority: Head of Lending Operations (Chair), Head of Credit Risk Policy, Senior Operational Risk Manager, Head of MI &amp; Regulatory Reporting, Replacement Solution Architect, Senior RM, Head of Lending Services, Head of Fulfilment</td></tr></table></div>
+
+<div class="pb"><h1>1. Why principles come before maps</h1>
+<p>A to-be map is a sequence of decisions: keep this step, remove that one, move this check earlier, automate that one. Without agreed principles, each decision is argued on its own and the loudest view wins; the result is the current process with fewer boxes. With principles signed first, each decision is tested against a rule the Design Authority has already accepted, and only the genuinely new questions reach the Authority.</p>
+<p>The ten principles below were not invented for this phase. Each is the design response to one of the six underlying causes established in Phase 1, or to a constraint the RFP imposed. The table shows the lineage.</p>
+<table><tr><th>Principle</th><th>Responds to</th><th>Evidence in Phase 1</th></tr>
+<tr><td>DP-01 Route by risk and materiality, not by deal type</td><td>U1</td><td>1.3: 82% common decision flow; renewals on the new-money path; SR/SD already fast-tracked</td></tr>
+<tr><td>DP-02 Every control is a rule the system applies and records</td><td>U2</td><td>1.6: 24 of 28 controls manual; DA determined by hand on system-held data</td></tr>
+<tr><td>DP-03 No control is removed or automated without equivalence</td><td>RFP §7; U2</td><td>1.6: 4 regulatory controls; second-line sign-off required</td></tr>
+<tr><td>DP-04 Every wait has an owner, a timer and a task</td><td>U3</td><td>1.9: PP-39; no SLA, queue or escalation anywhere</td></tr>
+<tr><td>DP-05 Triggers are system events that open work in context</td><td>U3</td><td>1.9: PP-03, PP-04; report-based renewal trigger; five-step manual start</td></tr>
+<tr><td>DP-06 Documents and requests are generated, delivered, received and evidenced on the platform</td><td>U4</td><td>1.7: W-06 to W-10; 3-month reset; off-platform letters</td></tr>
+<tr><td>DP-07 Rework paths are designed, bounded and measured</td><td>U4</td><td>1.2: two unbounded loops on every Deal &amp; Credit map</td></tr>
+<tr><td>DP-08 Distress is surfaced by data before effort is spent</td><td>U5</td><td>1.9: RC-08; screen after full assessment</td></tr>
+<tr><td>DP-09 Capture once, at source, with a named owner; protected fields are a constraint</td><td>U6; RFP §7</td><td>1.8: lineage undocumented; 5 field groups at high redesign risk</td></tr>
+<tr><td>DP-10 Standard before custom; configure before build</td><td>RFP §7 fit-to-standard</td><td>1.7: 13 of 23 workarounds expected native</td></tr></table>
+<h3>How the principles are used</h3>
+<ul><li>Every design decision in 2.3, 2.4 and 2.8 cites the principle(s) it applies. A decision that cites none is returned.</li><li>A decision that conflicts with a principle is escalated to the Design Authority with the conflict stated; the Authority may grant an exception, recorded with reason and expiry.</li><li>Where two principles conflict, the precedence in section 3 applies.</li><li>The principles bind the Replacement Programme’s configuration of these journeys through the requirements pack (2.8), which cites them.</li></ul></div>
+
+<div class="pb"><h1>2. The principles</h1>
+
+<div class="pr"><div class="hd">DP-01 · Route by risk and change materiality, not by deal type<span>U1 · levers L1, L5, L12</span></div><table>
+<tr><td>Statement</td><td>The path a deal follows is determined by its risk attributes and the materiality of what is changing, evaluated from system-held data. Deal type is a parameter that sets rules within a pattern; it does not define a workflow.</td></tr>
+<tr><td>Permits</td><td>Fast-track routes for low-risk unchanged renewals and administrative variations; exception-only Credit involvement for pre-approved drawdowns; one configured decision flow with parameters.</td></tr>
+<tr><td>Forbids</td><td>A new workflow per deal type; routing that cannot be explained by a stated rule; “if required” steps with no criterion.</td></tr>
+<tr><td>Test</td><td>Can this step’s inclusion or exclusion for a given deal be stated as a rule on data the system holds at that point? If not, either capture the data or the step applies to all.</td></tr>
+<tr><td>Arbiter</td><td>Head of Credit Risk Policy on routing criteria; Design Authority on pattern structure.</td></tr>
+<tr><td>Known tension</td><td>With DP-03: a fast-track that bypasses a Credit assessment must show equivalence (2.5) or a policy decision extending authority. With DP-10: the platform must support rule-based routing natively or the routing goes on the custom list.</td></tr></table></div>
+
+<div class="pr"><div class="hd">DP-02 · Every control is a rule the system applies and records<span>U2 · levers L3, L9</span></div><table>
+<tr><td>Statement</td><td>Each control in the inventory (1.6) is expressed as a rule with defined inputs, a defined outcome and recorded evidence (what was checked, against what, by whom or what, when). Judgement is retained where policy requires it, but the fact and basis of the judgement are recorded.</td></tr>
+<tr><td>Permits</td><td>Automated delegated-authority determination with recorded authority level and rule version; rules tables per pattern × risk band for required analytics and documents; manual override with reason.</td></tr>
+<tr><td>Forbids</td><td>Controls that exist only as practice; checks performed on data the system holds without the system recording the check; approvals without a recorded authority level.</td></tr>
+<tr><td>Test</td><td>For this control: what are the inputs, what is the rule, what evidence is written, and where is the policy reference? Any blank fails.</td></tr>
+<tr><td>Arbiter</td><td>Head of Credit Risk Policy (rule content); second-line Risk (evidence sufficiency).</td></tr>
+<tr><td>Known tension</td><td>With DP-10: rules engines vary in depth; rules the platform cannot express natively are custom (2.7) or remain manual with recorded evidence.</td></tr></table></div>
+
+<div class="pr"><div class="hd">DP-03 · No control is removed or automated without equivalence<span>RFP §7 · 1.6 · deliverable 2.5</span></div><table>
+<tr><td>Statement</td><td>A to-be map is not approved while it eliminates or automates a control without a corresponding entry in the control equivalence register (2.5) showing the replacement control, the evidence it produces, the residual risk, and the second-line decision. Regulatory controls (C15, C17, C27 and the KYC element of C1) are retained in every option; only their mechanism may change.</td></tr>
+<tr><td>Permits</td><td>Automation that strengthens a control (system check replacing manual); relocation of a control earlier in the flow; consolidation of duplicate checks.</td></tr>
+<tr><td>Forbids</td><td>Removal justified by speed alone; “we never use it” as evidence; changes to regulatory capture or timing without parallel-run reconciliation.</td></tr>
+<tr><td>Test</td><td>Is there a signed register entry for this change? If the answer is a policy question rather than an equivalence question, route to Credit Risk Policy and retain the as-is control until answered.</td></tr>
+<tr><td>Arbiter</td><td>Second-line Risk (equivalence); Head of Credit Risk Policy (policy questions).</td></tr>
+<tr><td>Known tension</td><td>With DP-01 and DP-07: the fast-track and the graduated staleness control are the two largest equivalence cases; they are opened first.</td></tr></table></div>
+
+<div class="pr"><div class="hd">DP-04 · Every wait has an owner, a timer and a task<span>U3 · levers L5, L7</span></div><table>
+<tr><td>Statement</td><td>Wherever a deal stops moving, the system knows who it is waiting on, how long it has waited, what the expected duration is, and what happens when that is exceeded. Hand-offs between teams create a task in the receiver’s queue, visible to the sender.</td></tr>
+<tr><td>Permits</td><td>Queues per team with SLAs; timers and escalations; customer-side waits tracked (letters, information requests); queue position visible to the RM.</td></tr>
+<tr><td>Forbids</td><td>Hand-offs by message, email or report; stages that end at “ready” with no receiver task; open-ended waits; batch jobs standing in for timers.</td></tr>
+<tr><td>Test</td><td>At this point, if nothing happens for ten working days, who is notified and what do they see?</td></tr>
+<tr><td>Arbiter</td><td>Head of Lending Operations (SLAs and ownership); Design Authority.</td></tr>
+<tr><td>Known tension</td><td>Team ownership of SLAs is an operating-model decision (2.9), not a configuration decision; the design must not set SLAs nobody has agreed to own.</td></tr></table></div>
+
+<div class="pr"><div class="hd">DP-05 · Triggers are system events that open work in context<span>U3 · lever L2</span></div><table>
+<tr><td>Statement</td><td>Work begins from a system event (review date, customer request logged, early-warning flag, referral) that opens the deal with the customer, parties, existing facilities and balances already loaded. The deal start is one shared component with two entry variants (new customer; existing relationship).</td></tr>
+<tr><td>Permits</td><td>Renewal tasks generated from review dates; landing page as a work queue; single sign-on; lead capture that becomes a deal without re-keying.</td></tr>
+<tr><td>Forbids</td><td>Reports as the trigger for routine work; repeating the login–search–locate–retrieve sequence per deal; an opportunity record that adds a step without adding information.</td></tr>
+<tr><td>Test</td><td>When this journey starts, what does the user already see without searching?</td></tr>
+<tr><td>Arbiter</td><td>Design Authority; Solution Architect on platform capability.</td></tr></table></div>
+
+<div class="pr"><div class="hd">DP-06 · Documents and requests are generated, delivered, received and evidenced on the platform<span>U4 · levers L4, L8, L11, L15</span></div><table>
+<tr><td>Statement</td><td>Facility letters, security instructions, strategy memos and information requests are produced from deal data, delivered through the platform, returned or answered through it, and their status is a system fact. Terms exist in the system before they exist in a document.</td></tr>
+<tr><td>Permits</td><td>Template-driven letters per pattern and product incl. tranches and shadow limits; e-delivery and e-signature with a wet-ink exception path; structured information requests; security instruction generated from approval conditions.</td></tr>
+<tr><td>Forbids</td><td>Off-platform letters or memos; manual issue by email; document checks that cannot reconcile to system terms; requests to customers tracked in mailboxes.</td></tr>
+<tr><td>Test</td><td>Can the system state, for this document, when it was issued, to whom, whether it was returned, and that its content matches the approved deal?</td></tr>
+<tr><td>Arbiter</td><td>Head of Lending Operations; Solution Architect (capability); Lending Services (security documents).</td></tr>
+<tr><td>Known tension</td><td>With DP-10: if the platform lacks e-signature natively, this principle justifies a custom or partner integration; the Design Authority decides whether the value (OP-15) warrants it.</td></tr></table></div>
+
+<div class="pr"><div class="hd">DP-07 · Rework paths are designed, bounded and measured<span>U4 · levers L5, L11</span></div><table>
+<tr><td>Statement</td><td>Deferral, decline, appeal, post-approval change and staleness are first-class paths with defined entry criteria, a maximum number of iterations or elapsed time, an escalation, and a measured rate. Prevention precedes handling: the submission standard is enforced before submission so that rework is the exception.</td></tr>
+<tr><td>Permits</td><td>Structured deferral with at most two loops before escalation; graduated staleness control replacing the hard reset; materiality rules for post-approval change; decline reason codes.</td></tr>
+<tr><td>Forbids</td><td>Loop-back arrows with no limit; full re-approval for non-material change or timing failure; declines without a recorded reason.</td></tr>
+<tr><td>Test</td><td>For this loop: what is the maximum, what happens at the maximum, and which metric in 1.4 reports it?</td></tr>
+<tr><td>Arbiter</td><td>Head of Credit (Credit-side loops); Head of Lending Operations.</td></tr></table></div>
+
+<div class="pr"><div class="hd">DP-08 · Distress is surfaced by data before effort is spent<span>U5 · lever L10</span></div><table>
+<tr><td>Statement</td><td>Early-warning indicators the system already holds (arrears, grade migration, covenant breach, forbearance) are combined into a flag shown at deal creation and on the work queue, so that referral is prompted before analysis and assessment effort, and so that distressed connections are excluded from fast-track routes. A referral is a record on the connection, not a transfer of a file.</td></tr>
+<tr><td>Permits</td><td>Referral prompts; exclusion criteria for DP-01 routes; parallel Credit and SBS review where CAP policy allows.</td></tr>
+<tr><td>Forbids</td><td>A distress screen that sits only after full assessment; referral dependent solely on RM judgement; sequential re-reading of the same memo by two authorities without a policy reason.</td></tr>
+<tr><td>Test</td><td>Would the system have flagged this connection before the RM opened the deal?</td></tr>
+<tr><td>Arbiter</td><td>Head of SBS; Head of Credit Risk Policy (CAP policy).</td></tr></table></div>
+
+<div class="pr"><div class="hd">DP-09 · Capture once, at source, with a named owner; protected fields are a constraint<span>U6 · RFP §7 · levers L14, L15</span></div><table>
+<tr><td>Statement</td><td>Every data element has one capture point, a structured form, and a named business owner. The protected-fields list (1.8 §6) is a constraint on every design decision: a lever that touches a P1 field must show where and when the field is captured in the to-be and must plan a parallel-run reconciliation at cut-over. Measurement (stage timestamps, task time) is designed in, not surveyed afterwards.</td></tr>
+<tr><td>Permits</td><td>Pull-through from CIF and product systems; structured memos; reason codes; old-to-new deal-type mapping for history.</td></tr>
+<tr><td>Forbids</td><td>Re-keying between systems; free text where a code is reportable; removing or re-timing a reporting field without the owner’s sign-off; designs whose benefit cannot be measured from the platform.</td></tr>
+<tr><td>Test</td><td>For every field this step creates or changes: who owns it, which report uses it, and is it captured here or earlier?</td></tr>
+<tr><td>Arbiter</td><td>Head of MI &amp; Regulatory Reporting; named field owners.</td></tr></table></div>
+
+<div class="pr"><div class="hd">DP-10 · Standard before custom; configure before build<span>RFP §7 · lever L13 · deliverable 2.7</span></div><table>
+<tr><td>Statement</td><td>Where the replacement platform provides a standard lending process or capability, the design adopts it unless a documented business, regulatory or control reason requires deviation. Each to-be step is classified Fit, Configure, Custom or Gap (2.7); the custom list is short, justified and approved as a whole by the Design Authority.</td></tr>
+<tr><td>Permits</td><td>Adapting a to-be map to the platform’s standard sequence where the outcome is the same; retiring workarounds in favour of native capability; parameterising rather than customising.</td></tr>
+<tr><td>Forbids</td><td>Rebuilding a workaround because it is familiar; custom build to preserve a step DP-01 to DP-09 would remove; “as-is on the new system” as a fallback.</td></tr>
+<tr><td>Test</td><td>Does the platform do this as standard? If yes, why not use it? If no, which principle requires it?</td></tr>
+<tr><td>Arbiter</td><td>Replacement Solution Architect (what is standard); Design Authority (whether deviation is justified).</td></tr>
+<tr><td>Known tension</td><td>With DP-06 and DP-01 where the platform is weaker than the design requires. The Design Authority resolves by value: custom is justified where an opportunity in 1.10 of size L or XL depends on it.</td></tr></table></div></div>
+
+<div class="pb"><h1>3. Precedence, exceptions and the decision record</h1>
+<h2>3.1 Precedence when principles conflict</h2>
+<ol><li><b>DP-03 and DP-09 are constraints.</b> They are never traded off. A design that cannot satisfy them is changed, not excepted.</li><li><b>DP-01, DP-02, DP-04, DP-06, DP-07, DP-08 define the target.</b> Where two conflict, the one that addresses the higher-scoring underlying cause (1.9 §6) takes precedence, and the conflict is recorded.</li><li><b>DP-05 and DP-10 govern how the target is reached.</b> They yield to the target principles where the Design Authority judges the value justifies it, by reference to 1.10.</li></ol>
+<h2>3.2 Exceptions</h2>
+<p>An exception is granted only by the Design Authority, in a sitting, recorded in the decision log with: the principle excepted, the decision it applies to, the reason, the residual consequence, and an expiry or review point. Exceptions are reported in the G2 pack. An exception to DP-03 or DP-09 is not available.</p>
+<h2>3.3 Design decision record</h2>
+<p>Every decision in 2.3, 2.4, 2.7 and 2.8 is logged in this form. Decisions without a principle citation are returned to the workstream.</p>
+<table><tr><th>Field</th><th>Content</th></tr>
+<tr><td>DDR-nnn</td><td>Sequential identifier</td></tr>
+<tr><td>Decision</td><td>What was decided, in one sentence, with the step or rule reference</td></tr>
+<tr><td>Principles applied</td><td>DP-nn; and any principle in tension, with how it was resolved</td></tr>
+<tr><td>Options considered</td><td>Including “retain as-is”</td></tr>
+<tr><td>Evidence</td><td>Phase 1 reference (pain point, control, workaround, metric)</td></tr>
+<tr><td>Control impact</td><td>None / strengthens / equivalence register entry CE-nnn / policy question routed</td></tr>
+<tr><td>Data impact</td><td>Field groups touched (1.8 §5); protection level</td></tr>
+<tr><td>Fit-gap</td><td>Fit / Configure / Custom / Gap (2.7)</td></tr>
+<tr><td>Decided by; date</td><td>Workstream lead; Design Authority where escalated</td></tr></table>
+<h2>3.4 Worked example</h2>
+<table><tr><td style="width:17%;color:#555;background:#f7f9fb">DDR-001</td><td>Renewals meeting the eligibility rule are approved within line authority without transfer to Credit (P2 fast-track route)</td></tr>
+<tr><td style="color:#555;background:#f7f9fb">Principles</td><td>DP-01 (route by risk); DP-02 (eligibility as a recorded rule); DP-08 (early-warning flag as exclusion). In tension with DP-03: Credit assessment (C6) is bypassed for eligible deals → equivalence entry CE-001 (automated DA determination C5 with recorded authority; eligibility rule; post-approval sampling by Credit) and policy question PQ-001 (extension of renewal authority) routed to Credit Risk Policy. Route is implemented only on PQ-001 answered.</td></tr>
+<tr><td style="color:#555;background:#f7f9fb">Options</td><td>(a) retain full Credit route for all renewals; (b) fast-track within existing authority if policy already permits; (c) fast-track with extended authority; (d) tiered: (b) now, (c) on policy decision. Chosen: (d).</td></tr>
+<tr><td style="color:#555;background:#f7f9fb">Evidence</td><td>PP-09 (score 25); A1 confirmed; A2 cohort share and outcomes (1.4 step 8); SR/SD precedent.</td></tr>
+<tr><td style="color:#555;background:#f7f9fb">Data</td><td>F04 limits and dates, F06 risk grade (P1): grade refresh rule required on fast-track; F07 authority level captured.</td></tr>
+<tr><td style="color:#555;background:#f7f9fb">Fit-gap</td><td>Configure if platform routing supports rule evaluation on grade, limit delta, covenant status, flags; else Custom (rules engine).</td></tr></table></div>
+
+<div class="pb"><h1>4. Sign-off</h1>
+<p>By signing, each member confirms that the principles are the agreed basis for the target-state design and that design decisions citing them will not be re-opened on grounds the principles already settle.</p>
+<table class="sig"><tr><th style="width:36%">Role</th><th style="width:30%">Name</th><th>Signature</th><th style="width:14%">Date</th></tr>
+<tr><td>Head of Lending Operations (Chair)</td><td></td><td></td><td></td></tr>
+<tr><td>Head of Credit Risk Policy</td><td></td><td></td><td></td></tr>
+<tr><td>Senior Operational Risk Manager (second line)</td><td></td><td></td><td></td></tr>
+<tr><td>Head of MI &amp; Regulatory Reporting</td><td></td><td></td><td></td></tr>
+<tr><td>Replacement Programme Solution Architect</td><td></td><td></td><td></td></tr>
+<tr><td>Senior Relationship Manager (Strategic Finance)</td><td></td><td></td><td></td></tr>
+<tr><td>Head of Lending Services</td><td></td><td></td><td></td></tr>
+<tr><td>Head of Fulfilment</td><td></td><td></td><td></td></tr>
+<tr><td>Engagement Lead (partner)</td><td></td><td></td><td></td></tr></table>
+<p class="small">Version control: v1.0 on signature. Subsequent changes by Design Authority decision only, logged as DDR entries against this document.</p></div>
+</body></html>

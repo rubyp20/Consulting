@@ -1,0 +1,177 @@
+<!doctype html><html><head><meta charset="utf-8"><title>2.2 Journey Pattern Definitions</title><link rel="stylesheet" href="../phase-1/build/style.css"><style>
+.pat { border: 1px solid #b8c4d0; margin: 0 0 10pt 0; }
+.pat .hd { background: #0b3d6b; color: #fff; padding: 5pt 8pt; font-weight: bold; font-size: 11pt; }
+.pat .hd span { font-weight: normal; opacity: .85; font-size: 8.5pt; margin-left: 8pt; }
+.pat > table { margin: 0; }
+.pat > table > tbody > tr > td:first-child { width: 16%; color: #555; background: #f7f9fb; }
+.rules th, .rules td { font-size: 7.8pt; }
+.comp { background: #e6edf5; }
+</style></head><body>
+
+<div class="cover"><p class="small" style="letter-spacing:1px;text-transform:uppercase">Business Bank · Business Banking Transformation Office · BB-BLP-BPR</p>
+<h1>2.2 Journey Pattern Definitions<br/><span style="font-size:15pt;color:#1f4f82">Five patterns, three shared components, and the rules that replace eleven deal types</span></h1>
+<table class="meta" style="width:65%;margin-top:20pt"><tr><td>Deliverable</td><td>2.2 Journey pattern definitions: scope, composition, parameters, routing, retired types and mapping</td></tr><tr><td>Version</td><td>0.8 – for Design Authority agreement, Week 8. v1.0 on agreement; pattern content then fixed for 2.3 mapping and 2.8 requirements</td></tr>
+<tr><td>Derived from</td><td>1.3 deal type × stage matrix (commonality 100% / 82% / 76%); 1.2 maps; 1.6 controls; 1.10 opportunities; 2.1 principles DP-01, DP-05, DP-10</td></tr><tr><td>Owner</td><td>WS1 Journeys &amp; Process</td></tr><tr><td>Accepted by</td><td>Design Authority; design decision DD-02 (deal-type model) to the Replacement Programme</td></tr>
+<tr><td>Depends on</td><td>G1 decision 2 (renewal authority) for the P2 fast-track route scope; G1 decision 3 for SC-3 documentation capability</td></tr></table></div>
+
+<div class="pb"><h1>1. The model</h1>
+<p>Phase 1 established that the nine lending journeys share one start, one decision flow and one completion flow, with differences that are parameters or three genuine flow variants. The target model therefore has three layers:</p>
+<table><tr><th>Layer</th><th>What it is</th><th>How many</th><th>Built</th></tr>
+<tr><td><b>Shared components</b></td><td>Process segments used by every pattern, configured once</td><td>3 (deal start; decision core; completion)</td><td>Once</td></tr>
+<tr><td><b>Patterns</b></td><td>A composition of shared components plus pattern-specific segments, routes and gates</td><td>5</td><td>Once each</td></tr>
+<tr><td><b>Parameters</b></td><td>Rules that vary behaviour within a pattern by deal type, product, risk band or segment</td><td>Rules tables (2.4)</td><td>As data, not workflow</td></tr></table>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 330" width="100%" font-family="Arial, Helvetica, sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0b3d6b"/></marker></defs>
+<g font-size="8.5" font-weight="bold" fill="#fff" text-anchor="middle">
+<rect x="20" y="20" width="200" height="40" rx="3" fill="#0b3d6b"/><text x="120" y="37">SC-1 Deal start</text><text x="120" y="50" font-weight="normal" font-size="7.5">two entry variants</text>
+<rect x="250" y="20" width="200" height="40" rx="3" fill="#0b3d6b"/><text x="350" y="37">SC-2 Decision core</text><text x="350" y="50" font-weight="normal" font-size="7.5">three routes; parameterised</text>
+<rect x="480" y="20" width="200" height="40" rx="3" fill="#0b3d6b"/><text x="580" y="37">SC-3 Completion</text><text x="580" y="50" font-weight="normal" font-size="7.5">three gates</text>
+</g>
+<g font-size="8" fill="#0b3d6b" text-anchor="middle">
+<rect x="20" y="90" width="120" height="34" rx="2" fill="#e6edf5" stroke="#0b3d6b"/><text x="80" y="104" font-weight="bold">P1 New / Increase</text><text x="80" y="116" font-size="7">SC-1b · SC-2 full · SC-3 all gates</text>
+<rect x="160" y="90" width="120" height="34" rx="2" fill="#e6edf5" stroke="#0b3d6b"/><text x="220" y="104" font-weight="bold">P2 Renewal</text><text x="220" y="116" font-size="7">SC-1a · SC-2 fast/full · SC-3 short</text>
+<rect x="300" y="90" width="120" height="34" rx="2" fill="#e6edf5" stroke="#0b3d6b"/><text x="360" y="104" font-weight="bold">P3 Servicing change</text><text x="360" y="116" font-size="7">SC-1a · SC-2 triage · SC-3 gated</text>
+<rect x="440" y="90" width="120" height="34" rx="2" fill="#e6edf5" stroke="#0b3d6b"/><text x="500" y="104" font-weight="bold">P4 Pre-approved drawdown</text><text x="500" y="116" font-size="7">SC-1a · SC-2 exception · SC-3 light</text>
+<rect x="580" y="90" width="100" height="34" rx="2" fill="#fff8e6" stroke="#c48a00"/><text x="630" y="104" font-weight="bold">P5 Distressed</text><text x="630" y="116" font-size="7">SC-1a · own decision flow · no SC-3</text>
+</g>
+<g stroke="#0b3d6b" stroke-width="0.8" fill="none" marker-end="url(#a)"><path d="M120,60 L80,90"/><path d="M120,60 L220,90"/><path d="M120,60 L360,90"/><path d="M120,60 L500,90"/><path d="M120,60 L630,90"/><path d="M350,60 L80,90"/><path d="M350,60 L220,90"/><path d="M350,60 L360,90"/><path d="M350,60 L500,90"/><path d="M580,60 L80,90"/><path d="M580,60 L220,90"/><path d="M580,60 L360,90"/><path d="M580,60 L500,90"/></g>
+<g font-size="8" fill="#333">
+<rect x="20" y="150" width="660" height="60" fill="#f7f9fb" stroke="#b8c4d0"/><text x="30" y="165" font-weight="bold" fill="#0b3d6b">Rules tables (2.4) — parameters by pattern × deal type × risk band × product × segment</text>
+<text x="30" y="178">Eligibility and routing criteria · required analytics and submission items · document checks and letter templates · DA determination inputs</text>
+<text x="30" y="190">staleness and loop limits · letter-required rule · security re-instruction rule · early-warning composition · approver by segment</text>
+<text x="30" y="203">Deal type is a column in these tables. It no longer defines a workflow.</text>
+<rect x="20" y="225" width="660" height="80" fill="#fff" stroke="#b8c4d0"/><text x="30" y="240" font-weight="bold" fill="#0b3d6b">Exception paths (first-class, shared) — DP-07</text>
+<text x="30" y="255">EX-A Decline / appeal / refer · EX-B Structured deferral (max 2 loops) · EX-C Post-approval change (materiality rule) · EX-D In-flight distress referral · EX-E Graduated staleness</text>
+<text x="30" y="270">Retired from the deal model: Staged Drawdown (origination type) · ESR Cleanse · DO NOT USE. Given a home: Remove All Facilities (P3 variant) · Staged Drawdown Allocation (P4).</text>
+<text x="30" y="290" font-size="7.5" fill="#555">Build count: 3 components + 5 pattern compositions + 5 exception paths, versus 11 deal types × 3 stages (33 workflow segments) in the as-is.</text>
+</g></svg></div>
+
+<div class="pb"><h1>2. Shared components</h1>
+<div class="pat"><div class="hd">SC-1 · Deal start<span>replaces stage 1 of every journey · DP-05 · OP-14</span></div><table>
+<tr><td>Purpose</td><td>Open a deal in context from a system event, with customer, parties, existing facilities and balances loaded, and route it to the correct pattern.</td></tr>
+<tr><td>Entry variants</td><td><b>SC-1a Existing relationship</b> (P2, P3, P4, P5 and P1 Increase): event opens the connection; existing deal and facilities pulled through; balances refreshed; early-warning flag evaluated (DP-08). <b>SC-1b New customer</b> (P1 New): lead captured as a structured record; customer and parties created or matched via CIF (C1); products and value entered; pre-screen rule applied (C0 as a rule with recorded outcome).</td></tr>
+<tr><td>Triggers (events)</td><td>Review date task (P2); customer request logged by RM or via digital intake (P1, P3, P4); drawdown date task (P4); early-warning flag or referral (P5); lead from Business Lending Form (P1).</td></tr>
+<tr><td>Steps retained from as-is</td><td>Customer identification (C1); party completeness (new rule); product selection (P1 only).</td></tr>
+<tr><td>Steps eliminated</td><td>Separate login; landing-page navigation; manual search where the trigger already identifies the customer; opportunity record as a separate object (opportunity becomes a status of the deal); “initial overview” as an undocumented judgement.</td></tr>
+<tr><td>Outputs</td><td>Deal created in the right pattern, with pattern parameters set (deal type, product, segment, risk band from grade), early-warning status, and the applicable rules table loaded.</td></tr>
+<tr><td>Controls</td><td>C0 (pre-screen, now a rule with reason code), C1 (identification), new: party completeness; early-warning evaluation (feeds C7 relocation).</td></tr>
+<tr><td>Data</td><td>Captures F01, F02, F03, F15; refreshes F04 balances (OP-32); evaluates F06, F10 for the flag.</td></tr>
+<tr><td>Open for 2.3</td><td>Whether deposit opportunities use SC-1 (SD-03); digital intake scope for leads (OP-14 vs. W-14).</td></tr></table></div>
+
+<div class="pat"><div class="hd">SC-2 · Decision core<span>replaces Deal &amp; Credit on NM, RN, VA, SL, SR, SD · DP-01, DP-02, DP-03, DP-07 · OP-01, 02, 06, 07, 17, 18</span></div><table>
+<tr><td>Purpose</td><td>Reach a recorded credit decision with effort proportionate to risk and change, under the correct authority, with the required analysis evidenced.</td></tr>
+<tr><td>Routes</td><td><b>R-FULL</b>: analysis per rules table → submission standard enforced → automated DA determination → within authority: approve with recorded level; outside: Credit queue → assessment → decision. <b>R-FAST</b>: eligibility rule satisfied → reduced analysis per rules table → automated DA determination → approve within line authority with recorded level and eligibility evidence; Credit post-approval sampling. <b>R-EXC</b> (pre-approved): validate against pre-approved terms → limit arithmetic enforced → material-change rule → Credit only if triggered.</td></tr>
+<tr><td>Route selection</td><td>By rules table on: pattern; change type and materiality (P3); eligibility criteria (P2); material-change triggers (P4); early-warning flag (excludes R-FAST and R-EXC, forces R-FULL or P5 referral).</td></tr>
+<tr><td>Steps retained</td><td>Customer analysis and credit analytics (C2, content per rules table); validation (C3, as system rules); document check (C4, as reconciliation once SC-3 generates from terms); DA determination (C5, automated); Credit assessment (C6, for R-FULL outside authority); distress screen (C7, relocated to SC-1 flag and retained as assessor judgement).</td></tr>
+<tr><td>Steps eliminated or changed</td><td>“Progress?” as an unrecorded RM judgement → recorded decision with reason; manual DA reading; “if required” analytics without criterion; unbounded deferral → EX-B; decline arrow → EX-A.</td></tr>
+<tr><td>Outputs</td><td>Decision (approve / decline / refer) with authority level, rule version, assessor where applicable, conditions, and the approved terms that SC-3 generates documents from.</td></tr>
+<tr><td>Controls</td><td>C2, C3, C4, C5, C6, C7; new: eligibility rule evidence; Credit sampling of R-FAST approvals (equivalence CE-001).</td></tr>
+<tr><td>Data</td><td>F04, F06 (grade refresh rule on R-FAST), F07 (authority, decline reason), F09 conditions.</td></tr>
+<tr><td>Open for 2.4</td><td>Eligibility criteria and thresholds (with Credit Risk); whether R-FAST approval sits with RM or line manager by segment; sampling rate; grade staleness rule.</td></tr></table></div>
+
+<div class="pat"><div class="hd">SC-3 · Completion<span>replaces Completion &amp; Fulfilment on NM, VA, SL, SR, SD and RN-3 · DP-04, DP-06, DP-07 · OP-13, 15, 16, 21</span></div><table>
+<tr><td>Purpose</td><td>Document, perfect and fulfil the approved facility, with every condition visible and every wait owned.</td></tr>
+<tr><td>Gates</td><td><b>G-DOC</b> documentation complete: letter generated from approved terms, delivered, signed (e-signature or wet-ink exception), returned, reconciled to terms (C8 automated for e-signed). Letter-required rule decides whether a signature is needed (P2). <b>G-SEC</b> security complete: instruction generated from approval conditions (C23), Lending Services queue with SLA, execution, registration, status (C10). Gate applies only when the rules table says security changes. <b>G-CP</b> conditions precedent: itemised from approval conditions, each evidenced (C9).</td></tr>
+<tr><td>Release</td><td>When all applicable gates are met, fulfilment task is created automatically (C11) in the Fulfilment queue with SLA; RM notified on completion; sort code and account recorded where funds released.</td></tr>
+<tr><td>Staleness</td><td>EX-E graduated control replaces the 3-month reset: automated chase at 2, 4, 8 weeks; RM extension with reason at 10 weeks; re-validation of key facts at 3 months; reset only on material change or at 6 months (subject to CE-002).</td></tr>
+<tr><td>Variants</td><td><b>Short</b> (P2): G-DOC only, letter per rule; no G-SEC; G-CP only if conditions set. <b>Gated</b> (P3): G-SEC only if security changes; fulfilment only if facility changes; removal variant (zero balance → repayment confirmed → release security → remove facility, in that order, with Securities and Fulfilment tasks). <b>Light</b> (P4): notice or short-form letter for reduced limit; full letter for new facility; initial-funds decision. <b>Full</b> (P1): all gates.</td></tr>
+<tr><td>Steps eliminated</td><td>Manual PDF issue; RM mailbox tracking; message to Fulfilment; message to Lending Services; four-message removal sequence; off-platform letters; security re-instruction when unchanged.</td></tr>
+<tr><td>Controls</td><td>C8, C9, C10, C11, C12 (removal), C23; new: letter reconciliation to terms; chase and extension evidence.</td></tr>
+<tr><td>Data</td><td>F08 security values and status; F13 document status (captured for the first time); F04 confirmed terms.</td></tr>
+<tr><td>Open for 2.3 / 2.7</td><td>Platform document and e-signature capability (G1 decision 3); wet-ink exception share; whether G-SEC registration tracking is platform or Lending Services system.</td></tr></table></div></div>
+
+<div class="pb"><h1>3. Pattern definitions</h1>
+
+<div class="pat"><div class="hd">P1 · New or Increased Lending<span>absorbs New, Increase, Shadow Limit / Staged Drawdown origination · 3,033 live deals (11.3%)</span></div><table>
+<tr><td>Purpose</td><td>Originate new facilities for a new or existing customer, or increase existing facilities, with full assessment, documentation and security.</td></tr>
+<tr><td>Composition</td><td>SC-1b (New) or SC-1a (Increase) → SC-2 R-FULL → SC-3 Full. Exception paths EX-A, EX-B, EX-C, EX-D, EX-E all apply.</td></tr>
+<tr><td>Pattern-specific</td><td>Product selection incl. shadow-limit product and term lending with tranches (tranche schedule captured as data, so P4 can draw on it); restructure / refinance flag; initial-funds decision at SC-3 release (shadow limit with no drawdown ends at G-DOC and waits for P4).</td></tr>
+<tr><td>Parameters</td><td>Deal type (New / Increase) sets: new-customer entry; restructure flag availability. Product sets: letter template; security requirement; tranche capture. Risk band sets: analytics items; DA inputs.</td></tr>
+<tr><td>Routes available</td><td>R-FULL only (no fast-track for new money). Increase with no new security and within a delta threshold: candidate for R-FAST in a later release; not in scope for Release 1.</td></tr>
+<tr><td>Retained controls</td><td>All of C0–C11, C23 via components; C22 via EX-C.</td></tr>
+<tr><td>Replaces as-is maps</td><td>NM-1/2/3; SL-1/2/3.</td></tr>
+<tr><td>Open questions</td><td>Whether Increase retains a separate deal-type value for MI (yes, as a parameter); digital lead intake scope.</td></tr></table></div>
+
+<div class="pat"><div class="hd">P2 · Renewal<span>absorbs Renewal, Extension Pending Review · 14,857 live deals (55.6%)</span></div><table>
+<tr><td>Purpose</td><td>Renew facilities at review date with no structural change, with effort proportionate to risk; extend for a bounded period where a full renewal cannot complete.</td></tr>
+<tr><td>Composition</td><td>SC-1a from review-date task → SC-2 R-FAST or R-FULL by eligibility rule → SC-3 Short. Exception paths EX-A (as withdraw facilities), EX-B, EX-D, EX-E apply.</td></tr>
+<tr><td>Pattern-specific</td><td><b>Eligibility rule</b> (2.4): limit unchanged; risk grade within band and not older than N months; covenants compliant; no early-warning flag; no watch-list; no EPR in prior 12 months; no party change (party change → P3). <b>Structural-change validation</b>: the system confirms only commentary, facility request type, review and maturity dates have changed; any other change diverts to P3. <b>EPR</b> becomes a parameter: extension of up to 3 months, maximum 3 consecutive, counter enforced, third extension forces R-FULL; EPR items list per rules table.</td></tr>
+<tr><td>Parameters</td><td>Deal type (Renewal / EPR) sets: items list; date rules; counter. Segment sets: who approves R-FAST (RM / line); who checks returned letter. Risk band sets: eligibility band; analytics items.</td></tr>
+<tr><td>Routes available</td><td>R-FAST (subject to G1 decision 2 and CE-001); R-FULL.</td></tr>
+<tr><td>Retained controls</td><td>C1–C8 via components; new: eligibility evidence; Credit sampling of R-FAST; grade staleness rule.</td></tr>
+<tr><td>Replaces as-is maps</td><td>RN-1/2/3.</td></tr>
+<tr><td>Open questions</td><td>Whether a letter is required on every renewal or only where terms are restated (letter-required rule); treatment of renewals where the customer requests a change mid-flow (divert to P3 or absorb).</td></tr></table></div>
+
+<div class="pat"><div class="hd">P3 · Servicing Change<span>absorbs Variation, Remove All Facilities, post-approval change · 7,277 live deals (27.2%)</span></div><table>
+<tr><td>Purpose</td><td>Amend the terms, parties, products, pricing, security or covenants of existing facilities, or remove facilities, with the route determined by what is changing.</td></tr>
+<tr><td>Composition</td><td>SC-1a from logged request → change-type capture (reason taxonomy) → materiality rule → SC-2 R-FAST (administrative) or R-FULL (credit-relevant) → SC-3 Gated. Removal variant: SC-1a → removal checks → SC-3 removal sequence (no SC-2 unless exposure elsewhere depends on released security). Exception paths all apply; EX-C routes here from any pattern.</td></tr>
+<tr><td>Pattern-specific</td><td><b>Reason taxonomy</b> (2.4): e.g. date / tracking item change; covenant amendment; pricing change; limit decrease; limit increase (→ P1); party change; security change; product change; removal. <b>Materiality rule</b>: which reasons, alone or combined, require R-FULL. <b>Security re-instruction</b> only when a security reason is present. <b>Removal sequence</b> enforced: balance zero → repayment confirmed (C12) → shared-security re-allocation check → Securities task (physical release) → system release → Fulfilment task → facility removed; associated-party deals updated (rule).</td></tr>
+<tr><td>Parameters</td><td>Reason codes set route, letter template, security gate, fulfilment gate. Segment sets approver for administrative changes.</td></tr>
+<tr><td>Routes available</td><td>R-FAST (administrative), R-FULL (credit-relevant); removal path.</td></tr>
+<tr><td>Retained controls</td><td>C1–C12, C23 via components; C22 (materiality) as the pattern’s core rule.</td></tr>
+<tr><td>Replaces as-is maps</td><td>VA-1/2/3; RF-1/2; EX-03.</td></tr>
+<tr><td>Open questions</td><td>Reason taxonomy content (WS-05 output); whether limit decreases are administrative; threshold for “shared security” re-allocation.</td></tr></table></div>
+
+<div class="pat"><div class="hd">P4 · Pre-approved Drawdown<span>absorbs Shadow Limit Reallocation, Staged Drawdown Allocation · 62+ live deals (0.2%)</span></div><table>
+<tr><td>Purpose</td><td>Draw on a facility Credit has already approved, within its limits and terms, with Credit involved only when something material has changed.</td></tr>
+<tr><td>Composition</td><td>SC-1a from request or tranche-date task, opening the pre-approved deal → allocation capture (products or tranche) → limit arithmetic enforced → SC-2 R-EXC → SC-3 Light. Exception paths EX-B, EX-D, EX-E apply.</td></tr>
+<tr><td>Pattern-specific</td><td><b>Limit arithmetic</b>: Σ allocations ≤ pre-approved limit, enforced by the system (C19 automated); shadow-limit headroom reduces automatically. <b>Material-change triggers</b> (2.4): e.g. product outside the approved set; pricing outside approved range; tenor beyond approval; early-warning flag; approval older than N months. <b>Tranche schedule</b> captured in P1 and consumed here; repayment schedule regenerated per tranche by the system (resolves the open question on SD-1). <b>Documentation</b>: notice for reduced shadow limit; full letter for new facility; tranche confirmation generated on platform (ends off-platform letters).</td></tr>
+<tr><td>Parameters</td><td>Facility type (shadow limit / staged) sets: allocation screen; document set. Approval age sets: re-validation requirement.</td></tr>
+<tr><td>Routes available</td><td>R-EXC; R-FULL on trigger.</td></tr>
+<tr><td>Retained controls</td><td>C3, C4, C5 (as material-change rule), C6 on trigger, C8–C11, C19 automated.</td></tr>
+<tr><td>Replaces as-is maps</td><td>SR-1/2; SD-1/2. Retires deal type “Staged Drawdown” (origination) and the “Staged Drawdown + Variation request type” workaround (W-16).</td></tr>
+<tr><td>Open questions</td><td>Material-change trigger list (from WS-10); whether P4 is the template for a P1 Increase fast-track in a later release.</td></tr></table></div>
+
+<div class="pat"><div class="hd">P5 · Distressed Connection<span>absorbs CAP Referral, CAP Strategy, in-flight referral · 1,516 live deals (5.7%)</span></div><table>
+<tr><td>Purpose</td><td>Identify financial difficulty early, refer with the correct authority, categorise, and set and record a strategy, with regulatory data captured correctly.</td></tr>
+<tr><td>Composition</td><td>SC-1a from early-warning flag, RM request or in-flight referral (EX-D) → referral record on the connection (not a deal transfer) → Credit authority decision (C13) and SBS categorisation (C14), sequential or parallel per CAP policy decision → categorisation data (cause, members, team) → forbearance assessment (C15) → strategy record (structured memo, C16) → recovery data (ERV, provisions, C17) → SBS approval (C18). No SC-2 decision core; no SC-3.</td></tr>
+<tr><td>Pattern-specific</td><td><b>Early-warning flag</b> composition (2.4): arrears, grade migration, covenant breach, forbearance, watch-list; shown at SC-1 for every pattern and as a queue on the SBS landing page. <b>Referral record</b>: live deals in other patterns are linked, not moved; their status (held / continue / decline) is an explicit decision. <b>Ownership transfer</b> to SBS with audit trail (replaces mass officer-code batch for this use). <b>Strategy memo</b> structured on platform. <b>Exit</b>: return to mainstream, retention exit, or recovery, each a recorded outcome.</td></tr>
+<tr><td>Parameters</td><td>Categorisation sets: team; forbearance assessment items; recovery fields required. Authority sequence set by CAP policy (sequential / parallel by trigger).</td></tr>
+<tr><td>Routes available</td><td>Referral accepted → categorise → strategy; referral returned → connection remains mainstream with flag history.</td></tr>
+<tr><td>Retained controls</td><td>C7 (relocated), C13, C14, C15, C16, C17, C18, C26, C27. Regulatory fields F10, F11 protected at P1.</td></tr>
+<tr><td>Replaces as-is maps</td><td>CR-1/2; CS-1/2; EX-04.</td></tr>
+<tr><td>Open questions</td><td>CAP policy on parallel authority (G1 decision; OP-23); whether SBS retains its own queue on the same platform; boundary with recovery systems (1.1 5.4).</td></tr></table></div></div>
+
+<div class="pb"><h1>4. Deal-type disposition and mapping</h1>
+<table><tr><th>As-is deal type</th><th>12-m vol.</th><th>Disposition</th><th>To-be pattern</th><th>Parameter value retained</th><th>History treatment (MI)</th></tr>
+<tr><td>New (New Money)</td><td class="num">695</td><td>Absorbed</td><td>P1</td><td>deal_type = New</td><td>Direct map</td></tr>
+<tr><td>Increase</td><td class="num">2,338</td><td>Absorbed</td><td>P1</td><td>deal_type = Increase</td><td>Direct map</td></tr>
+<tr><td>Renewal</td><td class="num">12,938</td><td>Absorbed</td><td>P2</td><td>deal_type = Renewal; route recorded</td><td>Direct map; route = Full for history</td></tr>
+<tr><td>Extension Pending Review</td><td class="num">1,919</td><td>Absorbed as parameter</td><td>P2</td><td>deal_type = EPR; counter</td><td>Direct map</td></tr>
+<tr><td>Variation</td><td class="num">7,277</td><td>Absorbed; split by reason</td><td>P3</td><td>deal_type = Variation; reason codes (new)</td><td>Historic variations carry reason = unclassified; removals re-coded where identifiable (DR-04)</td></tr>
+<tr><td>Remove All Facilities (un-typed)</td><td class="num">TBC</td><td>Given a home</td><td>P3 removal variant</td><td>reason = Removal</td><td>Re-coded from Variation where identifiable</td></tr>
+<tr><td>CAP Referral</td><td class="num">794</td><td>Absorbed</td><td>P5</td><td>record_type = Referral</td><td>Direct map</td></tr>
+<tr><td>CAP Strategy</td><td class="num">722</td><td>Absorbed</td><td>P5</td><td>record_type = Strategy</td><td>Direct map</td></tr>
+<tr><td>Shadow Limit Reallocation</td><td class="num">62</td><td>Absorbed</td><td>P4</td><td>facility_type = Shadow limit</td><td>Direct map</td></tr>
+<tr><td>Staged Drawdown Allocation (recorded as Staged Drawdown + Variation request type)</td><td class="num">TBC</td><td>Given a home</td><td>P4</td><td>facility_type = Staged</td><td>Re-coded from the field combination (DR-01)</td></tr>
+<tr><td>Staged Drawdown (origination type)</td><td class="num">0</td><td><b>Retired</b></td><td>— (tranches captured in P1)</td><td>—</td><td>None required</td></tr>
+<tr><td>ESR Cleanse</td><td class="num">3,816</td><td><b>Retired from deal model</b> (SD-01)</td><td>— (migration)</td><td>—</td><td>Excluded from all volume MI; exposure updates preserved by migration spec</td></tr>
+<tr><td>DO NOT USE</td><td class="num">—</td><td><b>Retired</b> (OP-29, now)</td><td>—</td><td>—</td><td>Any historic use re-coded or flagged</td></tr>
+<tr><td>Personal Association Lend</td><td class="num">—</td><td>Out of scope</td><td>—</td><td>—</td><td>—</td></tr></table>
+<h2>4.1 Crosswalk: as-is maps to to-be components</h2>
+<table><tr><th>As-is map (1.2)</th><th>To-be</th><th>As-is map (1.2)</th><th>To-be</th></tr>
+<tr><td>NM-1, SL-1, RN-1, VA-1, RF-1, CR-1, CS-1, SR-1 (start), SD-1 (start)</td><td>SC-1a / SC-1b</td><td>NM-3, VA-3, SL-3, SR-2, SD-2, RN-3</td><td>SC-3 (Full / Gated / Light / Short)</td></tr>
+<tr><td>NM-2, SL-2, RN-2, VA-2, SR-1 (decision), SD-1 (decision)</td><td>SC-2 (R-FULL / R-FAST / R-EXC)</td><td>RF-2</td><td>P3 removal variant of SC-3</td></tr>
+<tr><td>CR-2, CS-2, EX-04</td><td>P5 own flow + EX-D</td><td>EX-01, EX-02, EX-03, EX-05</td><td>EX-A, EX-B, EX-C, SC-3 G-SEC</td></tr>
+<tr><td>DP-1</td><td>Per SD-03 (SC-1 status or CRM)</td><td>—</td><td>—</td></tr></table></div>
+
+<div class="pb"><h1>5. Parameters carried as rules (index for 2.4)</h1>
+<p>Everything that varied by deal type in the as-is is listed here with where it now lives. 2.4 populates the content with Credit Risk.</p>
+<table class="rules"><tr><th>Rule set</th><th>Varies by</th><th>Used in</th><th>As-is source</th><th>Owner</th></tr>
+<tr><td>RS-01 Route eligibility (R-FAST)</td><td>Pattern; risk band; grade age; covenant status; flags; change type</td><td>SC-2</td><td>None (new); SR/SD precedent</td><td>Credit Risk Policy</td></tr>
+<tr><td>RS-02 Material-change triggers (R-EXC → R-FULL)</td><td>Facility type; product; pricing; tenor; approval age; flags</td><td>P4, SC-2</td><td>SR-1 / SD-1 “need credit approval?” (undocumented)</td><td>Credit Risk Policy</td></tr>
+<tr><td>RS-03 Variation reason taxonomy and materiality</td><td>Reason codes, combinations</td><td>P3</td><td>None (new)</td><td>Credit Risk Policy; Lending Ops</td></tr>
+<tr><td>RS-04 Required analytics and submission items</td><td>Pattern × route × risk band × product</td><td>SC-2 (C2, C3)</td><td>“if required”; EPR “fewer items”</td><td>Credit Risk Policy</td></tr>
+<tr><td>RS-05 Delegated-authority determination inputs</td><td>Limit; exposure; grade; product; connection; segment</td><td>SC-2 (C5)</td><td>DA matrix (DR-07)</td><td>Credit Risk Policy</td></tr>
+<tr><td>RS-06 Letter template and letter-required rule</td><td>Pattern; product; change type; segment</td><td>SC-3 G-DOC</td><td>RN-3 D1 (undocumented); product templates</td><td>Lending Ops</td></tr>
+<tr><td>RS-07 Security gate and re-instruction</td><td>Reason; product; existing security</td><td>SC-3 G-SEC</td><td>VA-3 default (undocumented)</td><td>Lending Services</td></tr>
+<tr><td>RS-08 Staleness and chase schedule</td><td>Pattern; letter type</td><td>SC-3 EX-E</td><td>3-month reset</td><td>Lending Ops; second line (CE-002)</td></tr>
+<tr><td>RS-09 Loop limits and escalation</td><td>Route</td><td>EX-B</td><td>None (unbounded)</td><td>Head of Credit</td></tr>
+<tr><td>RS-10 EPR limits</td><td>—</td><td>P2</td><td>Max 3 months; max 3</td><td>Credit Risk Policy</td></tr>
+<tr><td>RS-11 Early-warning flag composition</td><td>Indicator thresholds</td><td>SC-1, P5, RS-01 exclusion</td><td>None (new); batch logic for forbearance</td><td>Credit Risk; SBS</td></tr>
+<tr><td>RS-12 Post-approval materiality</td><td>Fields changed</td><td>EX-C</td><td>None (“re-processed”)</td><td>Credit Risk Policy</td></tr>
+<tr><td>RS-13 Approver by segment</td><td>Segment × route</td><td>SC-2, SC-3</td><td>RN-3 checker variation</td><td>Lending Ops</td></tr>
+<tr><td>RS-14 Pre-screen criteria and reason codes</td><td>Product; value; customer type</td><td>SC-1b (C0)</td><td>None (undocumented)</td><td>Lending Ops; Conduct</td></tr></table>
+<h2>5.1 What the Design Authority is asked to agree</h2>
+<ol><li>The three-layer model (components, patterns, rules) as the structure of the target state (DD-02, DD-03 to the Programme).</li><li>The five patterns as defined, including the removal variant in P3 and the retirement of three deal types.</li><li>That P2 is designed with both routes, with R-FAST activation dependent on G1 decision 2 and CE-001.</li><li>The rule-set index as the scope of 2.4, with owners as shown.</li><li>The crosswalk as the basis for marking Eliminated / Automated / Consolidated / Retained on every as-is step in 2.3.</li></ol></div>
+</body></html>
