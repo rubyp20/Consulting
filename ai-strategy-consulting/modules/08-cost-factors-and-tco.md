@@ -153,7 +153,7 @@ Annual inference, tiered: 600,000 x USD 0.179 = USD 107,000. Routing saves USD 1
 | **TCO (frontier only)** | **7.44** | **3.18** | **2.98** | **13.60** |
 | Tiered routing variant: extra build 0.15, inference saving 0.07, 0.14, 0.14 | 7.52 | 3.04 | 2.84 | 13.40 |
 
-All figures USD million [ILLUSTRATIVE — composite; pricing ESTIMATE, VERIFY]. Workforce transition costs (redeployment, retraining, any severance) are reported separately in the business case because they are policy decisions, not system costs; a placeholder of USD 1.5 million is used in Module 9.
+All figures USD million [ILLUSTRATIVE — composite; pricing ESTIMATE, VERIFY]. Workforce transition costs (redeployment, retraining, any severance) are reported separately in the business case because they are policy decisions, not system costs; a placeholder of USD 1.5 million would be carried into the business case (Module 9 shows the method on a different, KYB-based composite).
 
 ### 4.5 Unit economics
 

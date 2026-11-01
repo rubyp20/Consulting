@@ -127,7 +127,7 @@ First line: use-case owners and delivery teams own controls, monitoring and eval
 
 ## 4. Worked BFSI example
 
-`[ILLUSTRATIVE — composite]` Northgate Bank: a mid-sized UK bank, GBP 45bn assets, 7,000 staff, three business units (Retail, Commercial, Wealth), a 25-model classical inventory, four GenAI pilots run by a 12-person central "Data Science CoE", and a stated ambition of 30 AI use cases in production within 3 years with GBP 60m annual run-rate benefit.
+`[ILLUSTRATIVE — composite]` Harbourside Bank: a mid-sized UK bank, GBP 45bn assets, 7,000 staff, three business units (Retail, Commercial, Wealth), a 25-model classical inventory, four GenAI pilots run by a 12-person central "Data Science CoE", and a stated ambition of 30 AI use cases in production within 3 years with GBP 60m annual run-rate benefit.
 
 ### 4.1 Demand inventory
 

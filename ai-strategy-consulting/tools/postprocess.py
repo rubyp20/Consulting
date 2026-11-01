@@ -60,7 +60,19 @@ for item in zin.infolist():
                     maxlen[ci] = max(maxlen[ci], eff)
             w = [max(maxlen[i], hdrlen[i], 4) ** 0.75 for i in range(n)]
             tot = sum(w); cols = [max(int(TOTAL * x / tot), 700) for x in w]
-            diff = TOTAL - sum(cols); cols[cols.index(max(cols))] += diff
+            # never narrower than the longest header word (approx 95 DXA per char at 7-9pt, plus cell margins)
+            hdrcells = re.findall(r'<w:tc>.*?</w:tc>', rows[0], flags=re.S)
+            for i, c in enumerate(hdrcells):
+                txt = ''.join(re.findall(r'<w:t[^>]*>([^<]*)</w:t>', c))
+                lw = max([len(x) for x in txt.split()] or [0])
+                cols[i] = max(cols[i], lw * 95 + 220)
+            diff = TOTAL - sum(cols)
+            # take the difference from the widest columns proportionally
+            if diff != 0:
+                big = sorted(range(n), key=lambda i: -cols[i])[:max(1, n // 2)]
+                share = sum(cols[i] for i in big)
+                for i in big: cols[i] += int(diff * cols[i] / share)
+                cols[big[0]] += TOTAL - sum(cols)
             t = re.sub(r'<w:tblGrid>.*?</w:tblGrid>', '<w:tblGrid>' + ''.join(f'<w:gridCol w:w="{c}"/>' for c in cols) + '</w:tblGrid>', t, flags=re.S)
             # set each cell width in order (pandoc emits empty <w:tcPr /> per cell)
             out = []; ci = 0

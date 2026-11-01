@@ -8,7 +8,7 @@ Use the simulations in three ways. First, as a template: the H3 structure (clien
 
 ### Common assumptions used across all three simulations
 
-To keep the simulations numerically consistent, the following assumptions are shared and reused. All are [ESTIMATE — assumption, VERIFY against the client's actuals].
+To keep the simulations numerically consistent, the following assumptions are shared and reused. All are [ESTIMATE — assumption, VERIFY against the client's actuals]. The worked examples in Modules 8 and 9 use their own composite clients and state their own loaded-cost assumptions (for example USD 65,000 for a US dispute analyst in Module 8 against USD 52,000 blended here); the difference is onshore versus blended staffing, and both sit inside the range a client would recognise.
 
 | Assumption | Value | Note |
 |---|---|---|

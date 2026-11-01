@@ -99,7 +99,7 @@ Useful when the client wants AI KPIs integrated into existing performance manage
 
 ## 4. Worked BFSI example
 
-`[ILLUSTRATIVE — composite]` Meridian Cards, a UK card issuer with 4.2 million cards, processes 420,000 cardholder disputes a year in an operations centre of 210 disputes analysts and 18 team leaders. A supervisor-led multi-agent dispute system (evidence gathering, reason-code classification, merchant-response analysis, draft adjudication, with HITL approval) goes live in January.
+`[ILLUSTRATIVE — composite]` Calder Cards, a UK card issuer with 4.2 million cards, processes 420,000 cardholder disputes a year in an operations centre of 210 disputes analysts and 18 team leaders. A supervisor-led multi-agent dispute system (evidence gathering, reason-code classification, merchant-response analysis, draft adjudication, with HITL approval) goes live in January.
 
 ### 4.1 Baseline (12-month average, prior year)
 
