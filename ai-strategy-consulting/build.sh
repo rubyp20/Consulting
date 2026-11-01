@@ -2,7 +2,9 @@
 # Compiles the modules, recaps and answer key into one Word document and a PDF.
 set -euo pipefail
 cd "$(dirname "$0")"
-SCRATCH="${SCRATCH:-/tmp/claude-0/-home-user-Consulting/5d3ae399-3dec-5d6d-888c-a0ce93f71f6b/scratchpad}"
+SCRATCH="${SCRATCH:-/tmp/ai-strategy-build}"
+TOOLS="$(pwd)/tools"
+mkdir -p "$SCRATCH"
 OUT_BASE="AI-Strategy-Consulting-Foundations-to-Expert"
 PB='```{=openxml}
 <w:p><w:r><w:br w:type="page"/></w:r></w:p>
@@ -29,7 +31,7 @@ tail=re.sub(r'(?m)^(#{1,5}) ', lambda m: '#'*(len(m.group(1))+1)+' ' if len(m.gr
 open(p,'w').write(head+sep+tail)
 PY
 wc -w "$SCRATCH/compiled.md"
-pandoc "$SCRATCH/compiled.md" -o "$SCRATCH/raw.docx" --reference-doc="$SCRATCH/custom-ref.docx" --toc --toc-depth=2 -f markdown+pipe_tables+raw_attribute --wrap=none
-python3 "$SCRATCH/postprocess.py" "$SCRATCH/raw.docx" "$SCRATCH/pp.docx"
-timeout 900 python3 "$SCRATCH/lo_finalise.py" "$SCRATCH/pp.docx" "$OUT_BASE.docx" "$OUT_BASE.pdf"
+pandoc "$SCRATCH/compiled.md" -o "$SCRATCH/raw.docx" --reference-doc="$TOOLS/custom-ref.docx" --toc --toc-depth=2 -f markdown+pipe_tables+raw_attribute --wrap=none
+python3 "$TOOLS/postprocess.py" "$SCRATCH/raw.docx" "$SCRATCH/pp.docx"
+timeout 900 python3 "$TOOLS/lo_finalise.py" "$SCRATCH/pp.docx" "$OUT_BASE.docx" "$OUT_BASE.pdf"
 ls -la "$OUT_BASE".*

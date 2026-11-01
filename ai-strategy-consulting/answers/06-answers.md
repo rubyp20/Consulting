@@ -1,4 +1,4 @@
-## Module 06 — Quiz answers
+## Module 6 — Quiz answers
 
 **1.** L3 tasks have a definable input, output, decision logic and error profile, which is what an AI pattern acts on; L2 stages are where benefits appear because a stage only gets faster or cheaper when its whole set of tasks changes. Example L3: "build ownership structure and identify UBOs" (fit assessed here). Example L2: "entity verification" (business case built here, covering registry lookup, extraction, UBO unwinding, ID and V and reconciliation together).
 Manager-level benchmark: adds that assessing fit at L2 hides judgement tasks inside automatable stages, and that building cases at L3 produces unbankable micro-benefits.

@@ -1,4 +1,4 @@
-## Module 08 — Quiz answers
+## Module 8 — Quiz answers
 
 **1.** Consumption-based run cost (inference scales with volume and design, so it must be modelled per case, not as a licence). Human-in-the-loop cost (sampling QA, exceptions and appeals are permanent and are the control a supervisor will examine). Assurance cost (evals, guardrails, monitoring and model risk validation recur and are mandatory for higher-tier systems). Lifecycle churn (models are deprecated on 12 to 24 month cycles, forcing re-baselining and re-validation).
 Manager-level benchmark: names all four and notes that inference is usually the smallest of the four for bank back-office volumes.

@@ -1,4 +1,4 @@
-# Module 07 — Use-Case Assessment and Prioritisation
+# Module 7 — Use-Case Assessment and Prioritisation
 
 ## 1. Why a client cares
 

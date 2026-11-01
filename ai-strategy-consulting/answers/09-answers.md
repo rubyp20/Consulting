@@ -1,4 +1,4 @@
-## Module 09 — Quiz answers
+## Module 9 — Quiz answers
 
 **1. Vendor case-study haircut.** Apply roughly 50–70%, treating it as vendor claim or benchmark-from-another-bank evidence. The other bank's baseline, volumes, process design and data quality differ from the client's, and vendors publish their best outcomes. Manager-level benchmark: names the evidence-haircut ladder, states that the haircut falls as the client runs its own PoC and pilot, and proposes the pilot measurement that would justify lifting it.
 

@@ -1,4 +1,4 @@
-# Module 05 — AI Strategy and Maturity
+# Module 5 — AI Strategy and Maturity
 
 ## 1. Why a client cares
 

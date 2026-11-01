@@ -1,4 +1,4 @@
-## Module 07 — Quiz answers
+## Module 7 — Quiz answers
 
 **1.** How much is it worth (value scoring); can we do it and how hard (feasibility scoring); should an agent do it and how autonomously (agentic-fit assessment), with the risk overlay as the fourth, modifying question. Agentic fit is assessed at task level because a use case bundles tasks with different variability, judgement and error profiles; the pattern and autonomy decision only makes sense for one task at a time.
 Manager-level benchmark: names all instruments without blending them and explains that the overlay comes after scoring so it modifies rather than contaminates.

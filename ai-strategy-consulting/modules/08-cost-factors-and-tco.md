@@ -1,4 +1,4 @@
-# Module 08 — Cost Factors and Total Cost of Ownership
+# Module 8 — Cost Factors and Total Cost of Ownership
 
 ## 1. Why a client cares
 

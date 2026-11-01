@@ -1,4 +1,4 @@
-# Module 06 — Use-Case Discovery
+# Module 6 — Use-Case Discovery
 
 ## 1. Why a client cares
 

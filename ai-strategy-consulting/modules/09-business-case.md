@@ -1,4 +1,4 @@
-# Module 09 — The AI Business Case
+# Module 9 — The AI Business Case
 
 ## 1. Why a client cares
 

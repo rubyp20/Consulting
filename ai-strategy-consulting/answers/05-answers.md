@@ -1,4 +1,4 @@
-## Module 05 — Quiz answers
+## Module 5 — Quiz answers
 
 **1.** Business-led digital roadmap; talent; operating model; technology; data; adoption and scaling [PUBLIC — Lamarre, Smaje, Zemmel, "Rewired", 2023]. KYB depends most on data (entity, ownership and document data sit in several systems and must become governed data products before any agent can reason over them) and on adoption and scaling (onboarding is run by operations teams whose workflow, controls and second-line sign-off must change for benefits to appear).
 Manager-level benchmark: names all six without hesitation, picks two with a one-line reason each, and notes that governance (model risk) is a close third for a regulated process.
