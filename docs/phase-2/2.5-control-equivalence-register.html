@@ -1,0 +1,152 @@
+<!doctype html><html><head><meta charset="utf-8"><title>2.5 Control Equivalence Register</title><link rel="stylesheet" href="../phase-1/build/style.css"><style>
+.ce { border: 1px solid #b8c4d0; margin: 0 0 10pt 0; page-break-inside: avoid; }
+.ce .hd { background: #0b3d6b; color: #fff; padding: 5pt 8pt; font-weight: bold; font-size: 10.5pt; }
+.ce .hd span { font-weight: normal; opacity: .85; font-size: 8.5pt; margin-left: 8pt; }
+.ce > table { margin: 0; }
+.ce td:first-child { width: 17%; color: #555; background: #f7f9fb; }
+.reg th, .reg td { font-size: 7.6pt; padding: 1.8pt 3pt; }
+.ST { background: #e6f4ea; } .RL { background: #fff8e6; } .AU { background: #e6edf5; } .EQ { background: #fbe9e7; } .RT { background: #f7f9fb; } .PQ { background: #fde7c8; }
+.sig td { height: 22pt; }
+</style></head><body>
+
+<div class="cover"><p class="small" style="letter-spacing:1px;text-transform:uppercase">Business Bank · Business Banking Transformation Office · BB-BLP-BPR</p>
+<h1>2.5 Control Equivalence Register<br/><span style="font-size:15pt;color:#1f4f82">Every control in the lending process: what changes, what replaces it, what evidence it leaves, and second line’s decision</span></h1>
+<table class="meta" style="width:65%;margin-top:20pt"><tr><td>Deliverable</td><td>2.5 Control equivalence register for the target-state design</td></tr><tr><td>Version</td><td>0.6 – all 28 controls classified and the five substantive equivalence cases drafted (Week 9). Reviewed incrementally with second line from Week 9; v1.0 when every entry carries a second-line decision (Week 12, Design Authority sitting)</td></tr>
+<tr><td>Derived from</td><td>1.6 control inventory (C0–C27, source classification from WS-13); 2.1 DP-02, DP-03; 2.3 disposition register and DDR-001 to DDR-012; 2.4 rule sets and PQ-001 to PQ-005</td></tr><tr><td>Owner</td><td>WS2 Credit Policy, DA &amp; Controls (Credit Risk and Controls Specialist)</td></tr><tr><td>Signed by</td><td>Senior Operational Risk Manager (second line) per entry; Head of Credit Risk Policy for policy-dependent entries; noted by Internal Audit</td></tr>
+<tr><td>Rule</td><td>DP-03: no to-be map is approved while it eliminates or automates a control without a signed entry here. Regulatory controls are retained in every option; only their mechanism may change.</td></tr></table></div>
+
+<div class="pb"><h1>1. How the register works</h1>
+<h2>1.1 Change classes</h2>
+<p>Each of the 28 controls from 1.6 is assigned one class. Only two classes require a formal equivalence judgement; the others require second line to confirm the classification.</p>
+<table><tr><th style="width:5%">Code</th><th style="width:16%">Class</th><th>Meaning</th><th style="width:22%">Second-line action</th></tr>
+<tr class="RT"><td>RT</td><td>Retained</td><td>Same control, same mechanism, same evidence; possibly relocated within a component without changing timing</td><td>Confirm classification</td></tr>
+<tr class="ST"><td>ST</td><td>Strengthened</td><td>Same objective; mechanism changes from manual or undocumented to system-applied with recorded evidence; the to-be is demonstrably at least as effective</td><td>Confirm that the new evidence is sufficient</td></tr>
+<tr class="AU"><td>AU</td><td>Automated, like for like</td><td>Same check, performed by the platform instead of a person, producing equivalent evidence</td><td>Confirm evidence equivalence; agree exception handling</td></tr>
+<tr class="RL"><td>RL</td><td>Relocated</td><td>Control moves earlier or later in the flow; same mechanism; timing change must not weaken it</td><td>Judge the timing change</td></tr>
+<tr class="EQ"><td>EQ</td><td>Replaced with equivalence</td><td>The as-is control is bypassed or removed for a defined population; a different control or set of controls provides equivalent assurance</td><td><b>Formal equivalence judgement</b> (section 3)</td></tr>
+<tr class="PQ"><td>PQ</td><td>Policy question</td><td>The change is not an equivalence question but a change to what policy permits; routed to Credit Risk Policy; as-is control retained until answered</td><td>Note; sign only after policy decision</td></tr></table>
+<h2>1.2 Second-line acceptance criteria <span class="ph">(from the Week 2 interview; to be confirmed in writing by second line)</span></h2>
+<p>An EQ entry is accepted when all of the following are shown:</p>
+<ol><li><b>Objective preserved.</b> The risk the as-is control addressed is named and the replacement addresses the same risk for the same population.</li><li><b>Evidence at least as good.</b> The to-be produces evidence that is recorded, attributable, timestamped and reportable; manual evidence is not replaced by weaker system evidence.</li><li><b>Population bounded.</b> The deals to which the replacement applies are defined by rule on system-held data; exclusions are explicit; anything outside the population follows the as-is control.</li><li><b>Detective control present.</b> Where a preventive control is relaxed, a detective control (sampling, cohort MI, exception reporting) with a defined rate, owner and escalation is in place from day one.</li><li><b>Reversible.</b> The replacement can be suspended for a population or segment without system change if findings warrant it.</li><li><b>Regulatory untouched.</b> No regulatory control’s capture, timing or definition is changed, and protected fields (1.8 §6) are preserved.</li></ol>
+<h2>1.3 Entry lifecycle</h2>
+<table><tr><th>Status</th><th>Meaning</th></tr>
+<tr><td>Drafted</td><td>Entry written by WS2 from 2.3 / 2.4</td></tr>
+<tr><td>Reviewed</td><td>Discussed with second line; conditions or questions recorded</td></tr>
+<tr><td>Conditional</td><td>Accepted subject to named conditions (e.g. sampling rate, policy answer, data availability)</td></tr>
+<tr><td>Accepted</td><td>Signed by second line; design may proceed</td></tr>
+<tr><td>Refused</td><td>As-is control retained in the to-be; design amended; recorded as a Phase 4 improvement candidate</td></tr></table></div>
+
+<div class="pb wide"><h1>2. Register · all controls</h1>
+<table class="reg"><tr><th style="width:3%">Ref</th><th style="width:15%">Control objective (1.6)</th><th style="width:5%">Source (WS-13)</th><th style="width:9%">As-is mechanism</th><th style="width:16%">To-be mechanism (2.3 / 2.4)</th><th style="width:4%">Class</th><th style="width:13%">Evidence in to-be</th><th style="width:5%">CE entry</th><th style="width:7%">Status</th><th>Second-line note</th></tr>
+<tr class="ST"><td>C0</td><td>Only viable enquiries progress</td><td>PRC</td><td>RM judgement, unrecorded</td><td>Pre-screen rule RS-14 at SC-1b S2; outcome and reason code recorded</td><td>ST</td><td>Rule result; reason code; decline MI</td><td>CE-006</td><td>Drafted</td><td>Confirms conduct evidence for RR-07</td></tr>
+<tr class="ST"><td>C1</td><td>Correct customer and all parties identified</td><td>POL / REG (KYC)</td><td>Manual search; parties by RM</td><td>CIF match at SC-1b S3; party completeness rule at SC-1a S4</td><td>ST</td><td>CIF match ID; completeness result</td><td>CE-007</td><td>Drafted</td><td>KYC element unchanged (performed in CIF, not BLP)</td></tr>
+<tr class="ST"><td>C2</td><td>Submission contains required analysis</td><td>POL</td><td>“If required”; off-platform</td><td>RS-04 items matrix by route; presence enforced at SC-2 S2; analytics on platform or integrated</td><td>ST</td><td>Items present; dates; integration results</td><td>CE-008</td><td>Drafted</td><td>Reduced items on R-FAST are part of CE-001</td></tr>
+<tr class="ST"><td>C3</td><td>Deal complete and consistent before submission</td><td>SYS / PRC</td><td>Manual validation</td><td>Submission standard as system rules (SC-2 S2)</td><td>ST</td><td>Rule pass per item</td><td>CE-008</td><td>Drafted</td><td></td></tr>
+<tr class="AU"><td>C4</td><td>Facility documents match terms</td><td>PRC / AUD</td><td>Manual check</td><td>Letter generated from terms; reconciliation on return (SC-3 S3)</td><td>AU</td><td>Generation log; reconciliation result; wet-ink manual check retained</td><td>CE-004</td><td>Drafted</td><td>Template change control is the compensating control</td></tr>
+<tr class="ST"><td>C5</td><td>Approval only by sufficient authority</td><td>POL</td><td>Manual matrix reading</td><td>Automated determination RS-05 at SC-2 S3; level and rule version recorded; override with reason</td><td>ST</td><td>Required level; approver level; matrix version</td><td>CE-009</td><td>Drafted</td><td>Breach impossible by construction; attempted breaches logged</td></tr>
+<tr class="EQ"><td>C6</td><td>Independent Credit assessment outside authority</td><td>POL</td><td>Credit assesses every deal routed</td><td>Retained for R-FULL; <b>bypassed for R-FAST renewals (CE-001) and administrative variations (CE-003)</b>; sampling</td><td>EQ</td><td>Route evidence; sampling results; cohort MI</td><td>CE-001, CE-003</td><td>Reviewed</td><td>Formal judgement; CE-001 also PQ-001</td></tr>
+<tr class="RL"><td>C7</td><td>Distress identified and referred</td><td>POL</td><td>Assessor screen after full assessment</td><td>RS-11 flag at SC-1a S3 (earlier); assessor judgement retained at SC-2 K1</td><td>RL</td><td>Flag result and indicators; assessor note</td><td>CE-005</td><td>Drafted</td><td>Earlier and additive; indicator data gaps noted</td></tr>
+<tr class="AU"><td>C8</td><td>Returned letter valid and matches issued</td><td>POL / AUD</td><td>Manual check by segment-dependent role</td><td>E-signature identity and completeness system-evidenced; reconciliation automated; wet-ink retains manual check (RS-13)</td><td>AU</td><td>Signature certificate; reconciliation</td><td>CE-004</td><td>Drafted</td><td>Timing control (reset) is CE-002</td></tr>
+<tr class="ST"><td>C9</td><td>Conditions precedent satisfied before fulfilment</td><td>POL</td><td>Single flag</td><td>Itemised CP checklist from conditions; each evidenced (SC-3 S5, R1)</td><td>ST</td><td>Per-item evidence</td><td>CE-010</td><td>Drafted</td><td></td></tr>
+<tr class="RT"><td>C10</td><td>Security perfected / released before fulfil / remove</td><td>POL / REG</td><td>LS marks complete</td><td>Retained; registration evidence attached; removal sequence corrected (TB-P3R)</td><td>RT</td><td>Registration evidence; sequence timestamps</td><td>—</td><td>Drafted</td><td>Sequence correction strengthens</td></tr>
+<tr class="RT"><td>C11</td><td>Fulfilment matches approved terms</td><td>POL / AUD</td><td>Manual set-up from BLP</td><td>Retained; task from gates; terms flow by integration where available (Programme scope)</td><td>RT</td><td>Task; fulfilment confirmation</td><td>—</td><td>Drafted</td><td>Four-eyes retained until integration</td></tr>
+<tr class="ST"><td>C12</td><td>Balance repaid before removal</td><td>POL</td><td>RM confirms</td><td>System balance check at TB-P3R S1; shared-security check</td><td>ST</td><td>Balance at check; result</td><td>CE-011</td><td>Drafted</td><td></td></tr>
+<tr class="PQ"><td>C13</td><td>Credit authority on CAP referral</td><td>POL</td><td>Sequential before SBS</td><td>Retained; parallel with C14 where CAP policy allows</td><td>PQ</td><td>Decision; timing</td><td>PQ-002</td><td>Routed</td><td>Not an equivalence question</td></tr>
+<tr class="RT"><td>C14</td><td>SBS categorisation</td><td>POL</td><td>SBS review</td><td>Retained; on referral record</td><td>RT</td><td>Categorisation data</td><td>—</td><td>Drafted</td><td></td></tr>
+<tr class="RT"><td>C15</td><td>Forbearance assessed and recorded</td><td><b>REG</b></td><td>SBS; batch status</td><td>Retained; same step; batch logic becomes native with cut-over reconciliation</td><td>RT</td><td>Assessment record; status with audit</td><td>—</td><td>Drafted</td><td>Protected F10; parallel run at cut-over</td></tr>
+<tr class="ST"><td>C16</td><td>Strategy documented before recovery action</td><td>POL</td><td>Off-platform memo</td><td>Structured on-platform memo (P5 B3)</td><td>ST</td><td>Structured fields; version</td><td>CE-012</td><td>Drafted</td><td></td></tr>
+<tr class="RT"><td>C17</td><td>ERV, provisions, write-offs accurate</td><td><b>REG</b></td><td>SBS entry</td><td>Retained; validation rules on entry</td><td>RT</td><td>Fields; validation log</td><td>—</td><td>Drafted</td><td>Protected F11</td></tr>
+<tr class="ST"><td>C18</td><td>CAP Strategy approved by SBS authority</td><td>POL</td><td>Manual</td><td>Authority determination as C5 (RS-05)</td><td>ST</td><td>Level recorded</td><td>CE-009</td><td>Drafted</td><td></td></tr>
+<tr class="ST"><td>C19</td><td>Allocation within pre-approved limit</td><td>SYS</td><td>Manual arithmetic</td><td>System enforcement Σ ≤ limit (SC-2 S1)</td><td>ST</td><td>Calculation; block on exceed</td><td>CE-013</td><td>Drafted</td><td></td></tr>
+<tr class="ST"><td>C20</td><td>Decline communicated with required information</td><td>REG / POL</td><td>Undefined</td><td>Templated communication with reason code (EX-A)</td><td>ST</td><td>Template; reason; sent</td><td>CE-006</td><td>Drafted</td><td>Conduct</td></tr>
+<tr class="ST"><td>C21</td><td>Appeal independently reviewed</td><td>POL</td><td>Undefined</td><td>Independent reviewer assigned by rule (EX-A)</td><td>ST</td><td>Reviewer ≠ assessor; outcome</td><td>CE-006</td><td>Drafted</td><td></td></tr>
+<tr class="ST"><td>C22</td><td>Post-approval change materiality</td><td>PRC</td><td>None</td><td>RS-12 rule (EX-C)</td><td>ST</td><td>Fields changed; class; route</td><td>CE-014</td><td>Drafted</td><td>New control replacing undefined practice</td></tr>
+<tr class="ST"><td>C23</td><td>Security documents reflect approved terms</td><td>POL</td><td>Manual instruction</td><td>Instruction generated from conditions (SC-3 S4)</td><td>ST</td><td>Instruction content = conditions</td><td>CE-010</td><td>Drafted</td><td></td></tr>
+<tr class="AU"><td>C24</td><td>Stale deals re-originated (90 days)</td><td>POL / PRC</td><td>Batch reset</td><td>Workflow timer with warnings; reset with reason (OP-12)</td><td>AU</td><td>Warnings sent; reset reason</td><td>CE-015</td><td>Drafted</td><td>Intent retained; warning added</td></tr>
+<tr class="AU"><td>C25</td><td>Waiver expiry enforced</td><td>POL</td><td>Batch</td><td>Native covenant lifecycle with RM task (OP-24)</td><td>AU</td><td>Status; task</td><td>CE-015</td><td>Drafted</td><td>Release 2</td></tr>
+<tr class="ST"><td>C26</td><td>Officer-code integrity</td><td>SYS</td><td>Mass batch, no audit</td><td>Ownership transfer with audit trail (P5 S2; OP-26)</td><td>ST</td><td>Transfer record</td><td>CE-016</td><td>Drafted</td><td>Supports C27</td></tr>
+<tr class="RT"><td>C27</td><td>Corporate restricted access</td><td><b>REG</b></td><td>BLP views</td><td>Retained; requirement DD-10</td><td>RT</td><td>Access log</td><td>—</td><td>Drafted</td><td>Compliance confirms model</td></tr>
+<tr class="EQ"><td>C8-T</td><td>Staleness of approval (3-month reset)</td><td>POL / PRC</td><td>Hard reset at 3 months unreturned</td><td>Graduated control EX-E (RS-08)</td><td>EQ</td><td>Chase; extension reason; re-validation</td><td>CE-002</td><td>Reviewed</td><td>Formal judgement</td></tr></table>
+<p class="small">C8-T is the timing element of C8, separated because it is the only part of C8 that changes class. Source classification per WS-13; where WS-13 is pending, 1.6 hypothesised class shown.</p>
+<h3>Summary</h3>
+<table><tr><th>Class</th><th>Count</th><th>Controls</th></tr>
+<tr class="RT"><td>Retained</td><td class="num">7</td><td>C10, C11, C14, C15, C17, C27 (+ C13 pending PQ)</td></tr>
+<tr class="ST"><td>Strengthened</td><td class="num">15</td><td>C0, C1, C2, C3, C5, C9, C12, C16, C18, C19, C20, C21, C22, C23, C26</td></tr>
+<tr class="AU"><td>Automated like for like</td><td class="num">4</td><td>C4, C8, C24, C25</td></tr>
+<tr class="RL"><td>Relocated</td><td class="num">1</td><td>C7</td></tr>
+<tr class="EQ"><td>Replaced with equivalence</td><td class="num">2</td><td>C6 (two populations: CE-001, CE-003); C8-T (CE-002)</td></tr>
+<tr class="PQ"><td>Policy question</td><td class="num">1</td><td>C13 (PQ-002)</td></tr></table>
+<p>All four regulatory controls (C15, C17, C27; KYC element of C1) are Retained or Strengthened with capture and timing unchanged. The formal equivalence judgements are three: CE-001, CE-002, CE-003.</p></div>
+
+<div class="pb"><h1>3. Equivalence entries · formal judgements</h1>
+
+<div class="ce"><div class="hd">CE-001 · Independent Credit assessment (C6) bypassed for RS-01-eligible renewals<span>EQ · DDR-001 · linked PQ-001 · Status: Reviewed</span></div><table>
+<tr><td>Risk addressed by as-is</td><td>A renewal is approved without an independent judgement that the credit remains acceptable; deterioration in the customer, sector or security is missed at the review point.</td></tr>
+<tr><td>Population</td><td>Renewals where every RS-01 condition holds at evaluation: no change to any term; grade within band and not stale; no downgrade in 12 months; covenants compliant; no RS-11 flag; no arrears; no EPR in 12 months; not excluded by sector / product; exposure within ceiling; at most two consecutive fast-tracks. Everything else follows R-FULL with the failing condition recorded.</td></tr>
+<tr><td>Replacement controls</td><td><b>Preventive:</b> (a) RS-01 evaluated by platform on system-held data, result and inputs recorded; (b) structural-change validation blocks any term change from P2; (c) automated DA determination (RS-05) with recorded authority level; (d) RS-04 reduced items enforced, including current grade and covenant status; (e) RS-01 c.12 forces a full review at least every third cycle; (f) RS-11 flag excludes any connection with an indicator. <b>Detective:</b> (g) Credit post-approval sampling of R-FAST approvals at 10% initially, risk-weighted, floor 5%, with findings categorised and fed to thresholds; (h) quarterly cohort MI comparing 12-month downgrade, arrears and referral rates for fast-track vs. full-review renewals; (i) segment suspension trigger at a 5% finding rate.</td></tr>
+<tr><td>Evidence</td><td>Per deal: rule version, each condition’s input and result, route, approver and level, items present. Per month: sampling results. Per quarter: cohort outcome MI to Head of Credit and Risk Committee.</td></tr>
+<tr><td>Residual risk</td><td>Deterioration between grade reviews not captured by RS-11 indicators (e.g. sector shock without arrears). <b>Mitigation:</b> grade age ≤ 15 months (c.4); downgrade check (c.5); sampling weighted to band-edge grades; Credit Risk may add sector overlays to RS-11 at any time without system change.</td></tr>
+<tr><td>Acceptance criteria test</td><td>1 objective preserved ✓ (same risk, defined population) · 2 evidence ✓ (recorded, attributable) · 3 population bounded ✓ (rule on system data; RM may only force R-FULL) · 4 detective ✓ (sampling, cohort MI, suspension) · 5 reversible ✓ (suspension by segment is a rule-table change) · 6 regulatory ✓ (F06 grade capture unchanged; refresh rule added).</td></tr>
+<tr><td>Dependencies</td><td>PQ-001 (authority): if refused, this entry is withdrawn and R-FAST retains Credit assessment with a reduced submission. PQ-004 (thresholds). A2 cohort evidence at G1.</td></tr>
+<tr><td>Second-line conditions (to record)</td><td class="ph">[Sampling rate and weighting; cohort MI format; suspension trigger; grade-age maximum; review after two quarters]</td></tr>
+<tr><td>Decision</td><td class="ph">Reviewed W9; decision at W11 sitting after PQ-001</td></tr></table></div>
+
+<div class="ce"><div class="hd">CE-002 · Three-month unreturned-letter reset replaced by graduated staleness control<span>EQ · DDR-005 · Status: Reviewed</span></div><table>
+<tr><td>Risk addressed by as-is</td><td>A facility is documented and fulfilled on an approval whose basis has changed in the interval (customer position, security, terms), because too long has elapsed since the decision.</td></tr>
+<tr><td>Population</td><td>All deals in SC-3 awaiting a returned letter; any pattern.</td></tr>
+<tr><td>Replacement controls</td><td><b>Preventive:</b> (a) automated chase at 2, 4, 8 weeks with timestamps; (b) RM extension at 10 weeks with reason code, visible to line; (c) at 3 months, platform re-validation of the facts the approval depended on: grade unchanged or improved; no RS-11 flag; no arrears; terms, security, parties unchanged; any failure resets to SC-2; (d) reset at 6 months regardless; (e) material change at any time (RS-12) resets. <b>Detective:</b> (f) monthly MI on letters outstanding &gt; 8 weeks, extensions granted, re-validations passed / failed, resets.</td></tr>
+<tr><td>Evidence</td><td>Chase log; extension reason; re-validation record with each fact’s value at 3 months; reset reason.</td></tr>
+<tr><td>Residual risk</td><td>A change not captured by the re-validation items. <b>Mitigation:</b> item list owned by Credit Risk Policy and extendable; 6-month hard stop; the as-is control had no re-validation at all, only a reset, so the to-be examines more, not less.</td></tr>
+<tr><td>Acceptance criteria test</td><td>1 ✓ · 2 ✓ (chase and re-validation evidence where none existed) · 3 ✓ · 4 ✓ (monthly MI) · 5 ✓ (schedule is a rule table) · 6 ✓ (no regulatory field).</td></tr>
+<tr><td>Dependencies</td><td>Platform timers and status (G1 decision 3); RS-08 item list agreed.</td></tr>
+<tr><td>Second-line conditions (to record)</td><td class="ph">[Re-validation item list; whether 6 months may be shortened for New Money]</td></tr>
+<tr><td>Decision</td><td class="ph">Reviewed W9; decision at W11</td></tr></table></div>
+
+<div class="ce"><div class="hd">CE-003 · Independent Credit assessment (C6) bypassed for administrative variations<span>EQ · DDR-009 · Status: Reviewed</span></div><table>
+<tr><td>Risk addressed by as-is</td><td>A change that affects credit risk is made without Credit seeing it, because it was presented as administrative.</td></tr>
+<tr><td>Population</td><td>Variations whose reason codes are all in the RS-03 R-FAST set (V-01, V-02, V-10; V-05 subject to PQ-003) and no RS-11 flag.</td></tr>
+<tr><td>Replacement controls</td><td><b>Preventive:</b> (a) reason code mandatory at SC-1a; (b) most-material-wins combination rule: any R-FULL reason forces R-FULL; (c) V-12 “other” always R-FULL; (d) line approval with recorded reason and authority (RS-05, RS-13); (e) letter, security and fulfilment gates set by reason so an administrative code cannot produce a term change in documents. <b>Detective:</b> (f) Credit sampling weighted to V-02 and V-10; (g) exception report of any administrative variation that changed a monitored field (limit, rate, maturity, security, party) in the same period; (h) segment suspension as CE-001.</td></tr>
+<tr><td>Evidence</td><td>Reason codes; route; approver and level; field-change log vs. reason.</td></tr>
+<tr><td>Residual risk</td><td>Mis-coding to obtain the fast route. <b>Mitigation:</b> field-change exception report (g) detects it mechanically; sampling targets the codes most open to misuse; repeat findings by individual escalated through line.</td></tr>
+<tr><td>Acceptance criteria test</td><td>1 ✓ · 2 ✓ · 3 ✓ (codes on system data) · 4 ✓ (sampling + mechanical exception report) · 5 ✓ · 6 ✓.</td></tr>
+<tr><td>Dependencies</td><td>RS-03 taxonomy agreed (W9); PQ-003 on V-05.</td></tr>
+<tr><td>Decision</td><td class="ph">Reviewed W9; decision at W11</td></tr></table></div></div>
+
+<div class="pb"><h1>4. Equivalence entries · strengthened, automated and relocated controls</h1>
+<p>Shorter entries: second line confirms that the new evidence is sufficient and that exception handling is defined.</p>
+<table><tr><th style="width:6%">CE</th><th style="width:8%">Controls</th><th style="width:26%">To-be mechanism</th><th style="width:22%">Evidence</th><th style="width:20%">Exception handling</th><th>Status</th></tr>
+<tr><td>CE-004</td><td>C4, C8</td><td>Letter generated from approved terms; reconciliation on return; e-signature identity</td><td>Generation log; reconciliation pass / fail; signature certificate</td><td>Wet-ink path keeps manual C8 by RS-13 role; template change control with four-eyes; reconciliation failure blocks G-DOC</td><td>Drafted</td></tr>
+<tr><td>CE-005</td><td>C7</td><td>RS-11 flag at deal start; assessor judgement retained</td><td>Flag result and indicator values; assessor note</td><td>Indicator data gaps (arrears integration) → condition conservative; flag false-negatives mitigated by retained judgement</td><td>Drafted</td></tr>
+<tr><td>CE-006</td><td>C0, C20, C21</td><td>Pre-screen rule with reason; templated decline; independent reviewer by rule</td><td>Reason codes; template sent; reviewer ≠ assessor</td><td>Rule override by line with reason; appeal window configurable</td><td>Drafted</td></tr>
+<tr><td>CE-007</td><td>C1</td><td>CIF match; party completeness rule</td><td>Match ID; completeness result</td><td>No match → manual create with four-eyes; KYC remains in CIF</td><td>Drafted</td></tr>
+<tr><td>CE-008</td><td>C2, C3</td><td>RS-04 items enforced at submission</td><td>Items present with dates</td><td>Item unavailable → Credit may waive with reason (recorded)</td><td>Drafted</td></tr>
+<tr><td>CE-009</td><td>C5, C18</td><td>Automated authority determination from DA matrix as data</td><td>Required level; approver level; matrix version; override reason</td><td>Matrix maintenance under Credit Risk Policy change control; determination failure → Credit queue (safe default)</td><td>Drafted</td></tr>
+<tr><td>CE-010</td><td>C9, C23</td><td>Itemised CPs from conditions; security instruction from conditions</td><td>Per-item evidence; instruction content</td><td>Condition not expressible as item → manual item with evidence upload</td><td>Drafted</td></tr>
+<tr><td>CE-011</td><td>C12</td><td>Balance check; shared-security check before release</td><td>Balance value; check result</td><td>Balance data unavailable → manual confirmation with four-eyes</td><td>Drafted</td></tr>
+<tr><td>CE-012</td><td>C16</td><td>Structured memo</td><td>Fields; version</td><td>Narrative sections retained for judgement</td><td>Drafted</td></tr>
+<tr><td>CE-013</td><td>C19</td><td>Limit arithmetic enforced</td><td>Calculation; block</td><td>None needed (hard stop)</td><td>Drafted</td></tr>
+<tr><td>CE-014</td><td>C22</td><td>RS-12 materiality rule</td><td>Fields changed; class</td><td>Unclassified field → material (safe default)</td><td>Drafted</td></tr>
+<tr><td>CE-015</td><td>C24, C25</td><td>Timers replace batch; warnings; native lifecycle</td><td>Warnings; reset reason; task</td><td>Cut-over reconciliation of batch state to native status</td><td>Drafted</td></tr>
+<tr><td>CE-016</td><td>C26</td><td>Ownership transfer with audit; bulk with approval</td><td>Transfer record</td><td>Bulk transfer requires line approval; Corporate transfers checked against C27</td><td>Drafted</td></tr></table>
+<h2>4.1 Regulatory controls · statement for second line and Internal Audit</h2>
+<table><tr><th>Control</th><th>Field groups</th><th>Capture point as-is</th><th>Capture point to-be</th><th>Timing</th><th>Cut-over</th></tr>
+<tr><td>C15 Forbearance</td><td>F10</td><td>CR-2 S7; batch status</td><td>P5 B2; native status logic</td><td>Unchanged</td><td>Parallel run; status reconciliation</td></tr>
+<tr><td>C17 ERV / provisions / write-offs</td><td>F11</td><td>CS-2 S4</td><td>P5 B4 with validation</td><td>Unchanged</td><td>Field-level reconciliation</td></tr>
+<tr><td>C27 Corporate access</td><td>—</td><td>BLP views</td><td>Platform access model (DD-10)</td><td>n/a</td><td>Access model tested before migration</td></tr>
+<tr><td>C1 (KYC element)</td><td>F01, F02</td><td>CIF</td><td>CIF (unchanged); BLP pull-through</td><td>Unchanged</td><td>n/a</td></tr></table></div>
+
+<div class="pb"><h1>5. Review schedule and sign-off</h1>
+<table><tr><th>Week</th><th>Sitting</th><th>Entries</th><th>Outcome sought</th></tr>
+<tr><td>9</td><td>Second-line review 1</td><td>CE-006 to CE-016 (strengthened / automated); classification of all 28</td><td>Classifications confirmed; evidence sufficiency agreed; conditions noted</td></tr>
+<tr><td>9</td><td>Second-line review 2</td><td>CE-001, CE-002, CE-003 first reading; CE-004, CE-005</td><td>Questions and conditions recorded; data needs (A2 cohort) confirmed</td></tr>
+<tr><td>10</td><td>Credit Risk Policy</td><td>PQ-001 to PQ-005</td><td>Policy answers; CE-001 / CE-003 dependencies resolved</td></tr>
+<tr><td>11</td><td>Second-line review 3</td><td>CE-001, CE-002, CE-003 decision; conditional entries closed</td><td>Accepted / Conditional / Refused recorded</td></tr>
+<tr><td>12</td><td>Design Authority</td><td>Register v1.0</td><td>Signed; 2.3 approved against DP-03</td></tr></table>
+<h2>5.1 Sign-off</h2>
+<table class="sig"><tr><th style="width:30%">Role</th><th style="width:12%">Entries</th><th style="width:22%">Name</th><th>Signature</th><th style="width:12%">Date</th></tr>
+<tr><td>Senior Operational Risk Manager (second line)</td><td>All</td><td></td><td></td><td></td></tr>
+<tr><td>Head of Credit Risk Policy</td><td>CE-001, CE-003, CE-009; PQ-001 to PQ-005</td><td></td><td></td><td></td></tr>
+<tr><td>Head of MI &amp; Regulatory Reporting</td><td>Regulatory statement (§4.1)</td><td></td><td></td><td></td></tr>
+<tr><td>Head of Internal Audit (noted)</td><td>All</td><td></td><td></td><td></td></tr>
+<tr><td>Head of Lending Operations (Design Authority Chair)</td><td>Register v1.0</td><td></td><td></td><td></td></tr></table></div>
+</body></html>

@@ -10,6 +10,8 @@ const jobs = [
   { html: `${D}/2.2-journey-pattern-definitions.html`, pdf: `${D}/2.2-Journey-Pattern-Definitions.pdf`, landscape: false, title: 'BB-BLP-BPR · 2.2 Journey Pattern Definitions · v0.8 for Design Authority' },
   { html: `${D}/2.3-to-be-process-maps.html`, pdf: `${D}/2.3-To-Be-Process-Maps-L3-L4.pdf`, landscape: true, title: 'BB-BLP-BPR · 2.3 To-Be Process Maps L3/L4 · v0.6 design draft' },
   { html: `${D}/2.4-routing-design-and-rules-tables.html`, pdf: `${D}/2.4-Routing-Design-and-Rules-Tables.pdf`, landscape: false, title: 'BB-BLP-BPR · 2.4 Risk-Based Routing Design and Rules Tables · v0.5 for co-design' },
+  { html: `${D}/2.5-control-equivalence-register.html`, pdf: `${D}/2.5-Control-Equivalence-Register.pdf`, landscape: false, title: 'BB-BLP-BPR · 2.5 Control Equivalence Register · v0.6 for second-line review' },
+  { html: `${D}/2.6-gap-analysis.html`, pdf: `${D}/2.6-Gap-Analysis.pdf`, landscape: false, title: 'BB-BLP-BPR · 2.6 Gap Analysis · v0.7' },
 ];
 (async () => {
   const b = await chromium.launch();
