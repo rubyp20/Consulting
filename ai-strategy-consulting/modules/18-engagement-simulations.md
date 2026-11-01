@@ -25,7 +25,7 @@ To keep the simulations numerically consistent, the following assumptions are sh
 | Discount rate for NPV | 10% | Typical bank hurdle for operational investments |
 | FX for cross-checks | 1 EUR = 1.10 USD; 1 GBP = 1.17 EUR | Illustrative |
 
-## Simulation A — AI strategy and use-case assessment for a mid-sized bank
+## Simulation A: AI strategy and use-case assessment for a mid-sized bank
 
 ### Client ask
 
@@ -130,7 +130,7 @@ How a value score was built, for one row [ILLUSTRATIVE]. AML alert triage: 180,0
 | 4 | 4 | 10 | 48 | 34 | 35 |
 | 5 | 4 | 10 | 48 | 34 | 69 |
 
-NPV at 10%: -15/1.10 + -5/1.21 + 21/1.331 + 34/1.4641 + 34/1.6105 = -13.6 - 4.1 + 15.8 + 23.2 + 21.1 = EUR 42.3m. Payback during year 3, roughly month 35 from programme start. Investment of EUR 60m over five years against a run-rate benefit of EUR 48m is a payback profile a bank board will accept; the sensitivity that matters most is wave 2 slipping by a year, which moves payback to month 44 and cuts NPV to about EUR 27m.
+NPV at 10%: -15/1.10 + -5/1.21 + 21/1.331 + 34/1.4641 + 34/1.6105 = -13.6 - 4.1 + 15.8 + 23.2 + 21.1 = EUR 42.3m. Payback during year 3, roughly month 35 from programme start. Investment of EUR 60m over five years against a run-rate benefit of EUR 48m is a payback profile a bank board will accept; the sensitivity that matters most is wave 2 slipping by a year, which moves payback to month 43 and cuts NPV to about EUR 25m.
 
 **Analysis 5: operating model.** Hub-and-spoke: a central AI hub of 28 FTE by end of year 2 (platform engineering 12, AI product and delivery 8, AI risk and evaluation 5, change and adoption 3) with embedded product owners in each of the five domains. Funding: central budget for platform and wave 1, business-funded from wave 2 with a gain-share rule that 50% of validated savings are reinvested in the business unit's next use case. Governance: an AI steering committee chaired by the COO, a model-risk gate run by the existing model validation function extended with LLM evaluation competence, and an AI Act register maintained by Compliance.
 
@@ -175,7 +175,7 @@ Benefits: EUR 48m risk-adjusted run-rate by year 3, NPV EUR 42m, payback month 3
 
 Risks and mitigations: wave 2 slippage from KYC data remediation (mitigate by starting remediation in month 1); talent attrition in the hub (mitigate with a retention plan and partner model); value leakage if capacity released is not converted (mitigate with a quarterly benefits review co-signed by Finance); regulatory change (mitigate with an AI Act register and a horizon-scanning role in Compliance).
 
-## Simulation B — Agentic AI transformation of corporate onboarding (KYB) at a UK Tier-1 bank
+## Simulation B: Agentic AI transformation of corporate onboarding (KYB) at a UK Tier-1 bank
 
 ### Client ask
 
@@ -386,7 +386,7 @@ Benefits: GBP 18m of annual capacity release and an estimated GBP 10m of revenue
 
 Risks and mitigations: a missed beneficial owner or true match (mitigated by hard gates, 100% QC in pilot, risk-based sampling at scale, kill switch); vendor model changes degrading accuracy (mitigated by version pinning, change notification clauses, regression evals); analyst de-skilling (mitigated by rotation through complex cases and QC roles); prompt injection via uploaded documents (mitigated by document sanitisation, isolation of untrusted content, action allow-lists); labour relations in the UK and India (mitigated by early consultation and an attrition-first plan).
 
-## Simulation C — An AI business case for an agentic dispute-resolution platform, defended to a CFO
+## Simulation C: An AI business case for an agentic dispute-resolution platform, defended to a CFO
 
 ### Client ask
 
