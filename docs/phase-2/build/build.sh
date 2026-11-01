@@ -15,6 +15,7 @@ const jobs = [
   { html: `${D}/2.7-fit-gap-assessment.html`, pdf: `${D}/2.7-Fit-Gap-Assessment.pdf`, landscape: false, title: 'BB-BLP-BPR · 2.7 Fit-Gap Assessment · v0.5 expected classifications for workshops' },
   { html: `${D}/2.8-process-requirements-pack.html`, pdf: `${D}/2.8-Process-Requirements-Pack.pdf`, landscape: false, title: 'BB-BLP-BPR · 2.8 Process Requirements Pack · v0.7 interim release' },
   { html: `${D}/2.9-target-operating-model.html`, pdf: `${D}/2.9-Target-Operating-Model.pdf`, landscape: false, title: 'BB-BLP-BPR · 2.9 Target Operating Model · v0.6' },
+  { html: `${D}/2.10-data-and-mi-design.html`, pdf: `${D}/2.10-Data-and-MI-Design.pdf`, landscape: false, title: 'BB-BLP-BPR · 2.10 Data and MI Design · v0.6' },
 ];
 (async () => {
   const b = await chromium.launch();

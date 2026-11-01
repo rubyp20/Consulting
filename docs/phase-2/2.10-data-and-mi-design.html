@@ -1,0 +1,183 @@
+<!doctype html><html><head><meta charset="utf-8"><title>2.10 Data and MI Design</title><link rel="stylesheet" href="../phase-1/build/style.css"><style>
+.d th, .d td { font-size: 7.7pt; padding: 1.8pt 3.5pt; }
+.P1 { background: #fbe9e7; } .P2 { background: #fff8e6; } .P3 { background: #e6edf5; } .P4 { background: #f7f9fb; }
+.new { color: #1a7f37; font-weight: bold; }
+</style></head><body>
+
+<div class="cover"><p class="small" style="letter-spacing:1px;text-transform:uppercase">Business Bank · Business Banking Transformation Office · BB-BLP-BPR</p>
+<h1>2.10 Data and MI Design<br/><span style="font-size:15pt;color:#1f4f82">Where every field is captured in the target state, how protected fields are preserved, how history is mapped, and what the platform must report</span></h1>
+<table class="meta" style="width:65%;margin-top:20pt"><tr><td>Deliverable</td><td>2.10 Data and MI design: to-be capture points, new data elements, protected-field preservation, deal-type mapping, migration rules, KPI definitions on the to-be stage model, MI products</td></tr><tr><td>Version</td><td>0.6 – complete against 2.3 / 2.4 / 2.8 (Week 11). Field-level lineage rows depend on 1.8 v1.0 (DR-10); v1.0 at Design Authority (Week 12) with Head of MI &amp; Regulatory Reporting acceptance</td></tr>
+<tr><td>Derived from</td><td>1.8 lineage and protected fields; 1.4 stage model and metric dictionary; 2.3 maps; 2.4 rule inputs; 2.5 regulatory statement; 2.6 GD-01 to GD-08; 2.8 DAT-01 to DAT-08, INT-08, NFR-04</td></tr><tr><td>Owner</td><td>WS3 Data &amp; MI (Data / MI Analyst) with Bank BA</td></tr><tr><td>Accepted by</td><td>Head of MI &amp; Regulatory Reporting; named field-group owners; Replacement Programme Data Lead (DD-09, migration rules); second line (regulatory preservation)</td></tr></table></div>
+
+<div class="pb"><h1>1. Design principle applied and what this document guarantees</h1>
+<p>DP-09: capture once, at source, with a named owner; protected fields are a constraint. This document is the evidence that the target design honours it. It makes four guarantees, each verifiable by a table below:</p>
+<table><tr><th style="width:5%">#</th><th style="width:40%">Guarantee</th><th>Verified by</th></tr>
+<tr><td>1</td><td>Every protected field group (1.8 §6) has a to-be capture point at the same or an earlier step, with the same definition, and an owner</td><td>§2 capture map; §3 preservation table</td></tr>
+<tr><td>2</td><td>Every data element a rule in 2.4 reads is captured before the rule evaluates it, in structured form</td><td>§4 new elements, keyed to rule inputs</td></tr>
+<tr><td>3</td><td>History remains reportable across the deal-type change and the ESR Cleanse exclusion, and baseline metrics remain comparable across the stage-model change</td><td>§5 mapping and migration rules; §6 stage mapping</td></tr>
+<tr><td>4</td><td>Every KPI, control measure and benefit in 2.11 / 2.13 can be produced from platform data without a survey</td><td>§6 metric definitions; §7 MI products</td></tr></table>
+<h3>Ownership model (from 2.9 §5)</h3>
+<table><tr><th>Field group</th><th>Accountable owner</th><th>Definition change requires</th></tr>
+<tr><td>F10 forbearance; F11 ERV, provisions, write-offs, categorisation</td><td>Head of SBS (with Head of MI for reporting definition)</td><td>Owner + MI + second line</td></tr>
+<tr><td>F06 risk grade and classifications</td><td>Head of Credit Risk Policy</td><td>Owner + MI</td></tr>
+<tr><td>F04 facility terms; F05 exposure; F08 security</td><td>Head of Lending Operations (F08 with Lending Services)</td><td>Owner + MI</td></tr>
+<tr><td>F01 customer; F02 parties</td><td>Head of Lending Operations (KYC content: Compliance via CIF)</td><td>Owner + Compliance</td></tr>
+<tr><td>F07 decisions and authority; F03 deal and pattern; F12 ownership; F13 documents; F14 workflow events; F15 deposits</td><td>Head of Lending Operations</td><td>Owner + MI</td></tr>
+<tr><td>F09 covenants and conditions</td><td>Head of Credit Risk Policy</td><td>Owner</td></tr>
+<tr><td>Lineage register and protected-fields list</td><td>Head of MI &amp; Regulatory Reporting</td><td>Change control; annual attestation</td></tr></table></div>
+
+<div class="pb wide"><h1>2. To-be capture map</h1>
+<p>Every field group from 1.8 §5 with its as-is and to-be capture point, mode, and what changes. Protection level from 1.8 §6 (P1 regulatory · P2 regulatory-derived / audit · P3 MI continuity · P4 operational).</p>
+<table class="d"><tr><th style="width:3%">#</th><th style="width:14%">Field group</th><th style="width:3%">Prot.</th><th style="width:14%">As-is capture (1.8)</th><th style="width:17%">To-be capture (2.3 step)</th><th style="width:8%">Mode to-be</th><th style="width:8%">Captured by</th><th style="width:17%">What changes</th><th>Rules reading it (2.4)</th></tr>
+<tr class="P2"><td>F01</td><td>Customer identity, counterparty type, sector, SME classification</td><td>P2</td><td>NM-1 S3–S5 manual; CIF for existing</td><td>SC-1b S3 (CIF match / create); SC-1a S2 (loaded)</td><td>Pull-through</td><td>CIF; platform</td><td>Captured once in CIF; never re-keyed; sector and SME classification pulled, not typed</td><td>RS-01 c.10, RS-05, RS-14</td></tr>
+<tr class="P2"><td>F02</td><td>Parties, guarantors, connection membership</td><td>P2</td><td>NM-1 D1 loop; VA-1 S5; CS-2</td><td>SC-1a S4 (completeness rule); SC-1b S3; P3 V-07</td><td>Pull-through + rule</td><td>Platform; RM</td><td>Completeness enforced; connection traversal for RS-11 i.7</td><td>RS-11, RS-03 V-07</td></tr>
+<tr class="P3"><td>F03</td><td>Pattern, deal type parameter, route, dates, restructure flag</td><td>P3</td><td>NM-1 S7; RN-1 S5; SR-1 S6; SD-1 S6</td><td>SC-1a S5 / SC-1b S4 (pattern and parameters); SC-2 D1 (route)</td><td>System-set</td><td>Platform</td><td><span class="new">New:</span> route, eligibility result, failing conditions; deal type becomes a parameter; mapping table (§5)</td><td>RS-01 c.9, c.12; RS-10</td></tr>
+<tr class="P1"><td>F04</td><td>Product, limit, rate and margin, fees, repayment, expiry, tranche schedule</td><td>P1</td><td>NM-1 S8; SL-1 S8–S9; SR-1 S7–S8; SD-1; CS-2 S1</td><td>SC-1b R2 (P1); SC-1a R1 (P2 structural validation; P3 change capture); SC-2 S1 (P4 allocation); SC-2 S5 (approved terms)</td><td>Manual + system</td><td>RM; platform</td><td>Approved terms become the document source (no divergence between system and letter); tranche schedule structured; limit arithmetic enforced; balances via INT-01</td><td>RS-01 c.1–2, c.11; RS-02; RS-05; RS-06</td></tr>
+<tr class="P1"><td>F05</td><td>Exposure: total, personal, NAG, group</td><td>P1</td><td>Derived; ESR Cleanse updates</td><td>Derived from F04 across connection at SC-2 S3; migration rule for personal / NAG (§5.3)</td><td>Derived</td><td>Platform</td><td>ESR Cleanse removed as a capture path; migration carries the updates; derivation documented</td><td>RS-05; RS-01 c.11</td></tr>
+<tr class="P1"><td>F06</td><td>Risk grade, grade date, ECRS, lending category, debt-servicing result</td><td>P1</td><td>*-2 R3; off-platform W-10</td><td>SC-2 R2 (R-FULL) / R1 (R-FAST refresh per RS-04); grade history retained</td><td>Manual (on-platform) + integration (R2)</td><td>RM; Credit</td><td>Grade date and history structured (RS-01 c.4–5 depend on it); analytics evidenced on platform; staleness rule</td><td>RS-01 c.3–5; RS-04; RS-05; RS-11 i.2; RS-08 re-validation</td></tr>
+<tr class="P2"><td>F07</td><td>Decision, authority level, approver, rule version, decline reason</td><td>P2</td><td>*-2 D2, D4, S5; EX-01</td><td>SC-2 S3 (authority), R3 / D3 (decision), S5; EX-A S1 (reason)</td><td>System-written</td><td>Platform</td><td><span class="new">New:</span> authority level, matrix version, rule evidence, decline and withdraw reason codes, sampling tag and finding</td><td>RS-05 (writes); CE-001 sampling</td></tr>
+<tr class="P1"><td>F08</td><td>Security type, value, valuation date, allocation, perfection status, registration, release</td><td>P1</td><td>EX-05; RF-2; NM-3 S5</td><td>SC-3 S4 (instruction from conditions), G1–G2 (status, evidence); TB-P3R (release sequence)</td><td>Manual + system</td><td>Lending Services; platform</td><td>Registration evidence attached; release sequence enforced; shared-security relationship explicit</td><td>RS-04 (valuation age); RS-07; RS-02 t.8</td></tr>
+<tr class="P4"><td>F09</td><td>Covenants, tracking items, waivers, conditions precedent</td><td>P4</td><td>VA-3 S4; RF-2 S4; batch W-03</td><td>SC-2 S5 (conditions structured); SC-3 S5 (CP items); native lifecycle (OP-24, R2)</td><td>System + manual</td><td>Credit; RM; platform</td><td>Conditions structured at decision; CP items generated; waiver lifecycle native with audit</td><td>RS-01 c.6; RS-11 i.3; RS-08</td></tr>
+<tr class="P1"><td>F10</td><td>Forbearance status, date, measure</td><td>P1</td><td>CR-2 S7; batch W-02</td><td>P5 B2 (assessment); native status logic</td><td>Manual + system</td><td>SBS; platform</td><td><b>Definition, capture step and timing unchanged.</b> Batch logic reproduced natively; cut-over parallel run (§5.4)</td><td>RS-11 i.4</td></tr>
+<tr class="P1"><td>F11</td><td>ERV, provisions, write-offs, categorisation cause, recovery team</td><td>P1</td><td>CS-2 S4; CR-2 S5–S6</td><td>P5 S2 (categorisation), B3 (structured memo adds), B4 (recovery fields with validation)</td><td>Manual (validated)</td><td>SBS</td><td><b>Definition unchanged.</b> Validation rules on entry; memo adds structured fields, replaces none</td><td>— (reporting only)</td></tr>
+<tr class="P2"><td>F12</td><td>Officer, segment, team, ownership history</td><td>P2</td><td>Deal creation; CR-2 S8; batch W-04</td><td>SC-1 (from user / event); P5 S2 (transfer record)</td><td>System-written</td><td>Platform</td><td><span class="new">New:</span> ownership history with dates and reason; segment derivable at any point in time (MA-03 retired)</td><td>RS-13</td></tr>
+<tr class="P4"><td>F13</td><td>Document type, status, dates, signature evidence, reconciliation result</td><td>P4</td><td>*-3 S1–S3 (partial; DR-08)</td><td>SC-3 S1–S3; EX-E (chase, extension, re-validation)</td><td>System-written</td><td>Platform</td><td><span class="new">New, captured for the first time:</span> issued / viewed / signed / returned timestamps; chase log; extension reason; re-validation record</td><td>RS-06; RS-08</td></tr>
+<tr class="P3"><td>F14</td><td>Workflow stage, timestamps, actor, task open / close, queue</td><td>P3</td><td>Every transition (partial coverage)</td><td>Every transition and task (DAT-06); stage model §6</td><td>System-written</td><td>Platform</td><td>Complete coverage; task time; mapped to baseline stages</td><td>SLA timers; all T-metrics</td></tr>
+<tr class="P4"><td>F15</td><td>Deposit opportunity status, value, reason, pricing exception</td><td>P4</td><td>NM-1 S6; DP-1</td><td>Per SD-03: SC-1 status or CRM; reason code; exception approval</td><td>Manual</td><td>RM</td><td><span class="new">New:</span> reason codes; pricing-exception record</td><td>—</td></tr></table></div>
+
+<div class="pb"><h1>3. Protected-field preservation statement</h1>
+<p>For each P1 and P2 field group: the design obligation from 1.8 §6.1, how the design meets it, and the cut-over test. This section is the evidence for 2.5 §4.1 and DD-09.</p>
+<table><tr><th style="width:8%">Group</th><th style="width:22%">Lever(s) touching it</th><th style="width:30%">Obligation and how met</th><th style="width:22%">Cut-over test</th><th>Sign-off</th></tr>
+<tr class="P1"><td>F10</td><td>L7 retire batch; L10 distress</td><td>Status definition unchanged; batch rules re-implemented as native logic from the job specification (DR-09); assessment captured at P5 B2 as today</td><td>One reporting cycle parallel: batch status vs native status per connection; zero unexplained differences</td><td>Head of SBS; Head of MI; second line</td></tr>
+<tr class="P1"><td>F11</td><td>L14 capture once; L15 structured memo</td><td>Fields unchanged; validation added (ranges, mandatory on categorisation); memo adds fields, replaces none; narrative retained</td><td>Field-level reconciliation of migrated values; validation rules tested on historic cases</td><td>Head of SBS; Head of MI</td></tr>
+<tr class="P1"><td>F04, F05</td><td>L1 fast-track; L5 triage; L6 ESR Cleanse; L12 patterns</td><td>Terms captured once and used as document source; exposure derived by documented rule; ESR Cleanse updates specified for migration (§5.3); fast-track re-confirms limit and dates (RS-01 c.1–2)</td><td>Exposure recalculated post-migration vs pre-migration per connection; variance explained</td><td>Head of Lending Ops; Head of MI</td></tr>
+<tr class="P1"><td>F06</td><td>L1 fast-track; L11 submission; L14</td><td>Grade and classifications captured at SC-2 on every route; R-FAST requires grade ≤ 15 months (RS-01 c.4) and refresh per RS-04; history retained for RS-01 c.5 and RS-11</td><td>Grade history migrated; staleness rule tested on cohort</td><td>Head of Credit Risk Policy</td></tr>
+<tr class="P1"><td>F08</td><td>L8 security instruction; L15</td><td>Values and dates captured at instruction and completion; registration evidence attached; release sequence enforced</td><td>Security records reconciled; shared-security links verified</td><td>Head of Lending Services</td></tr>
+<tr class="P2"><td>F01, F02</td><td>L2 deal start</td><td>Captured in CIF; pulled through; completeness rule adds, removes nothing</td><td>CIF reference present on 100% of migrated customers</td><td>Compliance; Head of Lending Ops</td></tr>
+<tr class="P2"><td>F07, F12</td><td>L3 automated DA; L14</td><td>Authority level and rule version recorded on every decision (today: approver name only); ownership history retained</td><td>Migrated decisions carry approver; new decisions carry level; attempted-breach log operational</td><td>Second line; Internal Audit</td></tr></table>
+<p><b>Statement for second line:</b> no P1 field changes definition, capture step or timing. Four groups gain additional capture (validation, history, evidence) and none loses any.</p></div>
+
+<div class="pb"><h1>4. New data elements</h1>
+<p>Elements the as-is does not hold in structured form and the target design requires. Each is keyed to the rule or control that reads it, so none is captured without a consumer (DP-09).</p>
+<table class="d"><tr><th style="width:5%">ID</th><th style="width:22%">Element</th><th style="width:10%">Type / values</th><th style="width:14%">Captured at</th><th style="width:10%">By</th><th style="width:20%">Consumed by</th><th>Group</th></tr>
+<tr><td>N-01</td><td>Variation reason code(s)</td><td>Code list V-01..V-12; multi</td><td>SC-1a R1</td><td>RM</td><td>RS-03, RS-06, RS-07; CE-003 exception report</td><td>F03</td></tr>
+<tr><td>N-02</td><td>Route selected; eligibility result; failing conditions; rule version</td><td>Enum + structured</td><td>SC-2 D1</td><td>Platform</td><td>SC2-04 evidence; sampling; cohort MI; T-metrics by route</td><td>F03 / F07</td></tr>
+<tr><td>N-03</td><td>Required authority level; approver level; DA matrix version; override reason</td><td>Enum; text</td><td>SC-2 S3, R3</td><td>Platform; approver</td><td>CE-009; control MI (attempted breaches)</td><td>F07</td></tr>
+<tr><td>N-04</td><td>Decline reason code; withdraw reason code; appeal outcome</td><td>Code lists</td><td>EX-A S1; SC-2 D1; EX-A D1</td><td>RM; Credit</td><td>RR-07; R7; CE-006</td><td>F07</td></tr>
+<tr><td>N-05</td><td>Deferral request: items, owner, due date, loop counter</td><td>Structured</td><td>EX-B S1</td><td>Credit; platform</td><td>RS-09; R1, R2, R3; RS-04 maintenance</td><td>F14</td></tr>
+<tr><td>N-06</td><td>Sampling selection flag; finding category; reviewer</td><td>Flag; enum; user</td><td>SC-2 K2</td><td>Platform; Credit</td><td>CE-001/003 MI; suspension trigger</td><td>F07</td></tr>
+<tr><td>N-07</td><td>Early-warning flag result and indicator values</td><td>Boolean + indicator set</td><td>SC-1a S3; SC-2 submission</td><td>Platform</td><td>RS-01/02/03 exclusion; P5 trigger; CE-005</td><td>F06 / F10</td></tr>
+<tr><td>N-08</td><td>Document status and timestamps; signature certificate; reconciliation result</td><td>Enum + timestamps</td><td>SC-3 S1–S3</td><td>Platform; e-sign service</td><td>RS-08; T5; R4; CE-004</td><td>F13</td></tr>
+<tr><td>N-09</td><td>Chase log; extension reason; 3-month re-validation record</td><td>Structured</td><td>EX-E</td><td>Platform; RM</td><td>CE-002; MI letters outstanding</td><td>F13</td></tr>
+<tr><td>N-10</td><td>Conditions precedent items with evidence; gate status</td><td>Structured + attachments</td><td>SC-2 S5 (conditions); SC-3 S5, R1</td><td>Credit; RM</td><td>C9; OP-13; S4 timing</td><td>F09</td></tr>
+<tr><td>N-11</td><td>Tranche schedule (date, amount, conditions, status)</td><td>Child records</td><td>SC-1b R2 / P1</td><td>RM</td><td>P4; RS-02 t.7; C19</td><td>F04</td></tr>
+<tr><td>N-12</td><td>Referral record: trigger, summary, linked deals and their status, authority decisions</td><td>Record type</td><td>P5 S1, K1, B1</td><td>RM; Credit; SBS</td><td>T8; C13, C14; cohort MI</td><td>F11</td></tr>
+<tr><td>N-13</td><td>Ownership transfer: from, to, date, reason, approver</td><td>Record</td><td>P5 S2; admin</td><td>Platform</td><td>C26, C27; segment attribution</td><td>F12</td></tr>
+<tr><td>N-14</td><td>Post-approval change: fields changed, materiality class</td><td>Structured</td><td>EX-C R1, S1</td><td>RM; platform</td><td>RS-12; R5</td><td>F04 / F07</td></tr>
+<tr><td>N-15</td><td>Task open / close timestamps; queue; SLA status</td><td>Timestamps</td><td>Every task</td><td>Platform</td><td>W1, W2, W3; SLA MI; benefits tracking</td><td>F14</td></tr>
+<tr><td>N-16</td><td>Pre-screen outcome and code</td><td>Enum</td><td>SC-1b S2</td><td>Platform</td><td>RS-14; C0; decline MI</td><td>F07</td></tr>
+<tr><td>N-17</td><td>Lead record: source, created, first contact, converted</td><td>Record</td><td>SC-1b S1</td><td>RM / intake</td><td>S0 timing; conversion MI</td><td>F03</td></tr>
+<tr><td>N-18</td><td>Deposit reason code; pricing-exception approval</td><td>Enum; record</td><td>DP per SD-03</td><td>RM</td><td>MI-06</td><td>F15</td></tr></table>
+<p>Eighteen new elements. None is free text where a code is reportable; each has a named consumer. Elements N-02, N-03, N-06, N-08 and N-09 are the evidence base for the equivalence register; without them 2.5 cannot be operated.</p></div>
+
+<div class="pb"><h1>5. History, mapping and migration rules</h1>
+<h2>5.1 Deal-type mapping table (DAT-03)</h2>
+<table><tr><th>As-is deal type</th><th>To-be pattern</th><th>deal_type parameter</th><th>Additional derivation</th><th>History rule</th></tr>
+<tr><td>New</td><td>P1</td><td>New</td><td>—</td><td>Direct</td></tr>
+<tr><td>Increase</td><td>P1</td><td>Increase</td><td>—</td><td>Direct</td></tr>
+<tr><td>Renewal</td><td>P2</td><td>Renewal</td><td>route = Full (historic)</td><td>Direct; historic route null → Full for cohort comparison</td></tr>
+<tr><td>Extension Pending Review</td><td>P2</td><td>EPR</td><td>counter from sequence (DR-04)</td><td>Direct; counter back-filled where sequence identifiable</td></tr>
+<tr><td>Variation</td><td>P3</td><td>Variation</td><td>reason = Unclassified unless derivable</td><td>Where DR-04 fields-changed data exists, derive V-01..V-09; removals (zero limit, all facilities) → V-11; else Unclassified</td></tr>
+<tr><td>Remove All Facilities (un-typed)</td><td>P3</td><td>Variation, reason V-11</td><td>—</td><td>Re-coded from Variation by the removal signature</td></tr>
+<tr><td>CAP Referral</td><td>P5</td><td>Referral</td><td>—</td><td>Direct</td></tr>
+<tr><td>CAP Strategy</td><td>P5</td><td>Strategy</td><td>—</td><td>Direct; linked to referral where identifiable</td></tr>
+<tr><td>Shadow Limit Reallocation</td><td>P4</td><td>Reallocation</td><td>facility_type = Shadow</td><td>Direct</td></tr>
+<tr><td>Staged Drawdown + request type Variation</td><td>P4</td><td>Allocation</td><td>facility_type = Staged</td><td>Re-coded from the field combination (W-16)</td></tr>
+<tr><td>Staged Drawdown (origination; 0 deals)</td><td>—</td><td>—</td><td>—</td><td>Type retired; no records expected</td></tr>
+<tr><td>ESR Cleanse</td><td>— (excluded)</td><td>—</td><td>flag = migration_record</td><td>Excluded from all volume and cycle MI; retained as records for audit; exposure effects carried by §5.3</td></tr>
+<tr><td>DO NOT USE</td><td>— (excluded)</td><td>—</td><td>flag = invalid_type</td><td>Any records re-coded by inspection or flagged</td></tr></table>
+<p>Retention: mapping table maintained for 24 months after cut-over (NFR-08); all MI keyed on pattern + parameter from go-live, with a “legacy type” column available for reconciliation.</p>
+<h2>5.2 Migration population rules</h2>
+<table><tr><th>Population</th><th>Rule</th><th>Reconciliation</th></tr>
+<tr><td>Closed deals (history)</td><td>Migrated with mapping table applied; stage timestamps mapped per §6.2; no re-processing</td><td>Counts by legacy type = counts by pattern + parameter</td></tr>
+<tr><td>Open deals in SC-1 / SC-2 equivalent</td><td>Migrated into the to-be stage from the as-is status (§6.2); route = Full; rules evaluated on next action (no retrospective fast-track)</td><td>Open count and stage distribution before / after</td></tr>
+<tr><td>Open deals awaiting letters</td><td>Migrated into SC-3 with document status = issued (date from DR-08 or RM confirmation); EX-E timers start from original issue date</td><td>Letters outstanding count</td></tr>
+<tr><td>Open referrals / strategies</td><td>Migrated as referral records with linked deals; F10, F11 values carried field for field</td><td>§5.4 parallel run</td></tr>
+<tr><td>Facilities, security, covenants</td><td>Migrated as entities with relationships; shared security links derived from allocation data</td><td>Entity counts; exposure recalculation</td></tr></table>
+<h2>5.3 Exposure update rule (SD-01 option c; DAT-04)</h2>
+<p>ESR Cleanse records update personal exposure on personal-associated deals and external NAG exposure on business records. The migration specification (WS3 to Programme Data Lead, W7) states, for each exposure field: source record, derivation, timing, and the equivalent derivation in the to-be data model so that the update happens by rule rather than by a deal. Post-migration exposure per connection is recalculated and compared with the pre-migration value; variances above a tolerance set by Credit Risk are investigated before go-live.</p>
+<h2>5.4 Regulatory parallel run (DAT-05; CE-015)</h2>
+<table><tr><th>Element</th><th>Parallel run</th><th>Pass criterion</th><th>Owner</th></tr>
+<tr><td>Forbearance status (F10)</td><td>Batch job W-02 and native logic both run for one monthly cycle on the migrated population</td><td>Zero unexplained status differences; explained differences documented and accepted by SBS and MI</td><td>Head of SBS; Head of MI</td></tr>
+<tr><td>Waiver expiry (F09)</td><td>Batch W-03 vs native lifecycle, one cycle</td><td>As above</td><td>Head of Credit Risk Policy</td></tr>
+<tr><td>Regulatory extract (INT-08)</td><td>Extract from as-is and to-be for the same period</td><td>Field-level match on all P1 groups; differences explained by mapping only</td><td>Head of MI &amp; Reg Reporting</td></tr></table></div>
+
+<div class="pb"><h1>6. KPI definitions on the to-be stage model</h1>
+<h2>6.1 To-be stage model and mapping to baseline (GD-08)</h2>
+<table><tr><th>Baseline stage (1.4 §2)</th><th>To-be stage</th><th>Start event (to-be)</th><th>End event (to-be)</th><th>Comparability</th></tr>
+<tr><td>S0 Pre-deal</td><td>S0</td><td>Event / lead created</td><td>Deal opened</td><td>New: measurable for all event-triggered deals (baseline had partial coverage)</td></tr>
+<tr><td>S1 Preparation</td><td>S1</td><td>Deal opened</td><td>Submitted (standard met; DA determined)</td><td>Direct</td></tr>
+<tr><td>S2 Decision</td><td>S2</td><td>Submitted</td><td>Decision recorded</td><td>Direct; add split by route</td></tr>
+<tr><td>S2a Credit queue</td><td>S2a</td><td>Credit task created</td><td>Task opened by assessor</td><td>Direct (task timestamps now complete)</td></tr>
+<tr><td>S2b Credit assessment</td><td>S2b</td><td>Task opened</td><td>Decision recorded</td><td>Direct</td></tr>
+<tr><td>S3 Documentation</td><td>G-DOC</td><td>Decision approved</td><td>G-DOC met</td><td>Direct</td></tr>
+<tr><td>S3a Letter out</td><td>G-DOC a</td><td>Letter generated</td><td>Issued</td><td>Direct (now same-day)</td></tr>
+<tr><td>S3b Customer</td><td>G-DOC b</td><td>Issued</td><td>Returned</td><td>Direct; now complete coverage</td></tr>
+<tr><td>S4 Completion</td><td>Gates</td><td>Decision approved</td><td>All applicable gates met</td><td>Direct; add G-SEC and G-CP separately (new)</td></tr>
+<tr><td>S5 Fulfilment</td><td>S5</td><td>Fulfilment task created</td><td>Fulfilled</td><td>Direct</td></tr>
+<tr><td>S6 SBS</td><td>P5</td><td>Referral record created</td><td>Categorised / returned</td><td>Direct</td></tr></table>
+<h2>6.2 Status-to-stage mapping for migration</h2>
+<p>The as-is status codes (1.4 Appendix A, agreed with MI in Week 3) map to to-be stages as above; open deals are placed by this mapping at cut-over. The mapping is held in the lineage register and re-used by MI for the 24-month comparison window.</p>
+<h2>6.3 Metric definitions carried forward and added</h2>
+<table class="d"><tr><th style="width:6%">ID</th><th style="width:20%">Metric (1.4)</th><th style="width:34%">To-be source and definition</th><th style="width:12%">New cuts</th><th>Used by</th></tr>
+<tr><td>V1–V5</td><td>Volumes; Credit-routed share; fast-track eligible</td><td>Deals by pattern + parameter; route field; eligibility result (N-02)</td><td>Route; segment</td><td>2.11; cohort MI</td></tr>
+<tr><td>T1–T8</td><td>Cycle times</td><td>Stage timestamps per §6.1; calendar days; P50 / P80 / P95</td><td>Route; pattern; segment</td><td>2.11 targets; dashboards</td></tr>
+<tr><td>W1–W3</td><td>Touch, wait, flow efficiency</td><td>Task open / close (N-15) replaces survey for touch; wait = stage elapsed − task time</td><td>Role; stage</td><td>Benefits tracking without survey</td></tr>
+<tr><td>R1–R8</td><td>Rework and quality</td><td>Deferral counter (N-05); reset reason (N-09); R5 from N-14; R8 from timer resets; decline / withdraw from N-04</td><td>Route</td><td>2.11; CE-001/003 MI</td></tr>
+<tr><td>K1–K3</td><td>Cost</td><td>Task time × DR-16 rates</td><td>Pattern; role</td><td>2.13; benefits</td></tr>
+<tr class="l2"><td colspan="5">Added for the target state</td></tr>
+<tr><td>C1</td><td>Attempted approvals below authority</td><td>Count from N-03 log</td><td>Segment; role</td><td>O3 control MI</td></tr>
+<tr><td>C2</td><td>Sampling: completion rate; finding rate by category</td><td>N-06</td><td>Segment; route; reason code</td><td>CE-001/003; suspension trigger</td></tr>
+<tr><td>C3</td><td>Cohort outcomes: 12-month downgrade, arrears, referral rate, fast-track vs full</td><td>N-02 joined to F06 history, conduct, N-12</td><td>Grade band; segment</td><td>Quarterly to Credit Risk and second line</td></tr>
+<tr><td>C4</td><td>Administrative variations that changed a monitored field</td><td>N-01 vs F04 / F08 / F02 deltas</td><td>Code</td><td>CE-003 exception report</td></tr>
+<tr><td>D1</td><td>Letters outstanding &gt; 8 weeks; extensions; re-validations; resets</td><td>N-08, N-09</td><td>Pattern</td><td>CE-002 MI</td></tr>
+<tr><td>E1</td><td>Early-warning flag rate; flagged-to-referral conversion; T8</td><td>N-07, N-12</td><td>Indicator</td><td>RS-11 threshold review</td></tr>
+<tr><td>S1</td><td>SLA attainment per stage and owner</td><td>N-15 vs SLA table</td><td>Team</td><td>2.9 §4.1</td></tr></table></div>
+
+<div class="pb"><h1>7. MI products</h1>
+<table><tr><th style="width:5%">ID</th><th style="width:22%">Product</th><th style="width:16%">Audience</th><th style="width:8%">Cadence</th><th style="width:30%">Content</th><th>Source</th></tr>
+<tr><td>MI-P1</td><td>Pattern dashboards (five)</td><td>Business Owner; heads of segment</td><td>Weekly</td><td>1.4 §6 template: volumes, T1 / T2, stage bars touch vs wait, rework, segment cut, hypothesis / target read-out</td><td>Platform extract (INT-08)</td></tr>
+<tr><td>MI-P2</td><td>Queue and SLA board</td><td>Team leaders; Credit manager; LS; Fulfilment</td><td>Live / daily</td><td>Queue depth, ageing, SLA status by team; escalations</td><td>Platform native</td></tr>
+<tr><td>MI-P3</td><td>Control MI</td><td>Head of Credit; second line; Audit</td><td>Monthly</td><td>C1 attempted breaches; C2 sampling; C4 exception report; D1 letters; rule-version changes</td><td>Platform extract</td></tr>
+<tr><td>MI-P4</td><td>Cohort outcome report</td><td>Credit Risk Policy; second line; Risk Committee</td><td>Quarterly</td><td>C3 fast vs full outcomes by band and segment; E1 flag performance; threshold recommendations</td><td>Platform + conduct + grade history</td></tr>
+<tr><td>MI-P5</td><td>Benefits tracker</td><td>SteerCo; Finance; benefit owners</td><td>Monthly (Phase 4)</td><td>KPI vs baseline vs target per 2.11; capacity by role from task time; realisation status</td><td>MI-P1 inputs; DR-16</td></tr>
+<tr><td>MI-P6</td><td>Regulatory extract</td><td>Reg Reporting</td><td>Per return</td><td>All P1 / P2 fields per lineage register; unchanged definitions</td><td>INT-08</td></tr>
+<tr><td>MI-P7</td><td>Decline and conduct MI</td><td>Lending Ops; Conduct</td><td>Monthly</td><td>N-04, N-16 by stage, code, segment; appeals</td><td>Platform extract</td></tr>
+<tr><td>MI-P8</td><td>Rule-maintenance pack</td><td>Credit Risk Policy; Lending Ops</td><td>Quarterly</td><td>Per rule set: evaluation volumes, outcome distribution, override rate, sampling findings attributable, proposed changes</td><td>Rule evidence log (RUL-02)</td></tr></table>
+<h2>7.1 Manual adjustments retired</h2>
+<table><tr><th>Adjustment (1.8 §4)</th><th>Cause</th><th>Retired by</th><th>When</th></tr>
+<tr><td>MA-01 Re-classify removals recorded as Variation</td><td>No removal type</td><td>N-01 reason V-11; mapping table for history</td><td>Go-live</td></tr>
+<tr><td>MA-02 Exclude ESR Cleanse from volume MI</td><td>Migration recorded as deals</td><td>§5.1 exclusion; no new records</td><td>Wave 0 (now)</td></tr>
+<tr><td>MA-03 Segment attribution after officer-code batch</td><td>No ownership history</td><td>N-13 ownership history</td><td>Go-live</td></tr>
+<tr><td class="ph">MA-04+ (from DR-10 interview)</td><td class="ph">[to be listed at 1.8 v1.0]</td><td class="ph">[mapped to N-elements or lineage fixes]</td><td class="ph"></td></tr></table></div>
+
+<div class="pb"><h1>8. Dependencies, risks and sign-off</h1>
+<table><tr><th>Dependency</th><th>Needed for</th><th>Status</th></tr>
+<tr><td>1.8 v1.0 field-level lineage (DR-10)</td><td>§3 cut-over tests at field level; MA-04+</td><td class="ph">Pending W4–6</td></tr>
+<tr><td>Batch job specifications (DR-09)</td><td>§5.4 native logic reproduction</td><td class="ph">Pending W4</td></tr>
+<tr><td>Platform data model (CAP-06, 2.7)</td><td>Confirmation that N-01 to N-18 are configurable</td><td>FG-1 / FG-3</td></tr>
+<tr><td>Programme migration tooling</td><td>§5.2, §5.3</td><td>Programme</td></tr>
+<tr><td>1.4 Appendix A status mapping</td><td>§6.2</td><td>Agreed W3</td></tr></table>
+<table><tr><th>Risk</th><th>Mitigation</th></tr>
+<tr><td>Variation history largely Unclassified, weakening the P3 baseline comparison</td><td>50-deal sample classification (1.4 step 7) gives the historic mix; cohort comparison for P3 uses post-go-live data</td></tr>
+<tr><td>Conduct data unavailable for C3 cohort outcomes in Release 1</td><td>Downgrade and referral rates used; arrears added when INT-01 lands</td></tr>
+<tr><td>Parallel run reveals batch logic undocumented behaviours</td><td>DR-09 specification reviewed with RPA / BLP support before build; one extra cycle budgeted</td></tr></table>
+<h3>Sign-off</h3>
+<table><tr><th style="width:36%">Role</th><th style="width:30%">Scope</th><th>Name / date</th></tr>
+<tr><td>Head of MI &amp; Regulatory Reporting</td><td>Whole document; lineage and protected-fields ownership</td><td></td></tr>
+<tr><td>Head of SBS</td><td>F10, F11 preservation; §5.4</td><td></td></tr>
+<tr><td>Head of Credit Risk Policy</td><td>F06, F09 preservation; C3 definitions</td><td></td></tr>
+<tr><td>Head of Lending Operations</td><td>F03, F04, F07, F12–F15; N-elements</td><td></td></tr>
+<tr><td>Replacement Programme Data Lead</td><td>§5 mapping and migration rules (DD-09)</td><td></td></tr>
+<tr><td>Senior Operational Risk Manager</td><td>§3 statement</td><td></td></tr></table></div>
+</body></html>
