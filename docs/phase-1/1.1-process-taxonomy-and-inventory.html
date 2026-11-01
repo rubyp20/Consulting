@@ -1,0 +1,193 @@
+<!doctype html><html><head><meta charset="utf-8"><title>1.1 Process Taxonomy and Inventory</title><style>
+@page { size: A4; margin: 18mm 16mm 18mm 16mm; }
+@page wide { size: A4 landscape; margin: 16mm 16mm 18mm 16mm; }
+.wide { page: wide; }
+body { font-family: "Segoe UI", Arial, Helvetica, sans-serif; font-size: 9.4pt; line-height: 1.38; color: #1a1a1a; }
+h1 { font-size: 17pt; color: #0b3d6b; border-bottom: 2px solid #0b3d6b; padding-bottom: 3pt; margin: 0 0 8pt 0; }
+h2 { font-size: 12.5pt; color: #0b3d6b; margin: 14pt 0 4pt 0; }
+h3 { font-size: 10.5pt; color: #1f4f82; margin: 10pt 0 3pt 0; }
+table { border-collapse: collapse; width: 100%; margin: 4pt 0 10pt 0; }
+tr { page-break-inside: avoid; }
+th, td { border: 1px solid #b8c4d0; padding: 2.5pt 4.5pt; vertical-align: top; font-size: 8.3pt; }
+th { background: #e6edf5; text-align: left; }
+.pb { page-break-before: always; }
+.meta td:first-child { width: 22%; color: #555; }
+.cover { padding-top: 60mm; }
+.cover h1 { border: 0; font-size: 24pt; }
+.small { font-size: 7.5pt; color: #555; }
+.l1 { background: #0b3d6b; color: #fff; font-weight: bold; }
+.l2 { background: #e6edf5; font-weight: bold; }
+.en { background: #f4f6f8; }
+.kpi { color: #7a2e00; }
+ul { margin: 2pt 0 6pt 0; } li { margin-bottom: 1.5pt; }
+</style></head><body>
+
+<div class="cover"><p class="small" style="letter-spacing:1px;text-transform:uppercase">Business Bank · Business Banking Transformation Office · BB-BLP-BPR</p>
+<h1>1.1 Process Taxonomy and Inventory<br/><span style="font-size:15pt;color:#1f4f82">Business lending lifecycle on BLP</span></h1>
+<table class="meta" style="width:65%;margin-top:20pt"><tr><td>Deliverable</td><td>1.1 Process taxonomy (L1–L2) and process inventory</td></tr><tr><td>Version</td><td>0.9 – for agreement at WS-01 (Week 3); v1.0 on Business Owner acceptance</td></tr>
+<tr><td>Source</td><td>RFP BB-BLP-RFP-001; BLP current-state maps (22 pp, 02/04/2026); Phase 0 hypothesis tree (0.6)</td></tr><tr><td>Owner</td><td>WS1 Journeys &amp; Process</td></tr><tr><td>Accepted by</td><td>Business Owner (Head of Lending Operations)</td></tr></table></div>
+
+<div class="pb"><h1>1. Purpose and conventions</h1>
+<p>The taxonomy is the single structure every later deliverable hangs off: as-is maps (1.2) are indexed to it, the activity survey (1.5) uses its L2 categories, controls (1.6) and pain points (1.9) are tagged to it, and the to-be journey patterns in Phase 2 are defined against it. It is agreed once, at WS-01, and then frozen for the engagement.</p>
+<h3>Levels</h3>
+<table><tr><th>Level</th><th>Definition</th><th>Count</th><th>Example</th></tr>
+<tr><td>L0</td><td>The end-to-end lifecycle</td><td>1</td><td>Business lending lifecycle</td></tr>
+<tr><td>L1</td><td>Value-chain stage: a phase the customer or the bank would recognise as a distinct purpose</td><td>5 core + 2 enabling</td><td>2. Decide</td></tr>
+<tr><td>L2</td><td>Process: a repeatable unit of work with a trigger, an owner and an outcome</td><td>24</td><td>2.3 Credit assessment and decision</td></tr>
+<tr><td>L3</td><td>Journey stage as mapped: the swimlane level, one map each (deliverable 1.2)</td><td>26 maps</td><td>RN-2 Renewal – Deal &amp; Credit</td></tr>
+<tr><td>L4</td><td>Step: one row in a map’s step table</td><td>c. 300</td><td>RN-2 D2 Within delegated authority?</td></tr></table>
+<h3>Conventions</h3>
+<ul><li>L1 and L2 describe <b>what</b> is done, independent of who does it or which deal type triggers it. Deal types and journeys appear at L3.</li>
+<li>A process appears once in the taxonomy even if many journeys use it. Nine journeys use 1.3 Customer and party identification; it is listed once.</li>
+<li>Volumes at L2 are 12-month deal counts from the RFP, allocated by the journeys that pass through the process. They are indicative until DR-01 and DR-02 are reconciled at Week 4.</li>
+<li>“Owner” is the role accountable for the process operating correctly today, not the role that performs most steps.</li></ul>
+</div>
+
+<div class="pb"><h1>2. L1 value chain</h1>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 250" width="100%" font-family="Arial, Helvetica, sans-serif">
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0b3d6b"/></marker></defs>
+  <g font-size="9.5" fill="#fff" font-weight="bold" text-anchor="middle">
+    <polygon points="10,20 125,20 140,50 125,80 10,80" fill="#0b3d6b"/><text x="72" y="46">1. Originate</text><text x="72" y="60" font-size="7" font-weight="normal">lead → opportunity → deal</text>
+    <polygon points="135,20 250,20 265,50 250,80 135,80" fill="#0b3d6b"/><text x="197" y="46">2. Decide</text><text x="197" y="60" font-size="7" font-weight="normal">analysis → authority → decision</text>
+    <polygon points="260,20 375,20 390,50 375,80 260,80" fill="#0b3d6b"/><text x="322" y="46">3. Document &amp; Fulfil</text><text x="322" y="60" font-size="7" font-weight="normal">letter → security → fulfilment</text>
+    <polygon points="385,20 500,20 515,50 500,80 385,80" fill="#0b3d6b"/><text x="447" y="46">4. Service</text><text x="447" y="60" font-size="7" font-weight="normal">renew → vary → draw → remove</text>
+    <polygon points="510,20 640,20 655,50 640,80 510,80" fill="#0b3d6b"/><text x="580" y="46">5. Monitor &amp; Recover</text><text x="580" y="60" font-size="7" font-weight="normal">covenants → distress → CAP</text>
+  </g>
+  <path d="M447,80 L447,100 L197,100 L197,82" fill="none" stroke="#0b3d6b" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#a)"/><text x="322" y="97" font-size="7" fill="#0b3d6b" text-anchor="middle">Renewal, Variation, Increase and Drawdown re-enter Decide</text>
+  <path d="M580,80 L580,112 L72,112 L72,82" fill="none" stroke="#7a2e00" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#a)"/><text x="322" y="121" font-size="7" fill="#7a2e00" text-anchor="middle">CAP Referral and CAP Strategy are deals: they re-enter at Originate</text>
+  <g font-size="9" fill="#0b3d6b" font-weight="bold">
+    <rect x="10" y="140" width="645" height="30" fill="#e6edf5" stroke="#b9c3cf"/><text x="20" y="159">E1. Deposit opportunity management</text><text x="330" y="159" font-size="7.5" font-weight="normal" fill="#333">no credit decision; shares 1.1–1.3 with lending; 98 in progress</text>
+    <rect x="10" y="178" width="645" height="30" fill="#e6edf5" stroke="#b9c3cf"/><text x="20" y="197">E2. Platform, data and reporting</text><text x="330" y="197" font-size="7.5" font-weight="normal" fill="#333">batch jobs, bots, reference data, regulatory and operational MI</text>
+  </g>
+  <text x="10" y="235" font-size="7.5" fill="#555">Volume weight (12-month deals entering each stage): Originate 3,033 new/increase · Decide c. 25,900 · Document &amp; Fulfil c. 25,900 · Service 22,196 · Monitor &amp; Recover 1,516. ESR Cleanse (3,816) excluded pending SD-01.</text>
+</svg>
+
+<h2>2.1 Why five stages and not the source’s three</h2>
+<p>The source maps use three stages per journey: Lead/Customer, Deal &amp; Credit, Completion &amp; Fulfilment. That is a workflow view of a single deal. The taxonomy needs a lifecycle view, because two-thirds of volume is servicing of existing facilities (Renewal 12,938; Variation 7,277) and a further 1,516 deals are distress handling. Stages 4 and 5 make that work visible as its own purpose rather than as repeated origination. The three source stages map onto 1–3 and recur inside 4 and 5, which is the structural finding (F2, F3 in deliverable 1.2) that drives the to-be journey patterns.</p>
+</div>
+
+<div class="pb"><h1>3. L2 process taxonomy</h1>
+<table>
+<tr><th style="width:6%">ID</th><th style="width:22%">Process</th><th>Purpose</th><th style="width:15%">Trigger</th><th style="width:15%">Outcome</th></tr>
+<tr class="l1"><td colspan="5">1. ORIGINATE</td></tr>
+<tr><td>1.1</td><td>Lead capture and qualification</td><td>Receive and record customer interest; decide whether to progress</td><td>Call, Business Lending Form, face-to-face, referral</td><td>Qualified lead or declined at overview</td></tr>
+<tr><td>1.2</td><td>Opportunity creation</td><td>Record a lending or deposit opportunity against the customer</td><td>Qualified lead</td><td>Opportunity with product(s) and value</td></tr>
+<tr><td>1.3</td><td>Customer and party identification</td><td>Locate or create the customer record; identify all parties to the borrowing</td><td>Any deal start</td><td>Customer and parties confirmed in BLP</td></tr>
+<tr><td>1.4</td><td>Deal creation and structuring</td><td>Convert opportunity to deal; select products, limits, pricing, security, covenants, repayment</td><td>Opportunity to progress; or servicing event</td><td>Structured deal ready for analysis</td></tr>
+<tr class="l1"><td colspan="5">2. DECIDE</td></tr>
+<tr><td>2.1</td><td>Customer and credit analysis</td><td>Assess the customer and the proposal: classifications, debt servicing, external checks, credit memo</td><td>Structured deal</td><td>Completed credit submission</td></tr>
+<tr><td>2.2</td><td>Deal validation and documentation check</td><td>Confirm completeness and that facility documents match proposed terms</td><td>Completed submission</td><td>Validated deal</td></tr>
+<tr><td>2.3</td><td>Delegated-authority determination</td><td>Decide whether the deal can be approved by the RM / line authority or must go to Credit</td><td>Validated deal</td><td>Routed to DA approval or Credit</td></tr>
+<tr><td>2.4</td><td>Credit assessment and decision</td><td>Independent assessment by Credit; approve, decline, defer or refer</td><td>Deal outside DA</td><td>Credit decision recorded</td></tr>
+<tr><td>2.5</td><td>Decline, appeal and referral handling</td><td>Communicate declines; handle appeals; refer to alternative routes</td><td>Decline at any point</td><td>Closed, overturned or referred</td></tr>
+<tr><td>2.6</td><td>Post-approval change management</td><td>Handle customer changes after approval; decide materiality; re-process if required</td><td>Change request after approval</td><td>Approval maintained or re-decided</td></tr>
+<tr class="l1"><td colspan="5">3. DOCUMENT &amp; FULFIL</td></tr>
+<tr><td>3.1</td><td>Facility documentation</td><td>Generate, issue, track and check the facility letter / agreement</td><td>Approved deal</td><td>Executed facility letter on file</td></tr>
+<tr><td>3.2</td><td>Security preparation and perfection</td><td>Prepare, execute and register security; record complete in BLP</td><td>Approved deal with security</td><td>Security perfected</td></tr>
+<tr><td>3.3</td><td>Conditions and pre-conditions management</td><td>Track and evidence conditions precedent and covenant set-up</td><td>Approved deal</td><td>All conditions met</td></tr>
+<tr><td>3.4</td><td>Fulfilment</td><td>Set up or amend the facility on product systems; release funds</td><td>Ready for fulfilment</td><td>Facility live; BLP updated</td></tr>
+<tr class="l1"><td colspan="5">4. SERVICE</td></tr>
+<tr><td>4.1</td><td>Renewal and extension</td><td>Renew facilities at review date with no structural change; short-term extension where review cannot complete</td><td>Review / maturity date approaching</td><td>Renewed or extended facilities</td></tr>
+<tr><td>4.2</td><td>Variation and restructure</td><td>Amend terms, parties, products, pricing, security or covenants of existing facilities</td><td>Customer or bank request</td><td>Varied facilities</td></tr>
+<tr><td>4.3</td><td>Pre-approved drawdown and reallocation</td><td>Draw tranches of staged facilities; allocate shadow limits to products</td><td>Customer request or task date</td><td>Funds released within pre-approved limit</td></tr>
+<tr><td>4.4</td><td>Facility removal and exit</td><td>Repay, release security and remove facilities</td><td>Customer request or bank decision</td><td>Facilities removed; security released</td></tr>
+<tr class="l1"><td colspan="5">5. MONITOR &amp; RECOVER</td></tr>
+<tr><td>5.1</td><td>Covenant and condition monitoring</td><td>Track covenant tests, tracking items, waivers and expiries</td><td>Scheduled dates; waiver expiry</td><td>Compliance status; breaches flagged</td></tr>
+<tr><td>5.2</td><td>Distress identification and CAP referral</td><td>Identify financial difficulty; refer to SBS/PS with Credit authority</td><td>RM judgement, Credit flag, arrears, breach</td><td>Referral accepted or returned</td></tr>
+<tr><td>5.3</td><td>Categorisation and CAP strategy</td><td>Categorise the connection; set and record the strategy; forbearance, ERV, provisions</td><td>Accepted referral</td><td>Strategy in place; records updated</td></tr>
+<tr><td>5.4</td><td>Recovery and exit management</td><td>Execute retention-exit or recovery-secure strategy</td><td>Strategy approved</td><td>Exit, recovery or return to mainstream</td></tr>
+<tr class="l1"><td colspan="5">E1. DEPOSIT OPPORTUNITY MANAGEMENT (enabling)</td></tr>
+<tr><td>E1.1</td><td>Deposit opportunity recording and closure</td><td>Record deposit interest; mark won or declined</td><td>Customer interest</td><td>Won / Declined by Bank / Declined by Customer</td></tr>
+<tr class="l1"><td colspan="5">E2. PLATFORM, DATA &amp; REPORTING (enabling)</td></tr>
+<tr><td>E2.1</td><td>Scheduled processing</td><td>Batch jobs: auto-reoriginate at 90 days; forbearance status; waiver expiry; officer-code reassignment</td><td>Schedule</td><td>Records updated in bulk</td></tr>
+<tr><td>E2.2</td><td>Robotic process automation</td><td>Blue Prism bots performing BLP transactions</td><td>Schedule or event</td><td>Transactions completed</td></tr>
+<tr><td>E2.3</td><td>Reference and user administration</td><td>Users, roles, officer codes, product and rate tables</td><td>Change request</td><td>Reference data maintained</td></tr>
+<tr><td>E2.4</td><td>Regulatory and operational reporting</td><td>Extract and report BLP data for regulatory returns and MI</td><td>Reporting calendar</td><td>Returns and MI produced</td></tr>
+<tr><td>E2.5</td><td>Records migration (ESR Cleanse)</td><td>Transfer records from the orange lending file; update personal and NAG exposure</td><td>Migration programme</td><td>Records on BLP — <span class="kpi">pending SD-01</span></td></tr>
+</table></div>
+
+<div class="pb wide"><h1>4. Process inventory</h1>
+<p>One row per L2 process. Journeys and deal types that use the process, owner, systems, 12-month volume, controls and known issues. Map references point to deliverable 1.2.</p>
+<table>
+<tr><th style="width:5%">ID</th><th style="width:16%">Journeys / deal types</th><th style="width:11%">Owner</th><th style="width:12%">Performed by</th><th style="width:12%">Systems</th><th style="width:7%">12-m vol.</th><th style="width:9%">Controls</th><th>Known issues (pre-validation)</th><th style="width:9%">Maps</th></tr>
+<tr><td>1.1</td><td>New, Increase, Shadow Limit</td><td>Head of segment</td><td>RM; Business Direct</td><td>SharePoint form, phone, BLP</td><td>c. 3,000+ enquiries (TBC)</td><td>C0</td><td>No lead register; overview criteria undocumented; CYB card form TBC</td><td>NM-1, SL-1</td></tr>
+<tr><td>1.2</td><td>New, Increase, Shadow Limit; deposits</td><td>Head of Lending Ops</td><td>RM</td><td>BLP</td><td>3,033 + 98 dep.</td><td>—</td><td>Deals can bypass opportunity (source note)</td><td>NM-1, SL-1, DP-1</td></tr>
+<tr><td>1.3</td><td>All journeys</td><td>Head of Lending Ops</td><td>RM; SBS</td><td>BLP, CIF Portal</td><td>c. 26,700</td><td>C1</td><td>Five identical steps repeated in every journey; separate login</td><td>All *-1 maps</td></tr>
+<tr><td>1.4</td><td>All deal types</td><td>Head of Lending Ops</td><td>RM; SBS</td><td>BLP, MEO, IMPACS (balances)</td><td>c. 26,700</td><td>—</td><td>Balance latency TBC; 11 deal types, 1 unused, 1 “DO NOT USE”</td><td>*-1, *-2</td></tr>
+<tr><td>2.1</td><td>New, Increase, Renewal, Variation, SL, CAP</td><td>Head of Credit Risk Policy</td><td>RM; SBS</td><td>BLP + external credit checks + spreadsheets (TBC)</td><td>c. 25,900</td><td>C2</td><td>“If required” on renewal/variation without a criterion; off-platform elements TBC</td><td>*-2</td></tr>
+<tr><td>2.2</td><td>As 2.1 + SR, SD</td><td>Head of Lending Ops</td><td>RM</td><td>BLP</td><td>c. 25,900</td><td>C3, C4</td><td>Manual document check against terms</td><td>*-2</td></tr>
+<tr><td>2.3</td><td>As 2.2</td><td>Head of Credit Risk Policy</td><td>RM; line authority</td><td>BLP (data), manual check</td><td>c. 25,900</td><td>C5</td><td>Manual although limit, grade, exposure are in BLP (H-E2); DA split by deal type unknown</td><td>*-2</td></tr>
+<tr><td>2.4</td><td>Deals outside DA; CAP Referral</td><td>Chief Credit Officer</td><td>Credit</td><td>BLP</td><td>TBC (DR-03)</td><td>C6, C7, C13</td><td>Unbounded deferral loop; distress screen after full assessment; queue time not visible</td><td>*-2, CR-2</td></tr>
+<tr><td>2.5</td><td>Any decline</td><td>Head of Lending Ops</td><td>RM; Credit</td><td>BLP (TBC)</td><td>TBC</td><td>C20, C21</td><td>Not mapped; reason capture and appeal route unknown</td><td>EX-01</td></tr>
+<tr><td>2.6</td><td>New, Increase, SL</td><td>Head of Credit Risk Policy</td><td>RM; Credit</td><td>BLP</td><td>TBC</td><td>C22</td><td>Not mapped; “re-processed” with no materiality rule</td><td>EX-03</td></tr>
+<tr><td>3.1</td><td>All approved deals except CAP Strategy</td><td>Head of Lending Ops</td><td>RM; Business Ops; Corporate Associate</td><td>BLP (generate), email / post (issue)</td><td>c. 25,000</td><td>C8</td><td>Manual issue; no sent/returned tracking; off-platform for SL and SD; 3-month reset</td><td>*-3, SR-2, SD-2</td></tr>
+<tr><td>3.2</td><td>New, Increase, Variation, SL, SR, SD; removal</td><td>Head of Lending Services</td><td>Lending Services; Securities Team</td><td>BLP + LS systems (TBC)</td><td>TBC</td><td>C10, C23</td><td>Not mapped; instruction channel and elapsed time unknown</td><td>EX-05, RF-2</td></tr>
+<tr><td>3.3</td><td>As 3.1</td><td>Head of Lending Ops</td><td>RM</td><td>BLP</td><td>c. 25,000</td><td>C9</td><td>No single view of outstanding conditions</td><td>*-3</td></tr>
+<tr><td>3.4</td><td>As 3.1 where facility changes</td><td>Head of Fulfilment</td><td>Fulfilment</td><td>BLP, IMPACS, TELLER, product systems</td><td>TBC</td><td>C11</td><td>Hand-off by message; queue time not visible; renewals may not need fulfilment action</td><td>*-3, RF-2</td></tr>
+<tr><td>4.1</td><td>Renewal, EPR</td><td>Head of Lending Ops</td><td>RM; Credit</td><td>BLP, BDRM report</td><td>14,857</td><td>as 2.x, 3.1</td><td>Report-based trigger; full credit flow despite no structural change (H-A1); EPR chains</td><td>RN-1/2/3</td></tr>
+<tr><td>4.2</td><td>Variation, Increase (restructure)</td><td>Head of Lending Ops</td><td>RM; Credit</td><td>BLP</td><td>7,277 (+ part of 2,338)</td><td>as 2.x, 3.x</td><td>No triage by materiality (H-A4); security re-instructed by default</td><td>VA-1/2/3</td></tr>
+<tr><td>4.3</td><td>Shadow Limit Reallocation, Staged Drawdown Allocation</td><td>Head of Lending Ops</td><td>RM; Credit on exception</td><td>BLP; off-platform letters</td><td>62 (+ allocations TBC)</td><td>C19, C5</td><td>Existing fast-track model; manual limit reduction; off-platform letters; deal-type workaround</td><td>SR-1/2, SD-1/2</td></tr>
+<tr><td>4.4</td><td>Remove All Facilities (recorded as Variation TBC)</td><td>Head of Lending Ops</td><td>RM; Securities; Fulfilment</td><td>BLP</td><td>TBC</td><td>C10, C12</td><td>Not a deal type; system release before physical release; associated parties TBC</td><td>RF-1/2</td></tr>
+<tr><td>5.1</td><td>All live facilities</td><td>Head of Credit Risk Policy</td><td>RM; batch jobs</td><td>BLP; waiver-expiry and forbearance batch jobs</td><td>n/a</td><td>TBC</td><td>Not mapped in source; partly automated by batch</td><td>— (WS-13)</td></tr>
+<tr><td>5.2</td><td>CAP Referral</td><td>Head of SBS</td><td>RM; Credit; SBS</td><td>BLP</td><td>794</td><td>C7, C13, C14</td><td>Trigger undefined; two sequential authorities; elapsed time unknown</td><td>CR-1/2, EX-04</td></tr>
+<tr><td>5.3</td><td>CAP Strategy</td><td>Head of SBS</td><td>SBS</td><td>BLP; memo off-platform</td><td>722</td><td>C15–C18</td><td>Protected regulatory fields (forbearance, ERV, provisions)</td><td>CS-1/2</td></tr>
+<tr><td>5.4</td><td>Post-strategy</td><td>Head of SBS</td><td>SBS; Retention Exit; Recovery Secure</td><td>BLP + recovery systems (TBC)</td><td>n/a</td><td>TBC</td><td>Beyond source maps; boundary with Phase 1 scope to confirm at WS-07</td><td>—</td></tr>
+<tr><td>E1.1</td><td>Deposits</td><td>Head of segment</td><td>RM</td><td>BLP</td><td>98 in progress</td><td>—</td><td>No reason code; rate-exception approval outside BLP; location decision SD-03</td><td>DP-1</td></tr>
+<tr><td>E2.1</td><td>n/a</td><td>Head of Technology Ops</td><td>Batch</td><td>BLP</td><td>4 jobs</td><td>TBC</td><td>Each job a candidate workaround (H-D1); volumes via DR-09</td><td>— (1.7)</td></tr>
+<tr><td>E2.2</td><td>n/a</td><td>RPA team</td><td>Blue Prism</td><td>BLP</td><td>TBC</td><td>TBC</td><td>Bot inventory via DR-09</td><td>— (1.7)</td></tr>
+<tr><td>E2.3</td><td>n/a</td><td>BLP admin</td><td>BLP support</td><td>BLP</td><td>c. 900 users</td><td>TBC</td><td>“DO NOT USE” still selectable (I-02)</td><td>—</td></tr>
+<tr><td>E2.4</td><td>n/a</td><td>Head of MI &amp; Reg Reporting</td><td>MI team</td><td>BLP extracts</td><td>per calendar</td><td>TBC</td><td>Lineage undocumented (H-F1); manual adjustment (H-F2)</td><td>— (1.8)</td></tr>
+<tr><td>E2.5</td><td>ESR Cleanse</td><td>Replacement Programme (proposed)</td><td>RM / Business Ops</td><td>BLP; orange lending file</td><td>3,816</td><td>TBC</td><td>Recorded as a deal type; 12.5% of volume is not customer activity</td><td>— (SD-01)</td></tr>
+</table></div>
+
+<div class="wide" style="margin-top:14pt"><h1>5. Deal type to process mapping</h1>
+<p>Which L2 processes each deal type passes through today. This is the skeleton of deliverable 1.3 (deal type × stage matrix) and the test for hypotheses B1–B4.</p>
+<table>
+<tr><th>Deal type</th><th>12-m vol.</th><th>%</th><th>1.1</th><th>1.2</th><th>1.3</th><th>1.4</th><th>2.1</th><th>2.2</th><th>2.3</th><th>2.4</th><th>3.1</th><th>3.2</th><th>3.3</th><th>3.4</th><th>5.2</th><th>5.3</th><th>Journey map</th></tr>
+<tr><td>New (New Money)</td><td>695</td><td>2.3</td><td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td>○</td><td>●</td><td>●</td><td>●</td><td>●</td><td></td><td></td><td>NM</td></tr>
+<tr><td>Increase</td><td>2,338</td><td>7.7</td><td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td>○</td><td>●</td><td>●</td><td>●</td><td>●</td><td></td><td></td><td>NM</td></tr>
+<tr><td>Renewal</td><td>12,938</td><td>42.3</td><td></td><td></td><td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td>○</td><td>●</td><td></td><td>●</td><td>○</td><td></td><td></td><td>RN</td></tr>
+<tr><td>Extension Pending Review</td><td>1,919</td><td>6.3</td><td></td><td></td><td>●</td><td>●</td><td>(●)</td><td>●</td><td>●</td><td>○</td><td>●</td><td></td><td>●</td><td>○</td><td></td><td></td><td>RN</td></tr>
+<tr><td>Variation</td><td>7,277</td><td>23.8</td><td></td><td></td><td>●</td><td>●</td><td>(●)</td><td>●</td><td>●</td><td>○</td><td>●</td><td>○</td><td>●</td><td>○</td><td></td><td></td><td>VA, RF</td></tr>
+<tr><td>CAP Referral</td><td>794</td><td>2.6</td><td></td><td></td><td>●</td><td>●</td><td>●</td><td>●</td><td></td><td>●</td><td></td><td></td><td></td><td></td><td>●</td><td></td><td>CR</td></tr>
+<tr><td>CAP Strategy</td><td>722</td><td>2.4</td><td></td><td></td><td>●</td><td>●</td><td>(●)</td><td>●</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>●</td><td>CS</td></tr>
+<tr><td>Shadow Limit Reallocation</td><td>62</td><td>0.2</td><td></td><td></td><td>●</td><td>●</td><td></td><td>●</td><td>●</td><td>○</td><td>●</td><td>○</td><td>●</td><td>●</td><td></td><td></td><td>SR</td></tr>
+<tr><td>Staged Drawdown</td><td>0</td><td>0</td><td colspan="14" style="text-align:center;color:#7a2e00">No deals in 12 months; tranches set up via Term Lending product (SL-1 S9); allocation via SD-1 recorded as Staged Drawdown + Variation request type</td><td>SL, SD</td></tr>
+<tr><td>ESR Cleanse</td><td>3,816</td><td>12.5</td><td colspan="14" style="text-align:center;color:#7a2e00">Records transfer, not a customer deal; no credit decision; proposed out of deal model (SD-01)</td><td>—</td></tr>
+<tr><td>DO NOT USE</td><td>—</td><td>—</td><td colspan="14" style="text-align:center;color:#7a2e00">Discontinued; still selectable (I-02)</td><td>—</td></tr>
+<tr><td colspan="18" class="small">● always · (●) “if required” / conditional · ○ only when outside delegated authority or when facility changes · Deposits use 1.1–1.3 then E1.1 only</td></tr>
+</table>
+<div style="page-break-inside:avoid"><h3>What the matrix shows before any workshop</h3>
+<ul><li>Eight live deal types use the same processes 1.3, 1.4, 2.2 and 3.1. The differences are at 1.1–1.2 (new customer or not), 2.1 (full vs. “if required”), 3.2 (security or not) and 3.4 (fulfilment or not).</li>
+<li>Renewal and EPR, 48.6% of volume, pass through every decision process (2.1–2.4) that New Money does.</li>
+<li>Three of eleven deal types carry no live customer process (Staged Drawdown, ESR Cleanse, DO NOT USE).</li>
+<li>The two fast-track types (Shadow Limit Reallocation; Staged Drawdown Allocation) skip 2.1 and reach 2.4 only on exception: the pattern the to-be design generalises.</li></ul></div>
+</div>
+
+<div class="pb"><h1>6. Roles and systems touched, by L1 stage</h1>
+<table><tr><th>L1</th><th>RM / Business Direct</th><th>Credit</th><th>Lending Services / Securities</th><th>Fulfilment</th><th>SBS / PS</th><th>Business Ops / Corp. Associate</th><th>Systems</th></tr>
+<tr><td>1 Originate</td><td>●</td><td></td><td></td><td></td><td>● (CAP)</td><td></td><td>BLP, CIF Portal, SharePoint form, MEO</td></tr>
+<tr><td>2 Decide</td><td>●</td><td>●</td><td></td><td></td><td>● (CAP)</td><td></td><td>BLP, external credit checks, MEO/IMPACS balances</td></tr>
+<tr><td>3 Document &amp; Fulfil</td><td>●</td><td></td><td>●</td><td>●</td><td></td><td>● (letter check)</td><td>BLP, email/post, IMPACS, TELLER, product systems, LS systems (TBC)</td></tr>
+<tr><td>4 Service</td><td>●</td><td>● (exception)</td><td>●</td><td>●</td><td></td><td>●</td><td>BLP, BDRM report, off-platform letters</td></tr>
+<tr><td>5 Monitor &amp; Recover</td><td>●</td><td>●</td><td></td><td></td><td>●</td><td></td><td>BLP, batch jobs, recovery systems (TBC)</td></tr>
+<tr><td>E2 Platform &amp; data</td><td></td><td></td><td></td><td></td><td></td><td></td><td>BLP, Blue Prism, batch scheduler, MI extracts</td></tr></table>
+
+<h1 style="margin-top:16pt">7. Use of the taxonomy in later deliverables</h1>
+<table><tr><th>Deliverable</th><th>How the taxonomy is used</th></tr>
+<tr><td>1.2 As-is maps</td><td>Each map indexed to one or more L2 processes; the map index shows coverage and gaps (5.1, 5.4, E2.x have no source map)</td></tr>
+<tr><td>1.3 Deal type × stage matrix</td><td>Section 5 of this document, extended to step level after validation</td></tr>
+<tr><td>1.4 / 1.5 Baselines</td><td>Cycle time per L1 stage; activity survey categories are the 24 L2 processes plus “other”</td></tr>
+<tr><td>1.6 Controls</td><td>Each control tagged to the L2 process it protects</td></tr>
+<tr><td>1.7 Workarounds</td><td>Each bot / batch job tagged to the L2 process it substitutes for</td></tr>
+<tr><td>1.9 Pain points</td><td>Tagged to L2 and L4</td></tr>
+<tr><td>Phase 2 journey patterns</td><td>Patterns are defined as paths through L2 processes with parameters; the taxonomy does not change, the paths do</td></tr></table>
+
+<h1 style="margin-top:16pt">8. Items to agree at WS-01</h1>
+<ul><li>Whether 5.4 Recovery and exit management is in scope beyond the hand-off from CAP Strategy, or stops at the SBS boundary</li>
+<li>Whether 5.1 Covenant monitoring is mapped in Phase 1 (no source map exists) or baselined from batch-job data only</li>
+<li>Confirmation that E2.5 ESR Cleanse sits under enabling processes pending SD-01, not under Originate</li>
+<li>Owner names against each L2 process</li>
+<li>Any L2 process performed today that does not appear above</li></ul>
+</div>
+</body></html>
