@@ -193,3 +193,266 @@ Attempt before consulting the answer key in the appendix.
 3. State the four guardrail layers for an agentic system and the design principle about where guardrails are enforced.
 4. A dispute agent runs six model steps averaging 5,000 input and 500 output tokens at USD 3 and USD 15 per million tokens. What is the inference cost per case and per 500,000 cases before caching?
 5. Name the five PRA SS1/23 principles and say why prompts and retrieval corpora fall under model change control.
+
+## Part B: Five AI case drills
+
+Each drill is [ILLUSTRATIVE — composite]. Run it aloud against a 25-minute timer: two minutes of clarifying questions, three minutes to lay out a structure, fifteen minutes of analysis with the interviewer feeding numbers, five minutes for recommendation and risks. The model structures below are what a manager-level candidate produces; the "what distinguishes a manager-level answer" line is the grading criterion.
+
+### Case drill 1: AI strategy for a regional bank
+
+**Prompt.** "Nordbank [ILLUSTRATIVE — composite] is a EUR 50 billion asset regional bank with retail and SME banking, about 6,000 staff, a cost-income ratio of 62% and a legacy core. The CEO has been told by the board to 'have an AI strategy' by the next strategy day in ten weeks. What should it be?"
+
+**Clarifying questions a strong candidate asks.**
+
+- What is the strategic ambition: defend cost position, grow in SME, or both? What is the board's risk appetite?
+- What exists already: data platform, cloud posture, any AI in production, a model risk function?
+- What is the cost base split between operations, distribution, risk and support, and where is the biggest pain?
+- Any regulatory constraints or commitments: EU AI Act readiness, supervisor expectations?
+- What budget envelope is realistic for a three-year programme?
+
+**Structure.**
+
+1. Ambition: which of defend, extend, transform, and the one or two business outcomes the strategy must move.
+2. Value scan: where the money is, by domain, using cost and revenue pools.
+3. Foundations: data, technology, talent and governance maturity against the ambition.
+4. Portfolio: long list to prioritised waves using value versus feasibility with an agentic-fit lens.
+5. Operating model and governance: how the bank will deliver and control it.
+6. Business case and roadmap: investment, benefits, NPV and the first 100 days.
+
+**Key analyses with numbers.** Opex of about EUR 1.1 billion [ESTIMATE — 62% of roughly EUR 1.8 billion income]. Interviewer gives a split: operations and servicing 35%, distribution 30%, risk and compliance 15%, technology 12%, support 8%. Operations and servicing is EUR 385 million; the AI-addressable share of effort in document- and text-heavy operations is 25–35% [ESTIMATE — practitioner range], giving EUR 95–135 million of gross potential. Realistic capture in three years is around 40% of potential, so EUR 40–55 million of run-rate saving, which is 3.5–5.0% of opex and would move cost-income from 62% towards 58–59% with flat income. Risk and compliance adds EUR 10–15 million from AML and KYC efficiency. Revenue levers in SME, pricing and next-best-action, are plausible but lower-evidence; include at 25% probability weight. Programme investment EUR 60–80 million over three years, of which data and integration foundations about 40%, use cases 35%, change and capability 25%. Payback inside year three; five-year NPV positive at 10% in the base case.
+
+**Recommendation.** An ambition of "defend and extend": first, reshape three operations processes end to end, onboarding and KYC, payments exceptions and investigations, and servicing, with agentic designs under human oversight; second, deploy productivity tools firm-wide as a floor, not a business case; third, build the foundations, a data platform, a model gateway, an evaluation capability and model-risk coverage for GenAI, as a funded workstream; fourth, a hub-and-spoke operating model with a small central hub and spokes in operations and SME. Present the board a 100-day plan, three-year roadmap and a benefits register with owners.
+
+**What distinguishes a manager-level answer.** Sizing the value from cost pools rather than listing use cases; explicitly separating deploy from reshape; naming foundations as the gating item; a risk-adjusted number and a payback; and the operating model as part of the strategy, not an afterthought.
+
+### Case drill 2: Should a card issuer build an agentic dispute platform?
+
+**Prompt.** "A card issuer [ILLUSTRATIVE — composite] with 20 million cards handles about one million disputes a year with 300 operations staff. A vendor has pitched an agentic dispute platform; the COO asks whether to build, buy or do nothing."
+
+**Clarifying questions.**
+
+- Current cost per dispute, cycle time, and write-off below investigation threshold?
+- Dispute mix: fraud versus non-fraud, and share resolved by rule today?
+- Existing case-management system and its integration options?
+- Risk appetite for automated provisional credits and automated denials?
+- The vendor's commercial model and what exactly it automates?
+
+**Structure.** Baseline economics; where the value sits by dispute step; design options (rules uplift only, agent-assist, agentic with HITL); build versus buy versus partner; business case and risks.
+
+**Key analyses with numbers.** Baseline: 300 FTE at USD 60,000 loaded is USD 18 million, plus USD 4 million systems, about USD 22 per dispute. Interviewer gives a time study: intake and classification 15%, evidence gathering 35%, rule application and decision 25%, customer communication 15%, quality and rework 10%. Agentic-fit scoring places evidence gathering, classification and communication drafting as agent-fit with review, rule application largely in a rules engine, and final decisions above a value threshold with humans. Automatable effort about 60%, retaining 15% of released capacity for review and exceptions, so net 45% of labour, USD 8 million a year. Goodwill write-offs below the investigation threshold are USD 15 million; better evidence and representment cut them 20%, USD 3 million. Faster cycle time cuts provisional-credit funding cost by about USD 1 million. Total steady-state benefit about USD 12 million a year. Costs: build USD 8 million, run USD 4 million a year including inference of roughly USD 0.2 per case, platform, evaluation and human review. Ramp 30%, 70%, 100%. Five-year NPV at 10% about USD 12 million; payback early in year three; IRR in the low 40s per cent.
+
+| Year | Benefit (USD m) | Run cost (USD m) | Build (USD m) | Net (USD m) | Discounted at 10% |
+|---|---|---|---|---|---|
+| 0 | 0.0 | 0.0 | 8.0 | -8.0 | -8.0 |
+| 1 | 3.6 | 4.0 | 0.0 | -0.4 | -0.4 |
+| 2 | 8.4 | 4.0 | 0.0 | 4.4 | 3.6 |
+| 3 | 12.0 | 4.0 | 0.0 | 8.0 | 6.0 |
+| 4 | 12.0 | 4.0 | 0.0 | 8.0 | 5.5 |
+| 5 | 12.0 | 4.0 | 0.0 | 8.0 | 5.0 |
+| NPV | | | | | 11.7 |
+
+**Recommendation.** Not "do nothing": the economics clear the hurdle even with 25% haircuts on benefits. Not a pure vendor platform either, because dispute handling under scheme rules is close to the issuer's customer promise and the vendor's model behaviour is outside the issuer's change control. Recommend "buy the plumbing, build the judgement": an orchestration and LLMOps platform from a vendor, agents and rules specified and owned by the issuer, integrated with the existing case system, with autonomy earned step by step and human gates on write-offs and adverse decisions.
+
+**What distinguishes a manager-level answer.** Step-level scoring rather than a process-level verdict; separating the labour saving from the write-off and funding levers; a cash-flow table with a ramp; a build-buy answer at the layer level; and naming where the human stays.
+
+### Case drill 3: GenAI in a bank's contact centre
+
+**Prompt.** "A retail bank [ILLUSTRATIVE — composite] runs a 3,000-agent contact centre with 25 million contacts a year. The head of servicing wants a GenAI chatbot to cut cost by 30%. Advise."
+
+**Clarifying questions.** Channel mix and cost per contact by channel; intent distribution and share already contained by existing automation; complaint and conduct exposure; current customer satisfaction; appetite for agent-assist versus customer-facing automation.
+
+**Structure.** Baseline by channel and intent; three levers (containment, agent assist, demand elimination); sequencing by risk; business case; conduct and adoption risks.
+
+**Key analyses with numbers.** Cost base around USD 200 million at USD 8 per contact. Channel split: 15 million voice at USD 10, 10 million digital chat at USD 5. Intent analysis shows 40% of digital chats are low-complexity informational or transactional and 25% of those are already contained by menus. A GenAI assistant could contain a further 30 percentage points of the low-complexity digital volume, 1.2 million chats at USD 5, about USD 6 million. Agent assist, real-time knowledge retrieval, summarisation and after-call work automation, cuts average handling time 12% across voice, worth about USD 18 million, with a 60% conversion of capacity to cost through attrition and vacancy management, USD 11 million realised. Demand elimination by fixing the top five failure-driven intents, surfaced by GenAI contact analytics, removes 5% of contacts, USD 10 million. Total realistic saving USD 27 million, about 13% of cost, not 30%. Programme cost USD 12 million build and USD 6 million run.
+
+**Recommendation.** Reset the ambition to 12–15% in two years with a path to 20%; lead with agent assist and contact analytics, which carry low conduct risk and build the knowledge base the customer-facing assistant will later need; introduce customer-facing containment only on intents with high accuracy on a golden set and an always-available human handover; measure first-contact resolution and complaints alongside cost. Cite Klarna's 2024 claims and 2025 adjustment [PUBLIC — 2024–25; VERIFY] and the Commonwealth Bank of Australia reversal [PUBLIC — Aug 2025; VERIFY] as the two public cautions on over-reach and premature headcount removal.
+
+**What distinguishes a manager-level answer.** Challenging the 30% rather than accepting it; three distinct levers with different risk profiles; capacity-to-cost conversion stated explicitly; and conduct risk treated as a design constraint with public evidence.
+
+### Case drill 4: AML false-positive reduction
+
+**Prompt.** "A universal bank [ILLUSTRATIVE — composite] generates 1.2 million transaction-monitoring alerts a year with a 97% false-positive rate and employs 600 level-one analysts. The head of financial crime wants to use AI to cut the cost. What do you recommend, and what will the regulator ask?"
+
+**Clarifying questions.** Current monitoring system (rules-based scenarios?); suspicious activity report yield and any regulatory findings; data quality on customer risk and transaction features; the bank's model risk framework and relationship with the supervisor; appetite for suppressing alerts versus re-ranking them.
+
+**Structure.** Where the cost and risk sit in the alert funnel; two AI levers (alert scoring and investigation assistance); regulatory conditions; phased plan; economics.
+
+**Key analyses with numbers.** Level-one cost: 600 analysts at USD 55,000 loaded is USD 33 million; handling time 45 minutes per alert. Lever one, machine-learning alert risk scoring layered on existing scenarios, as in the HSBC and Google Cloud case where Google reported two to four times more suspicious activity found with around 60% fewer alerts [PUBLIC — Google Cloud, June 2023; VERIFY]: assume a conservative 45% reduction in alerts that need level-one review via auto-closure of lowest-risk alerts with sampling, leaving 660,000. Lever two, GenAI investigation assistance that assembles customer context, transaction history and prior alerts into a draft narrative: handling time from 45 to 30 minutes. Capacity needed: 660,000 alerts times 0.5 hours is 330,000 hours; at 1,600 productive hours per analyst that is about 206 analysts against 600 today. Release of roughly 390 FTE, USD 21 million, of which the bank should reinvest a share in level-two investigation quality. Costs: USD 10 million build including validation and USD 5 million run.
+
+**Regulatory conditions.** The supervisor will ask for evidence that suspicious-activity yield does not fall: run the scoring model in shadow mode for at least six months, perform below-the-line testing on auto-closed alerts, demonstrate stability and explainability of risk scores, document the model under the MRM framework with independent validation, and keep an audit trail for every auto-closure. Under UK SS1/23 [PUBLIC — PRA, 2023; VERIFY] this is a high-materiality model.
+
+**Recommendation.** Phase one, GenAI investigation assistance, low regulatory friction, immediate time saving. Phase two, risk scoring in shadow mode with regulator engagement, then re-ranking, then auto-closure of the lowest tier with sampling. Reinvest 20% of released capacity into level-two and typology development. Headline: level-one cost down about 55% in three years with higher detection, not lower.
+
+**What distinguishes a manager-level answer.** Treating the regulator as a design stakeholder; sequencing by regulatory friction; the shadow-mode and below-the-line test as explicit steps; and framing the outcome as better detection at lower cost rather than cost alone.
+
+### Case drill 5: Rescuing a failing AI pilot
+
+**Prompt.** "A bank's KYC document-extraction GenAI pilot [ILLUSTRATIVE — composite] is at month nine. Target accuracy was 95%; it is at 82%. Analysts have stopped using it. The sponsor wants to know whether to fix it, pivot or kill it."
+
+**Clarifying questions.** How is accuracy measured and on what sample; error distribution by document type and field; was there a production path, integration and owner from the start; what do analysts say; what has been spent and what remains?
+
+**Structure.** Diagnose across six causes (problem fit, data, model and evaluation, integration, adoption, governance); quantify the fix; decide against explicit criteria; re-plan with gates.
+
+**Key analyses with numbers.** The interviewer gives an error analysis: 60% of errors come from three document types, scanned and handwritten forms, which are 30% of volume; on the remaining 70% of volume, digital documents, accuracy is 96%. The pilot has been measured on a blended sample, so the headline hides a usable component. Adoption failed because outputs appeared in a separate screen and analysts re-keyed data, which doubled their work; no integration budget had been allocated. Governance: no evaluation set existed at the start, so the target was arbitrary.
+
+**Decision.** Pivot, not kill. Re-scope to digital documents at autonomy level three, sampled review, with handwritten and scanned documents routed to analysts with the model's extraction shown as a draft at autonomy level one. Fund integration into the case system so extracted fields pre-populate. Build a golden set of 1,000 documents stratified by type and define accuracy per field with thresholds, 97% for digital pre-population, before any further model work. Set a 90-day gate: adoption above 70% of eligible cases and field accuracy at threshold, otherwise stop. Expected value: 70% of volume at 20 minutes saved per case; for 200,000 cases a year that is about 47,000 hours, roughly 29 FTE, or USD 1.6 million a year at USD 55,000 [ESTIMATE], against USD 0.8 million to integrate and complete.
+
+**What distinguishes a manager-level answer.** Decomposing the accuracy figure before judging it; naming the real failure as integration and governance rather than the model; a kill criterion with a date; and matching autonomy level to measured accuracy by segment.
+
+## Part C: Three AI guesstimates
+
+A guesstimate is scored on structure, labelled assumptions and sanity checks, not on the final number. State the assumption, state why it is reasonable, do the arithmetic aloud, and end with a check against something you know.
+
+### Guesstimate 1: Annual inference cost of an LLM assistant for 20,000 relationship managers
+
+**Structure.** Users times usage times tokens per use times price, then apply the cost levers.
+
+1. Users and days: 20,000 RMs, 220 working days a year, 80% active on a given day [ESTIMATE — assumption] gives 3.52 million user-days.
+2. Usage: 12 queries per active user-day [ESTIMATE — observed ranges for adviser assistants are roughly 5–20] gives about 42 million queries a year.
+3. Tokens per query: system prompt and tool definitions 1,500, retrieved context 3,000, conversation history 1,000, output 500 [ESTIMATE — assumption]. That is 5,500 input and 500 output tokens.
+4. Annual tokens: 42 million times 5,500 is about 231 billion input tokens; 42 million times 500 is about 21 billion output tokens.
+5. Price, frontier model: USD 3 per million input and USD 15 per million output [ESTIMATE — order of magnitude, VERIFY]. Input cost USD 693,000; output cost USD 315,000; total about USD 1.0 million a year.
+6. Levers: prompt caching on the system prompt and tool definitions, about 27% of input, at 90% discount saves roughly USD 170,000; routing 60% of queries to a mid-tier model at a third of the price saves a further USD 300,000 or so. Realistic range USD 0.5–1.0 million a year.
+
+**Sanity check.** USD 25–50 per RM per year, against a loaded RM cost of USD 120,000–200,000. Inference is well under 0.1% of the cost of the people using it. The programme's real costs are integration with CRM and research systems, evaluation, and change; a plausible three-year TCO is USD 15–25 million [ESTIMATE], of which inference is under 10%.
+
+### Guesstimate 2: KYC analysts in UK banking and the addressable automation value
+
+**Structure.** Headcount by institution tier, loaded cost, addressable share, capture rate.
+
+1. Institutions: five large UK banking groups, about 15 mid-sized banks and building societies, roughly 150 smaller banks, foreign branches and large payment and e-money firms [ESTIMATE — order of magnitude].
+2. Headcount: large groups run financial-crime operations in the low thousands each, of which KYC and customer due diligence is perhaps 40%, say 1,200 each, giving 6,000. Mid-sized firms about 150 each, 2,250. Smaller firms about 20 each, 3,000. Onshore-equivalent total about 11,000 [ESTIMATE]. Add offshore and outsourced capacity serving UK books, commonly equal to or greater than onshore in large groups, say 9,000. Total around 20,000 FTE.
+3. Cost: blended loaded cost of GBP 45,000 (onshore GBP 60,000, offshore GBP 25,000) [ESTIMATE] gives an annual cost pool of about GBP 900 million.
+4. Addressable effort: document collection and extraction, registry and screening lookups, data normalisation and narrative drafting are 50–60% of analyst time [ESTIMATE — consistent with task-level studies in composite engagements]; take 55%, GBP 495 million gross.
+5. Capture: 50% of addressable within three years after human review, change and regulatory caution, about GBP 250 million a year run-rate across the UK market.
+
+**Sanity check.** GBP 250 million is about 1% of UK banks' total operating costs of roughly GBP 25–30 billion for the large groups [ESTIMATE — order of magnitude, VERIFY], which is plausible for one process family. If the number had come out at 10% of opex, an assumption would be wrong.
+
+### Guesstimate 3: Global annual value of AI in card disputes
+
+**Structure.** Dispute volume times cost per dispute times addressable share, plus a loss lever.
+
+1. Volume: global card purchase transactions are of the order of 700 billion a year [ESTIMATE — order of magnitude from industry statistics, VERIFY]. Dispute rates run around 0.1–0.2% of transactions [ESTIMATE]; take 0.15%, about 1.05 billion disputes a year.
+2. Handling cost: issuer and acquirer operations cost per dispute of USD 15–40 depending on market and complexity [ESTIMATE]; take USD 25 blended, giving a global handling cost pool of about USD 26 billion.
+3. Addressable effort: as in the issuer case, about 60% of handling effort is agent-fit, with 15 points retained for review, net 45%, about USD 12 billion gross.
+4. Capture: 40% within five years given legacy systems and scheme-rule change, about USD 4.7 billion a year.
+5. Loss lever: merchant and issuer write-offs and first-party misuse losses are a multiple of handling cost; even a 10% reduction via better evidence and representment plausibly adds a similar order of magnitude, USD 3–5 billion [ESTIMATE — wide uncertainty].
+
+**Sanity check.** A total of USD 8–10 billion a year is a small fraction of global card-industry revenue, which runs in the hundreds of billions of dollars [ESTIMATE — order of magnitude], and is consistent with the operations share of the McKinsey Global Institute banking estimate of USD 200–340 billion for generative AI overall [PUBLIC — MGI, June 2023]. Say explicitly that the loss lever carries the widest uncertainty.
+
+## Part D: Full mock interview with grading rubrics
+
+Have a partner read each question. Answer in 60–120 seconds. Score each with the rubric (0 = missing or wrong, 1 = weak, 2 = adequate, 3 = strong). A model strong answer follows each rubric; do not read it until you have answered.
+
+### Question 1 (fit): "Tell me about yourself and why this practice."
+
+| Score | Descriptor |
+|---|---|
+| 1 | Chronological CV recital; enthusiasm for AI as the reason |
+| 2 | Clear trajectory, mentions AI work, generic reason for the firm |
+| 3 | Trajectory framed as deliberate convergence of payments depth and AI scoping work; a specific, defensible reason this practice |
+
+**Model strong answer.** "Eight years in financial services consulting, mostly payments: ISO 20022 programmes, real-time payments, cross-border and cards. Over the last two years I moved to where the money in those processes is now going, AI: I scored a Tier-1 bank's KYB process for agentic fit, which set the scope of a supervisor-led multi-agent design; I ran the as-is diagnostic that re-scoped an underwriting proposition; and I built a working multi-agent dispute prototype to settle design questions before engineering spend. I want this practice because it does the reshape work, not deploy work, with the risk and business-case rigour that banks require, and because my differentiator, knowing the processes and data AI is being pointed at, is most valuable here."
+
+### Question 2 (experience probe): "On the KYB work, what did you personally decide?"
+
+| Score | Descriptor |
+|---|---|
+| 1 | Describes team activity; cannot isolate own decisions |
+| 2 | Names own analysis; decisions attributed to others |
+| 3 | Names two or three decisions owned, the analysis behind each, and one that was wrong and corrected |
+
+**Model strong answer.** "Three things. Which steps were scored as rules rather than agents: about a third, the deterministic checks, and I defended that against a vendor who wanted everything in agents. The calibration of the six dimension weights with the risk function, which is where the scoring became defensible. And the recommendation that risk rating and adverse decisions stay human, on error tolerance. One I got wrong first: our initial weights overvalued volume and let two deterministic high-volume steps score as agent-fit; risk challenged it and we re-weighted. The architecture itself was the engineering lead's; I owned the boundary."
+
+### Question 3 (concept): "Why does an agent need guardrails outside the model?"
+
+| Score | Descriptor |
+|---|---|
+| 1 | Generic "AI can make mistakes" |
+| 2 | Lists guardrail types without the enforcement-location argument |
+| 3 | Four layers, plus the argument that model-based checks share the model's attack surface, plus an example |
+
+**Model strong answer.** "Because a check performed by the model can be defeated by the same inputs that compromise the model: a prompt injection that gets the agent to attempt an unauthorised refund can also get it to report that the refund was authorised. So the four layers, input filtering, output validation, action controls and governance logging, must be enforced in deterministic code the model cannot influence: tool allow-lists, value limits, schema validation, approval gates. In my dispute prototype the broad agent attempted actions outside its remit until I narrowed tool access per specialist; narrowing the prompt alone was not enough."
+
+### Question 4 (framework): "How would you prioritise 40 use cases a bank has brainstormed?"
+
+| Score | Descriptor |
+|---|---|
+| 1 | "Value versus effort" with no dimensions or process |
+| 2 | Scoring dimensions named; weights and sequencing vague |
+| 3 | Dimensions, weight-setting with the sponsor, agentic-fit and risk overlays, dependency mapping, and waves with a rationale |
+
+**Model strong answer.** "First clean the list: de-duplicate, cluster into domains, write each as a problem statement with a value hypothesis; 40 usually becomes 20. Then score value, on cost, revenue, risk and customer experience, and feasibility, on data readiness, integration complexity, model maturity, regulatory exposure and change effort, with weights agreed in the room with the sponsor and risk, because weights are a political decision. Overlay a regulatory tier and a dependency map; the top scorer is often blocked by a data foundation. Then sequence into waves: two or three quick wins to fund credibility, the foundations, then the reshape bets. The output the executive committee sees is a 2x2 and a roadmap; the scoring table is the appendix they will ask for."
+
+### Question 5 (case): "A COO asks whether to automate sanctions alert adjudication with an agent. Walk me through it in five minutes."
+
+| Score | Descriptor |
+|---|---|
+| 1 | Jumps to a yes or no |
+| 2 | Structure present; numbers thin; regulator absent |
+| 3 | Baseline, step-level fit, autonomy by alert tier, regulator conditions, economics and sequencing |
+
+**Model strong answer.** "Baseline first: alert volume, true-match rate, handling time and cost; typically 95%-plus of name-screening alerts are false positives [ESTIMATE — practitioner range]. Then score the steps: evidence gathering, identifier comparison, narrative drafting are agent-fit; the dismissal decision is deterministic for clear non-matches and judgement-heavy for partial matches; escalation of true matches stays human. Autonomy by tier: auto-dismiss only the lowest-risk tier with sampling, agent-draft with analyst decision for the middle, human-led for potential matches. Economics: if 60% of alerts are tier one and handling time halves on the rest, level-one capacity falls by roughly 60–70% [ESTIMATE — composite]. Conditions: shadow mode, below-the-line testing, independent validation under the MRM framework, and supervisor engagement before any auto-dismissal. Sequence: assist first, auto-dismiss later, earned by evidence."
+
+### Question 6 (numbers defence): "Your business case claims USD 12 million a year. I think half of it is hours saved that never become cost. Defend it."
+
+| Score | Descriptor |
+|---|---|
+| 1 | Restates the number |
+| 2 | Acknowledges the point; no mechanism offered |
+| 3 | Separates levers, states the capacity-to-cost conversion mechanism and rate, offers the risk-adjusted figure unprompted |
+
+**Model strong answer.** "You are right to separate them. Of the USD 12 million, USD 8 million is labour capacity, USD 3 million is write-off reduction and USD 1 million is funding cost; the last two are cash regardless. On the USD 8 million, the conversion mechanism is attrition and vacancy management at a 14% attrition rate on 300 staff, which releases about 40 roles a year without redundancy; we assume 70% conversion in year two and 90% in year three, and the benefits register names the head of operations as owner. If you prefer, the risk-adjusted case at 60% conversion is USD 9 million a year and still clears the hurdle with payback inside three years. I would rather you approve the conservative number and we beat it."
+
+### Question 7 (governance): "A UK bank wants to deploy an agentic KYB system. What will the model risk function require, and how long will it take?"
+
+| Score | Descriptor |
+|---|---|
+| 1 | "Governance and compliance" without specifics |
+| 2 | Names SS1/23; vague on what validation means for an agentic system |
+| 3 | Inventory and tiering, end-to-end validation on a golden set, change control on prompts and corpora, vendor update handling, a realistic timeline |
+
+**Model strong answer.** "Under SS1/23 [PUBLIC — PRA, 2023; VERIFY] the system goes into the model inventory, probably as a high-materiality model given its role in onboarding decisions. Validation will be end to end on a golden set rather than of the foundation model's internals: accuracy and groundedness per task, robustness to adversarial inputs, guardrail effectiveness and the human-oversight design. Prompts, retrieval corpora and tool configurations go under change control, and vendor model updates are treated as model changes that trigger re-validation. Expect three to six months from design freeze to validation sign-off if the evaluation set and documentation are built during development, and much longer if they are retrofitted [ESTIMATE — practitioner range]. I would put validation on the critical path from day one."
+
+### Question 8 (behavioural): "Tell me about a time you were wrong on a client engagement."
+
+| Score | Descriptor |
+|---|---|
+| 1 | A non-failure dressed as a failure |
+| 2 | A real failure; learning is generic |
+| 3 | A real, specific failure, the consequence, the correction, and a changed practice |
+
+**Model strong answer.** "I built the dispute prototype before building its evaluation set. It worked on the scenarios I had in mind and produced confident, wrong outcomes on edge cases I had not written down; one agent attempted actions outside its remit. The consequence was two weeks of rework and a credibility dent with the engineering lead. I built a stratified golden set, narrowed each agent's tools and prompt, and documented failure modes. The practice I changed is that the evaluation set is now the first deliverable on any AI workstream I run, and golden-set accuracy at the chosen autonomy level is an explicit business-case assumption."
+
+### Question 9 (curveball): "Isn't all of this just hype? Most pilots fail."
+
+| Score | Descriptor |
+|---|---|
+| 1 | Defends AI uncritically or concedes entirely |
+| 2 | Cites a statistic; weak explanation |
+| 3 | Agrees with the evidence, explains the mechanism of failure, states where value is proven, and turns it into the firm's value proposition |
+
+**Model strong answer.** "The failure statistics are real: Gartner projected 30% of GenAI projects abandoned after proof of concept [PUBLIC — Gartner, 2024; VERIFY], and the MIT NANDA report put the share of pilots with no measurable P&L impact at around 95%, with methodological caveats [PUBLIC — Aug 2025; VERIFY]. But the mechanism is not that the technology does not work; it is that pilots are built without a production owner, integration budget, validation plan or business metric. Where those exist, operations use cases are delivering: HSBC's AML results [PUBLIC — Google Cloud, 2023; VERIFY] and Morgan Stanley's adviser assistant adoption [PUBLIC — 2023–24; VERIFY] are measured. So the hype is real and so is the value; the difference is scoping, governance and business-case discipline, which is precisely what a strategy practice sells."
+
+### Question 10 (close): "What questions do you have for me?"
+
+| Score | Descriptor |
+|---|---|
+| 1 | None, or questions answerable from the website |
+| 2 | Reasonable questions about the practice |
+| 3 | Two or three questions that show commercial and delivery understanding and invite the interviewer's judgement |
+
+**Model strong answer.** Ask: "Where in the deploy, reshape, invent spectrum is most of your banking work today, and where do you expect it in two years?" "How do your teams handle model-risk validation with clients: do you own it, or do you work alongside the client's second line?" "What has distinguished the consultants who have grown fastest in this practice?"
+
+### Self-scoring and interpretation
+
+Total the ten scores out of 30.
+
+| Total | Interpretation | Action |
+|---|---|---|
+| Under 15 | Foundations gap | Re-read Modules 1–4 and 7–9; rebuild the three narratives in Module 19 |
+| 15–21 | Practitioner | Drill Parts B and C; rehearse numbers defence (Question 6) and governance (Question 7) until both score 3 |
+| 22–26 | Manager-level | Polish altitude and brevity; practise the curveball and the close |
+| 27–30 | Ready | Run a cold mock with a new interviewer; focus on case speed and quantification |
+
+Re-run the mock no sooner than a week later with different numbers fed in by your partner, so you are practising structure rather than memorising answers.
