@@ -1,0 +1,175 @@
+<!doctype html><html><head><meta charset="utf-8"><title>2.9 Target Operating Model</title><link rel="stylesheet" href="../phase-1/build/style.css"><style>
+.rp { border: 1px solid #b8c4d0; margin: 0 0 10pt 0; page-break-inside: avoid; }
+.rp .hd { background: #0b3d6b; color: #fff; padding: 5pt 8pt; font-weight: bold; font-size: 10.5pt; }
+.rp .hd span { font-weight: normal; opacity: .85; font-size: 8.5pt; margin-left: 8pt; }
+.rp > table { margin: 0; }
+.rp td:first-child { width: 17%; color: #555; background: #f7f9fb; }
+.raci th, .raci td { font-size: 7.6pt; text-align: center; padding: 1.8pt 3pt; }
+.raci td:first-child, .raci th:first-child { text-align: left; }
+.up { color: #1a7f37; } .down { color: #a00; } .chg { color: #b36b00; }
+</style></head><body>
+
+<div class="cover"><p class="small" style="letter-spacing:1px;text-transform:uppercase">Business Bank · Business Banking Transformation Office · BB-BLP-BPR</p>
+<h1>2.9 Target Operating Model<br/><span style="font-size:15pt;color:#1f4f82">Who does what in the target state: RACI by pattern, role profiles, accountability for time and risk, and the organisational impact</span></h1>
+<table class="meta" style="width:65%;margin-top:20pt"><tr><td>Deliverable</td><td>2.9 Target operating model: to-be RACI, role profiles, SLA and sampling accountabilities, organisation impact by role and segment</td></tr><tr><td>Version</td><td>0.6 – structure and role changes complete from 2.3 / 2.4 / 2.6 (Week 11). FTE-equivalent impacts illustrative until 1.5 measured; v1.0 at Design Authority (Week 12) with Business Owner acceptance; SD-04 capacity treatment remains a management decision post-G2</td></tr>
+<tr><td>Derived from</td><td>2.6 people gaps GPe-01 to GPe-08; 2.3 lanes; 2.4 RS-13 and sampling design; 2.5 CE-001 / CE-003; 1.5 effort baseline; 1.10 sizing; 0.1 charter SD-04</td></tr><tr><td>Owner</td><td>WS5 People &amp; Change (Change Lead) with WS1</td></tr><tr><td>Accepted by</td><td>Business Owner; Heads of segment, Credit, Lending Services, Fulfilment, SBS (for their roles)</td></tr></table>
+<div class="ph-box" style="margin-top:24pt"><b>Capacity, not headcount.</b> This document describes what each role does differently and the capacity that shifts as a result. Per charter decision SD-04, whether released capacity becomes headcount reduction or redeployment is decided by line management after G2 and is outside this document. FTE-equivalent figures in section 6 are illustrative (from 1.10 on assumed inputs) until the measured effort baseline replaces them.</div></div>
+
+<div class="pb"><h1>1. Operating model on one page</h1>
+<table><tr><th style="width:18%">Element</th><th style="width:40%">As-is</th><th>To-be</th></tr>
+<tr><td>Work arrives</td><td>Reports, phone, email; RM finds the customer</td><td>System events into role queues; context loaded (SC-1)</td></tr>
+<tr><td>Routing</td><td>By deal type; one path</td><td>By risk and materiality (RS-01/02/03); three routes</td></tr>
+<tr><td>Who approves</td><td>RM reads DA matrix; Credit assesses all routed deals</td><td>Platform determines authority (RS-05); line approves fast routes with evidence; Credit assesses full route and samples fast routes</td></tr>
+<tr><td>Documents</td><td>RM issues PDFs; LS instructed by email; Fulfilment by message</td><td>Platform generates and delivers; LS and Fulfilment work queues from conditions and gates</td></tr>
+<tr><td>Time</td><td>Nobody owns end-to-end; no SLAs</td><td>Stage SLA owners; Head of Lending Operations owns end-to-end cycle time (KPI T2)</td></tr>
+<tr><td>Risk oversight</td><td>Preventive only (Credit assesses everything)</td><td>Preventive on full route; detective on fast routes (sampling, cohort MI, suspension)</td></tr>
+<tr><td>Rules</td><td>Policy documents applied by reading</td><td>Fourteen rule sets owned as data by named functions</td></tr>
+<tr><td>Data</td><td>No owners; lineage in scripts</td><td>Named owner per field group; change control on protected fields</td></tr>
+<tr><td>Distress</td><td>RM judgement; file transfer; sequential authorities</td><td>Flag-driven; referral record; SBS queue; parallel where policy allows</td></tr></table>
+<h2>1.1 Roles in scope</h2>
+<table><tr><th>Role</th><th>Segment(s)</th><th>Population (DR-11, TBC)</th><th>Change intensity</th></tr>
+<tr><td>Relationship Manager (RM)</td><td>Strategic Finance, Corporate</td><td class="ph">[DR-11]</td><td class="chg">High: content shifts; new accountability</td></tr>
+<tr><td>Business Direct adviser / team leader</td><td>Business Direct</td><td class="ph">[DR-11]</td><td class="chg">High: volume segment; team leader approves fast routes</td></tr>
+<tr><td>Line manager / approver</td><td>All</td><td class="ph">[DR-11]</td><td class="chg">High: new fast-route accountability</td></tr>
+<tr><td>Credit assessor</td><td>All</td><td class="ph">[DR-11]</td><td class="chg">High: caseload mix; sampling function</td></tr>
+<tr><td>Credit manager</td><td>All</td><td class="ph">[DR-11]</td><td class="chg">Medium: escalations; sampling oversight; suspension</td></tr>
+<tr><td>Lending Services / Securities</td><td>All</td><td class="ph">[DR-11]</td><td>Medium: queue working; instructions from conditions</td></tr>
+<tr><td>Fulfilment</td><td>All</td><td class="ph">[DR-11]</td><td>Medium: queue working; gate-released tasks</td></tr>
+<tr><td>Business Operations / Corporate Associate</td><td>SF / Corporate</td><td class="ph">[DR-11]</td><td>Medium: wet-ink checks only; letter admin largely removed</td></tr>
+<tr><td>SBS / PS</td><td>All</td><td class="ph">[DR-11]</td><td>Medium: referral record; structured memo; queue</td></tr>
+<tr><td>Credit Risk Policy</td><td>—</td><td>—</td><td class="chg">High: owns nine rule sets as data</td></tr>
+<tr><td>MI &amp; Regulatory Reporting</td><td>—</td><td>—</td><td>Medium: lineage and field ownership; new MI</td></tr>
+<tr><td>Second line</td><td>—</td><td>—</td><td>Medium: equivalence oversight; sampling MI recipient</td></tr></table></div>
+
+<div class="pb wide"><h1>2. RACI by pattern and component</h1>
+<p>R responsible · A accountable · C consulted · I informed. One A per row. Rows are the main decisions and hand-offs of the target design; routine steps follow the lanes in 2.3.</p>
+<table class="raci"><tr><th style="width:26%">Activity</th><th>RM / BD</th><th>Line / TL</th><th>Credit assessor</th><th>Credit manager</th><th>Lending Services</th><th>Fulfilment</th><th>SBS</th><th>Credit Risk Policy</th><th>Lending Ops (Head)</th><th>MI / Reg Rep</th><th>2nd line</th></tr>
+<tr class="l2"><td colspan="12">SC-1 Deal start</td></tr>
+<tr><td>Act on event task within SLA</td><td>R</td><td>A</td><td></td><td></td><td></td><td></td><td></td><td></td><td>I</td><td></td><td></td></tr>
+<tr><td>Confirm scope; capture reason codes</td><td>R/A</td><td>I</td><td></td><td></td><td></td><td></td><td></td><td>C (taxonomy)</td><td></td><td></td><td></td></tr>
+<tr><td>Act on early-warning prompt (refer or justify continue)</td><td>R</td><td>A</td><td>C</td><td></td><td></td><td></td><td>I</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Pre-screen decline with reason</td><td>R</td><td>A</td><td></td><td></td><td></td><td></td><td></td><td></td><td>I</td><td></td><td></td></tr>
+<tr class="l2"><td colspan="12">SC-2 Decision core</td></tr>
+<tr><td>Prepare submission to RS-04 standard</td><td>R/A</td><td>I</td><td>C</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Approve R-FAST (P2 / P3) within authority</td><td>R (SF, per RS-13)</td><td>A (BD TL; SF line; Corp line)</td><td>I</td><td>I</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Assess R-FULL and decide</td><td>I</td><td>I</td><td>R</td><td>A</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Defer with structured request; escalate at limit</td><td>R (respond)</td><td>I</td><td>R</td><td>A</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Sample fast-route approvals; record findings</td><td>I</td><td>I</td><td>R</td><td>A</td><td></td><td></td><td></td><td>C</td><td>I</td><td>I</td><td>I</td></tr>
+<tr><td>Suspend R-FAST for a segment on findings</td><td>I</td><td>I</td><td>C</td><td>R</td><td></td><td></td><td></td><td>A</td><td>I</td><td></td><td>I</td></tr>
+<tr><td>Maintain RS-01 to RS-05, RS-10 to RS-12 thresholds</td><td></td><td></td><td>C</td><td>C</td><td></td><td></td><td>C (RS-11)</td><td>R/A</td><td>I</td><td></td><td>C</td></tr>
+<tr class="l2"><td colspan="12">SC-3 Completion</td></tr>
+<tr><td>Respond to chase; extend at week 10 with reason</td><td>R</td><td>A</td><td></td><td></td><td></td><td></td><td></td><td></td><td>I</td><td></td><td></td></tr>
+<tr><td>Wet-ink letter check (RS-13 role)</td><td>R (BD) / Bus Ops (SF) / Corp Assoc</td><td>A</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Prepare, execute, register security within SLA</td><td>I</td><td></td><td></td><td></td><td>R/A</td><td></td><td></td><td></td><td>I</td><td></td><td></td></tr>
+<tr><td>Evidence conditions precedent</td><td>R/A</td><td>I</td><td>C</td><td></td><td>C</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Fulfil within SLA</td><td>I</td><td></td><td></td><td></td><td></td><td>R/A</td><td></td><td></td><td>I</td><td></td><td></td></tr>
+<tr><td>Removal sequence (release, remove)</td><td>R (repayment)</td><td>I</td><td></td><td></td><td>R (release)</td><td>R (remove)</td><td></td><td></td><td>A</td><td></td><td></td></tr>
+<tr><td>Maintain RS-06, RS-07, RS-08, RS-13, RS-14</td><td></td><td></td><td></td><td></td><td>C (RS-07)</td><td></td><td></td><td>C</td><td>R/A</td><td></td><td>C (RS-08)</td></tr>
+<tr class="l2"><td colspan="12">P5 Distressed</td></tr>
+<tr><td>Raise referral record</td><td>R</td><td>I</td><td>R</td><td>A</td><td></td><td></td><td>I</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Credit authority decision on referral</td><td>I</td><td></td><td>R</td><td>A</td><td></td><td></td><td>C</td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Categorise; forbearance; strategy; recovery data; approve</td><td>I</td><td></td><td>I</td><td></td><td></td><td></td><td>R/A</td><td>C</td><td></td><td>I (protected fields)</td><td></td></tr>
+<tr class="l2"><td colspan="12">Cross-cutting</td></tr>
+<tr><td>End-to-end cycle time (T2) and stage SLAs</td><td>I</td><td>R (stage)</td><td>R (stage)</td><td>R (stage)</td><td>R (stage)</td><td>R (stage)</td><td>R (stage)</td><td></td><td>A</td><td>I</td><td></td></tr>
+<tr><td>Protected fields and lineage</td><td></td><td></td><td></td><td></td><td></td><td></td><td>R (F10, F11)</td><td>R (F06)</td><td>R (F03, F13)</td><td>A</td><td>I</td></tr>
+<tr><td>Equivalence oversight; cohort MI review</td><td></td><td></td><td></td><td>R</td><td></td><td></td><td></td><td>C</td><td>I</td><td>R (MI)</td><td>A</td></tr></table></div>
+
+<div class="pb"><h1>3. Role profiles · what changes</h1>
+<div class="rp"><div class="hd">Relationship Manager / Business Direct adviser<span>GPe-01, GPe-02 · highest change intensity</span></div><table>
+<tr><td>Purpose (to-be)</td><td>Own the customer relationship and the quality of the submission; decide scope; act on system prompts; approve within held authority where RS-13 assigns it.</td></tr>
+<tr><td>Stops doing</td><td>Navigating to find customers and deals; issuing letters by email and tracking in mailboxes; chasing Credit, LS and Fulfilment by message; reading the DA matrix; re-keying analytics; recording ESR Cleanse migrations as deals; deciding whether a signature is needed; instructing security by email.</td></tr>
+<tr><td>Starts doing</td><td>Confirming scope and reason codes at deal start; responding to early-warning prompts; preparing to a stated submission standard; responding to structured requests; extending stale letters with reason; evidencing CPs in the single view; (SF, per RS-13) approving eligible renewals and administrative variations within authority with system evidence.</td></tr>
+<tr><td>Keeps doing</td><td>Customer analysis and credit memo on R-FULL; customer contact; decline communication; relationship time.</td></tr>
+<tr><td>Accountability change</td><td class="chg">Fast-route approvals (where RS-13 assigns to RM) carry personal accountability supported by rule evidence and sampling. Addressed by clear criteria (RS-01, RS-03), evidence attached automatically, training, and sampling feedback rather than blame (DB-06).</td></tr>
+<tr><td>Skills</td><td>Submission standard; reason taxonomy; reading rule evidence; new platform. Less: system navigation; document admin.</td></tr>
+<tr><td>Measures</td><td>Submission first-time-right (R1); scope accuracy (sampling findings on coding); T7 renewal lateness; customer relationship time (survey N01).</td></tr>
+<tr><td>Capacity shift (illustrative)</td><td class="ph">≈ 23 FTE-eq released across RM / BD / Bus Ops (1.10 §4.1), mainly from letters (OP-15), deal start (OP-14), fast-track preparation (OP-01) and manual DA (OP-06); intended destination: customer time and lead handling, per SD-04.</td></tr></table></div>
+
+<div class="rp"><div class="hd">Line manager / Business Direct team leader<span>GPe-02 · new accountability</span></div><table>
+<tr><td>Purpose (to-be)</td><td>Approve fast-route deals within line authority (BD team leaders; SF and Corporate line per RS-13); own stage SLA for deal start and completion in their team; act on escalations.</td></tr>
+<tr><td>Starts doing</td><td>R-FAST approvals with evidence review (not re-assessment); extension approvals at week 10 visibility; queue management against SLAs; acting on sampling findings for their team.</td></tr>
+<tr><td>Accountability change</td><td class="chg">Becomes the authority holder for the fast route in volume segments. Requires: held authority in platform profile; training on RS-01 / RS-03 evidence; sampling MI by team.</td></tr>
+<tr><td>Measures</td><td>Team SLA attainment (S1, S3); sampling finding rate; approvals within authority (100% by construction).</td></tr></table></div>
+
+<div class="rp"><div class="hd">Credit assessor and Credit manager<span>GPe-03, GC-05 · caseload and function change</span></div><table>
+<tr><td>Purpose (to-be)</td><td>Independent assessment of R-FULL deals; detective assurance over fast routes; escalation decisions; co-ownership of rule thresholds with Credit Risk Policy.</td></tr>
+<tr><td>Stops doing</td><td>Assessing eligible unchanged renewals and administrative variations (subject to PQ-001 / CE-001 / CE-003); re-reading resubmissions from scratch; free-text deferral requests; distress screening as the first point of detection.</td></tr>
+<tr><td>Starts doing</td><td>Sampling review of fast-route approvals (new function, CE-001 §6.3); structured deferral requests; escalation decisions at loop limit; quarterly cohort MI review; feeding sampling findings into RS-01 / RS-03 / RS-04 maintenance; parallel referral review (PQ-002).</td></tr>
+<tr><td>Keeps doing</td><td>Full assessment and decision on R-FULL; distress judgement; appeal review (independent assessor).</td></tr>
+<tr><td>Dis-benefit</td><td class="chg">DB-01: average case complexity rises as simple cases leave the queue; assessment time per case may increase. Netted in 2.13 against capacity released. Role profile and grading reviewed by Head of Credit.</td></tr>
+<tr><td>Sampling function</td><td>Illustrative: 10% of ≈ 7,100 eligible renewals + ≈ 4,400 administrative variations ≈ 1,150 samples / yr ≈ 0.5–0.7 FTE-eq at 45–60 min each; rate reviewed quarterly, floor 5%. Reviewer must be independent of the segment’s line approvals.</td></tr>
+<tr><td>Measures</td><td>S2a queue SLA; R1 first-time-right (shared with RMs); sampling completion and finding rate; cohort outcome parity (fast vs. full).</td></tr>
+<tr><td>Capacity shift (illustrative)</td><td class="ph">≈ 5 FTE-eq released (OP-01, OP-02, OP-17) less ≈ 0.6 FTE-eq sampling and the DB-01 complexity effect (to measure).</td></tr></table></div>
+
+<div class="rp"><div class="hd">Lending Services / Securities · Fulfilment · Business Operations / Corporate Associate<span>GPe-04, GPe-06</span></div><table>
+<tr><td>Lending Services</td><td>Works a queue with SLA; instructions arrive from approval conditions (no transcription); registration status recorded with evidence; no instruction on unchanged security; removal release before system release. Own tracker retired. Measures: G-SEC SLA; instruction-to-complete time by security type.</td></tr>
+<tr><td>Fulfilment</td><td>Tasks released by gates with terms attached; no message hand-off; SLA; fee keying retained until INT-03. Measures: S5 SLA (T6).</td></tr>
+<tr><td>Business Operations / Corporate Associate</td><td>Letter issue and chase removed; wet-ink checks only (RS-13); Corporate Associate retains Corporate checks under C27. Capacity shift: part of the ≈ 6 FTE-eq in OP-15; redeployment per SD-04.</td></tr></table></div>
+
+<div class="rp"><div class="hd">SBS / PS<span>GPe-07</span></div><table>
+<tr><td>Changes</td><td>Works from a queue of flags and referrals; reviews a shared referral record (no file re-read); parallel with Credit where PQ-002 allows; structured memo on platform; takes ownership via audited transfer, not batch; owns F10 and F11 field definitions jointly with MI. Measures: T8 referral-to-categorisation; flagged-connection conversion rate.</td></tr></table></div>
+
+<div class="rp"><div class="hd">Credit Risk Policy · MI &amp; Regulatory Reporting · Second line<span>GPe-08; GPo-03, GPo-04; GC-05</span></div><table>
+<tr><td>Credit Risk Policy</td><td>New ongoing role: owner of RS-01, 02, 03 (with Lending Ops), 04, 05, 10, 11 (with SBS), 12 as data; quarterly threshold review against cohort MI; DA matrix maintained as data under change control; policy questions PQ-001 to PQ-005 answered and recorded. Effort: initial co-design W8–10; then ≈ 1–2 days per quarter.</td></tr>
+<tr><td>MI &amp; Regulatory Reporting</td><td>Owner of the lineage register and protected-fields list (OP-25); accountable for field-group ownership assignments; produces pattern dashboards, sampling and cohort MI, control MI; re-issues stage mapping for the to-be. Manual adjustments MA-01 to MA-03 retired over time.</td></tr>
+<tr><td>Second line</td><td>Signs equivalence register; receives sampling and cohort MI quarterly; may require suspension; reviews CE-001 / CE-003 after two quarters.</td></tr></table></div></div>
+
+<div class="pb"><h1>4. Accountability for time and risk</h1>
+<h2>4.1 SLA ownership (DP-04 precondition, GPe-05)</h2>
+<table><tr><th>Stage (1.4 model)</th><th>SLA owner</th><th>Proposed SLA (working days)</th><th>Escalation</th><th>Metric</th></tr>
+<tr><td>S0 Event to deal start</td><td>Line / team leader</td><td class="ph">5 from task creation</td><td>Head of segment</td><td>T7 (renewals)</td></tr>
+<tr><td>S1 Preparation to submission</td><td>Line / team leader</td><td class="ph">P2 R-FAST 5; P2/P3 R-FULL 10; P1 15</td><td>Head of segment</td><td>T3 S1</td></tr>
+<tr><td>S2a Credit queue</td><td>Credit manager</td><td class="ph">3</td><td>Head of Credit</td><td>T4</td></tr>
+<tr><td>S2b Credit assessment</td><td>Credit manager</td><td class="ph">5 (excl. deferral wait on customer)</td><td>Head of Credit</td><td>T3 S2b</td></tr>
+<tr><td>S3a Letter generation and issue</td><td>Platform (automatic)</td><td>Same day</td><td>Lending Ops</td><td>T3 S3a</td></tr>
+<tr><td>S3b Customer return</td><td>RM / line (chase)</td><td>RS-08 schedule</td><td>Line at week 10</td><td>T5; R4</td></tr>
+<tr><td>G-SEC Security</td><td>Head of Lending Services</td><td class="ph">By security type: 10–30</td><td>Head of Lending Ops</td><td>EX-05 measure</td></tr>
+<tr><td>S5 Fulfilment</td><td>Head of Fulfilment</td><td class="ph">2</td><td>Head of Lending Ops</td><td>T6</td></tr>
+<tr><td>S6 Referral to categorisation</td><td>Head of SBS (with Credit manager)</td><td class="ph">10</td><td>Head of Lending Ops</td><td>T8</td></tr>
+<tr class="l2"><td>End to end (T2)</td><td><b>Head of Lending Operations</b></td><td>Per pattern target (2.11)</td><td>SteerCo / Business Owner</td><td>T2 by pattern</td></tr></table>
+<p class="small">SLAs are proposals for line agreement in Week 11; the design requires that each has an owner, not that these values are adopted.</p>
+<h2>4.2 Risk oversight model for fast routes</h2>
+<table><tr><th>Layer</th><th>Mechanism</th><th>Owner</th><th>Cadence</th></tr>
+<tr><td>Preventive</td><td>RS-01 / RS-03 eligibility; RS-11 exclusion; RS-05 authority; RS-04 items</td><td>Credit Risk Policy (rules); platform (evaluation)</td><td>Per deal</td></tr>
+<tr><td>Detective 1</td><td>Credit sampling with findings</td><td>Credit manager</td><td>Monthly</td></tr>
+<tr><td>Detective 2</td><td>Field-change exception report (administrative variations that changed monitored fields)</td><td>MI; Credit manager</td><td>Monthly</td></tr>
+<tr><td>Detective 3</td><td>Cohort outcome MI (fast vs. full)</td><td>MI; Credit Risk Policy</td><td>Quarterly</td></tr>
+<tr><td>Response</td><td>Segment suspension; threshold change; individual feedback via line</td><td>Credit Risk Policy (A); Credit manager (R)</td><td>On trigger</td></tr>
+<tr><td>Oversight</td><td>Equivalence review; Risk Committee reporting</td><td>Second line</td><td>Quarterly; formal review after two quarters</td></tr></table></div>
+
+<div class="pb"><h1>5. Governance of rules and data in run</h1>
+<table><tr><th>Asset</th><th>Owner (A)</th><th>Change process</th><th>Review</th></tr>
+<tr><td>RS-01, 02, 04, 05, 10, 12 (credit rules)</td><td>Head of Credit Risk Policy</td><td>Proposal with cohort evidence → Credit Risk Policy approval → four-eyes entry → effective date; second line informed for RS-01</td><td>Quarterly</td></tr>
+<tr><td>RS-03 (taxonomy and materiality)</td><td>Head of Credit Risk Policy (materiality); Lending Ops (codes)</td><td>As above; new codes default R-FULL until classified</td><td>Quarterly</td></tr>
+<tr><td>RS-11 (early warning)</td><td>Credit Risk with SBS</td><td>As above; thresholds tested against referral outcomes</td><td>Quarterly</td></tr>
+<tr><td>RS-06, 07, 08, 13, 14 (operational rules)</td><td>Head of Lending Operations (RS-07 with Lending Services)</td><td>Lending Ops change control; second line informed for RS-08; Legal for RS-06 templates</td><td>Semi-annual</td></tr>
+<tr><td>RS-09 (loop limits)</td><td>Head of Credit</td><td>Credit change control</td><td>Semi-annual</td></tr>
+<tr><td>DA matrix (data)</td><td>Head of Credit Risk Policy</td><td>Existing policy governance; loaded as versioned data</td><td>As policy</td></tr>
+<tr><td>Letter templates</td><td>Head of Lending Operations with Legal</td><td>Template change control; CE-004 compensating control</td><td>On change</td></tr>
+<tr><td>Protected fields and lineage</td><td>Head of MI &amp; Regulatory Reporting; field owners per 1.8 §6</td><td>Change control; owner sign-off; cut-over reconciliation for P1</td><td>On change; annual attestation</td></tr>
+<tr><td>Patterns and SLAs</td><td>Head of Lending Operations</td><td>Design Authority (run-mode) for pattern change; line agreement for SLAs</td><td>Annual</td></tr></table>
+<h2>5.1 Design Authority in run mode</h2>
+<p>After G3 the Design Authority continues at reduced cadence (quarterly) as the forum that approves pattern, rule-ownership and SLA changes, reviews sampling and cohort MI with second line, and decides on fast-route extensions (e.g. P1 Increase fast-track, Release 2). Membership unchanged; chaired by Head of Lending Operations.</p></div>
+
+<div class="pb"><h1>6. Organisation impact</h1>
+<h2>6.1 Impact by role and segment <span class="ph">(illustrative capacity; measured at v1.0)</span></h2>
+<table><tr><th>Role</th><th>Business Direct</th><th>Strategic Finance</th><th>Corporate</th><th>Nature of impact</th><th>Illustrative capacity shift</th></tr>
+<tr class="ill"><td>RM / BD adviser</td><td class="chg">High</td><td class="chg">High</td><td>Medium (C27 limits fast route to line)</td><td>Content shift; letters, navigation, chasing removed; approval accountability (SF)</td><td class="num">≈ 23 FTE-eq released (incl. Bus Ops)</td></tr>
+<tr class="ill"><td>Team leader / line</td><td class="chg">High</td><td>Medium</td><td>Medium</td><td>Fast-route approver; SLA owner</td><td class="num">+ small (approval time)</td></tr>
+<tr class="ill"><td>Credit assessor</td><td colspan="3">High (pooled)</td><td>Caseload mix; sampling function</td><td class="num">≈ 5 released; ≈ 0.6 to sampling; DB-01 to measure</td></tr>
+<tr class="ill"><td>Lending Services</td><td colspan="3">Medium</td><td>Queue; instructions from conditions; no unnecessary re-instruction</td><td class="num">≈ 1.4 released (OP-02); OP-21 unsized</td></tr>
+<tr class="ill"><td>Fulfilment</td><td colspan="3">Medium</td><td>Gate-released tasks; SLA</td><td class="num">Small; chasing removed</td></tr>
+<tr class="ill"><td>SBS / PS</td><td colspan="3">Medium</td><td>Queue; shared record; structured memo</td><td class="num">Small; T8 improvement</td></tr>
+<tr class="ill"><td>Credit Risk Policy</td><td colspan="3">New run role</td><td>Rule ownership</td><td class="num">+ ≈ 0.1 FTE-eq ongoing</td></tr>
+<tr class="ill"><td>MI &amp; Reg Reporting</td><td colspan="3">Medium</td><td>Lineage ownership; new MI; adjustments retired</td><td class="num">Net neutral to small release</td></tr></table>
+<h2>6.2 Spans, layers and structure</h2>
+<ul><li><b>No change to reporting lines is required by the design.</b> Accountabilities are added to existing roles (fast-route approval to line; sampling to Credit; rule ownership to Credit Risk Policy; SLA ownership to heads of function). Structure change, if any, follows the SD-04 decision and is for line management.</li><li><b>One new function:</b> fast-route sampling within Credit (≈ 0.5–0.7 FTE-eq illustrative), independent of segment line approvals. May be a rotation rather than a post.</li><li><b>One accountability made explicit:</b> end-to-end cycle time sits with the Head of Lending Operations, who already chairs the Design Authority.</li><li><b>Segment variation reduced to RS-13.</b> Corporate retains line-only fast-route approval and Corporate Associate checks under C27.</li></ul>
+<h2>6.3 Transition considerations (input to Phase 3)</h2>
+<table><tr><th>Item</th><th>Consideration</th><th>Owner</th></tr>
+<tr><td>Fast-route accountability</td><td>Authority profiles loaded before go-live; training on evidence reading; first two quarters with higher sampling and explicit no-blame feedback loop</td><td>Heads of segment; Head of Credit</td></tr>
+<tr><td>Credit caseload</td><td>Monitor assessment time per case from go-live; adjust resourcing if DB-01 exceeds assumption</td><td>Head of Credit</td></tr>
+<tr><td>Capacity treatment</td><td>SD-04 decision after G2; benefits plan (Phase 3) aggregates by team; redeployment to customer time is a valid realisation</td><td>Business Owner; Finance</td></tr>
+<tr><td>Team trackers</td><td>Retired at go-live; queue MI replaces them; short overlap tolerated</td><td>Heads of LS, Fulfilment, Credit</td></tr>
+<tr><td>Rule ownership</td><td>Credit Risk Policy resourced for W8–10 co-design and quarterly review thereafter</td><td>Head of Credit Risk Policy</td></tr>
+<tr><td>Pilot segment</td><td>Business Direct recommended (volume, lowest C27 complexity, team-leader approval model); SF follows</td><td>Business Owner</td></tr></table></div>
+</body></html>
