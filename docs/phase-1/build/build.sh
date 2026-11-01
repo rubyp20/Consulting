@@ -18,6 +18,7 @@ const jobs = [
   { html: `${D}/1.8-regulatory-mi-data-lineage.html`, pdf: `${D}/1.8-Regulatory-MI-Data-Lineage.pdf`, landscape: false, title: 'BB-BLP-BPR · 1.8 Regulatory Reporting and MI Data Lineage · v0.4' },
   { html: `${D}/1.9-pain-point-register-rca.html`, pdf: `${D}/1.9-Pain-Point-Register-RCA.pdf`, landscape: false, title: 'BB-BLP-BPR · 1.9 Pain-Point Register and Root-Cause Analysis · v0.7' },
   { html: `${D}/1.10-opportunity-long-list.html`, pdf: `${D}/1.10-Opportunity-Long-List.pdf`, landscape: false, title: 'BB-BLP-BPR · 1.10 Opportunity Long-List, Sized · v0.6' },
+  { html: `${D}/1.11-current-state-assessment-report.html`, pdf: `${D}/1.11-Current-State-Assessment-Report.pdf`, landscape: false, title: 'BB-BLP-BPR · 1.11 Current-State Assessment Report and G1 Pack · v0.5' },
 ];
 (async () => {
   const b = await chromium.launch();
