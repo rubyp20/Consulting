@@ -9,6 +9,7 @@ const jobs = [
   { html: `${D}/1.6-control-policy-da-inventory.html`, pdf: `${D}/1.6-Control-Policy-DA-Inventory.pdf`, landscape: false, title: 'BB-BLP-BPR · 1.6 Control, Policy and Delegated-Authority Inventory · v0.6' },
   { html: `${D}/1.7-workaround-inventory.html`, pdf: `${D}/1.7-Workaround-Inventory.pdf`, landscape: false, title: 'BB-BLP-BPR · 1.7 Workaround Inventory · v0.6' },
   { html: `${D}/1.8-regulatory-mi-data-lineage.html`, pdf: `${D}/1.8-Regulatory-MI-Data-Lineage.pdf`, landscape: false, title: 'BB-BLP-BPR · 1.8 Regulatory Reporting and MI Data Lineage · v0.4' },
+  { html: `${D}/1.9-pain-point-register-rca.html`, pdf: `${D}/1.9-Pain-Point-Register-RCA.pdf`, landscape: false, title: 'BB-BLP-BPR · 1.9 Pain-Point Register and Root-Cause Analysis · v0.7' },
 ];
 (async () => {
   const b = await chromium.launch();
